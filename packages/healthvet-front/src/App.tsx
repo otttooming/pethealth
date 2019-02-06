@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'antd/lib/button';
 import styled from 'styled-components';
 import Landing from './pages/Landing/Landing';
+import Exception from './pages/Exception/Exception';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import logo from './logo.svg';
@@ -83,6 +84,7 @@ class App extends Component {
           <Route exact={true} path="/" component={Landing} />
           <Route path="/about" component={About} />
           <Route path="/topics" component={Topics} />
+          <Route component={Exception} />
         </div>
       </Router>
     );
