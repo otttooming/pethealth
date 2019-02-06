@@ -1,0 +1,26 @@
+{
+  "defaultSeverity": "warning",
+  "jsRules": {},
+  "rules": {
+    "prettier": true,
+    "no-console": true,
+    "object-literal-sort-keys": false,
+    "no-var-keyword": true,
+    "no-submodule-imports": [true, "next"],
+    "no-implicit-dependencies": false,
+    "no-empty-interface": false,
+    "prefer-const": true,
+    "ordered-imports": false,
+    "interface-name": false,
+    "member-access": false,
+    "jsx-no-lambda": false
+  },
+  "radix": true,
+  "rulesDirectory": ["tslint-plugin-prettier", ".prettierrc"],
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-eslint-rules",
+    "tslint-config-prettier"
+  ]
+}

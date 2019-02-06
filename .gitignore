@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+# Retain specific files
+!*.keep
+
+# MacOS specific files
+.DS_Store
