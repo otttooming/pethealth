@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'antd/lib/button';
 import styled from 'styled-components';
+import Landing from './pages/Landing/Landing';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import logo from './logo.svg';
@@ -79,8 +80,7 @@ class App extends Component {
               <Link to="/topics">Topics</Link>
             </li>
           </ul>
-
-          <Route exact={true} path="/" component={Home} />
+          <Route exact={true} path="/" component={Landing} />
           <Route path="/about" component={About} />
           <Route path="/topics" component={Topics} />
         </div>
