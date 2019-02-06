@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import Button from 'antd/lib/button';
+import styled from 'styled-components';
+
 import logo from './logo.svg';
 import './App.css';
+
+const RedComponent = styled.div`
+  background: blue;
+  color: red;
+`;
 
 class App extends Component {
   render() {
@@ -21,6 +28,7 @@ class App extends Component {
             Learn React
           </a>
           <Button type="primary">Button</Button>
+          <RedComponent>ABC</RedComponent>
         </header>
       </div>
     );
