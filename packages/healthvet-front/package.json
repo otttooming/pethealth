@@ -19,7 +19,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "clean": "rimraf dist && rimraf build",
+    "now-build": "npm run clean && react-scripts build && mv build dist",
+    "now:deploy": "npm run now-build && now",
+    "deploy": "npm run now:deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,6 +36,7 @@
   ],
   "devDependencies": {
     "@types/react-router-dom": "^4.3.1",
-    "@types/styled-components": "^4.1.8"
+    "@types/styled-components": "^4.1.8",
+    "typescript": "3.3.1"
   }
 }
