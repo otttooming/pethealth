@@ -1,73 +1,91 @@
 import * as React from 'react';
-import { Row, Col, Button } from 'antd';
+import { Button, Layout } from 'antd';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  background-image: linear-gradient(to left, #ff9176, #ffc093);
+import landing_img from './doggo1.svg';
+import logo from './logo-valge.svg';
+import { Redirect } from 'react-router';
+
+const { Content } = Layout;
+
+const Flex = styled.div`
+  display: flex;
 `;
 
-const Image = styled.img``;
-
-const Text = styled.section`
-  font-size: 20px;
-  font-weight: bold;
-  padding-top: 50px;
-  padding-right: 30px;
-  padding-bottom: 50px;
-  padding-left: 80px;
+const Image = styled.img`
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
 `;
 
-const Icon = styled.svg`
-  padding-top: 50px;
-  padding-right: 30px;
-  padding-bottom: 50px;
-  padding-left: 80px;
+const Logo = styled.img`
+  left: 0;
+  top: 0;
+  padding: 80px;
+`;
+
+const Text = styled.h2`
+  padding-top: 20%;
+  padding-bottom: 5%;
+  color: white;
+  font-size: xx-large;
+  padding-left: 20px;
+`;
+
+const Button1 = styled.button`
+  position: absolute;
+  background-color: #f4511e;
+  border: 0;
+  border-radius: 12px;
+  color: white;
+  width: 400px;
+  height: 60px;
+  text-align: center;
+  font-size: px;
+  margin: 4px 2px;
+  opacity: 1;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+  }
 `;
 
 export interface LandingProps {}
 
 export default class Landing extends React.Component<LandingProps, any> {
+  handleSignIn() {}
+
   public render() {
     return (
-      <Wrapper>
-        <Row gutter={16}>
-          <Col span={20}>
-            <Row type="flex" justify="start">
-              <Icon>
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  stroke="black"
-                  stroke-width="3"
-                  fill="red"
-                />
-              </Icon>
-            </Row>
-            <Row type="flex" justify="space-around">
-              <Text>
-                With HealthVet we provide solutions that empower your vision and
-                enrich animal healthcare with intuitive collaboration
-              </Text>
-            </Row>
-            <Row type="flex" justify="space-around">
-              <Button
-                type="primary"
-                shape="round"
-                icon="usergroup-add"
-                size="large"
-              >
-                Sign up
-              </Button>
-            </Row>
-          </Col>
-          <Col span={4}>
-            <Row type="flex" justify="space-around">
-              <Image />
-            </Row>
-          </Col>
-        </Row>
-      </Wrapper>
+      <Flex>
+        <ul
+          style={{
+            listStyleType: 'none',
+            width: '50%',
+            position: 'relative',
+          }}
+        >
+          <li>
+            <Logo src={logo} />
+          </li>
+          <li>
+            <Text>
+              With HealthVet we provide solutions that empower your vision and
+              enrich animal healthcare with intuitive collaboration.
+            </Text>
+          </li>
+          <li>
+            <div style={{ padding: '20px' }}>
+              <Button1 onClick={() => this.handleSignIn()}>Sign up</Button1>
+            </div>
+          </li>
+        </ul>
+        <Image src={landing_img} />
+      </Flex>
     );
   }
 }

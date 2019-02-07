@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import Landing from './pages/Landing/Landing';
 import Exception from './pages/Exception/Exception';
 import Dashboard from './pages/Dashboard/Dashboard';
+import Login from './pages/Login/Login';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
-import logo from './logo.svg';
+import logo from './doggo1.png';
 import './App.css';
 
 const RedComponent = styled.div`
@@ -39,6 +40,9 @@ function Topics({ match }: any) {
       <ul>
         <li>
           <Link to={`${match.url}/rendering`}>Rendering with React</Link>
+        </li>
+        <li>
+          <Link to={`${match.url}/login`}>Login</Link>
         </li>
         <li>
           <Link to={`${match.url}/components`}>Components</Link>
@@ -76,6 +80,9 @@ class App extends Component {
               <Link to="/">Home</Link>
             </li>
             <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
               <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>
@@ -90,6 +97,7 @@ class App extends Component {
             <Route path="/about" component={About} />
             <Route path="/topics" component={Topics} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/login" component={Login} />
             <Route component={Exception} />
           </Switch>
         </div>
