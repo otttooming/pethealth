@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import landing_img from './doggo1.svg';
 import logo from './logo-valge.svg';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const { Content } = Layout;
 
@@ -17,6 +18,8 @@ const Image = styled.img`
   right: 0;
   top: 0;
   width: 50%;
+  border: none;
+  margin: -1px;
 `;
 
 const Logo = styled.img`
@@ -80,7 +83,9 @@ export default class Landing extends React.Component<LandingProps, any> {
           </li>
           <li>
             <div style={{ padding: '20px' }}>
-              <Button1 onClick={() => this.handleSignIn()}>Sign up</Button1>
+              <Link to="/login">
+                <Button1 onClick={() => this.handleSignIn()}>Sign up</Button1>
+              </Link>
             </div>
           </li>
         </ul>

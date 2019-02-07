@@ -75,23 +75,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/topics">Topics</Link>
-            </li>
-          </ul>
           <Switch>
             <Route exact={true} path="/" component={Landing} />
             <Route path="/about" component={About} />
