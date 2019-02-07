@@ -38,7 +38,7 @@ const Text = styled.h2`
 
 const Button1 = styled.button`
   position: absolute;
-  background-color: #f4511e;
+  background-color: #f57171;
   border: 0;
   border-radius: 12px;
   color: white;
@@ -84,7 +84,7 @@ export default class Landing extends React.Component<LandingProps, any> {
           <li>
             <div style={{ padding: '20px' }}>
               <Link to="/login">
-                <Button1 onClick={() => this.handleSignIn()}>Sign up</Button1>
+                <Button1>Sign up</Button1>
               </Link>
             </div>
           </li>
