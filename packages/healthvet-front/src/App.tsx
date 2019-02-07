@@ -3,7 +3,8 @@ import Button from 'antd/lib/button';
 import styled from 'styled-components';
 import Landing from './pages/Landing/Landing';
 import Exception from './pages/Exception/Exception';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Dashboard from './pages/Dashboard/Dashboard';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import logo from './logo.svg';
 import './App.css';
@@ -75,16 +76,22 @@ class App extends Component {
               <Link to="/">Home</Link>
             </li>
             <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
               <Link to="/about">About</Link>
             </li>
             <li>
               <Link to="/topics">Topics</Link>
             </li>
           </ul>
-          <Route exact={true} path="/" component={Landing} />
-          <Route path="/about" component={About} />
-          <Route path="/topics" component={Topics} />
-          <Route component={Exception} />
+          <Switch>
+            <Route exact={true} path="/" component={Landing} />
+            <Route path="/about" component={About} />
+            <Route path="/topics" component={Topics} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route component={Exception} />
+          </Switch>
         </div>
       </Router>
     );
