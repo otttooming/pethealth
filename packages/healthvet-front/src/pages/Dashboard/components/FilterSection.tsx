@@ -4,6 +4,7 @@ import Button from '../../../components/Button/Button';
 import styled from 'styled-components';
 import Icon, { IconName } from '../../../components/Icon/Icon';
 import Squareblocks from '../../../components/Icon/components/Squareblocks';
+import Select from '../../../components/Select/Select';
 
 export interface FilterSectionProps {}
 
@@ -21,6 +22,7 @@ const Right = styled.div`
 
 const Questions = styled.p`
   margin-bottom: 0;
+  margin-right: 16px;
 
   font-family: Nunito;
   font-style: normal;
@@ -42,6 +44,11 @@ const Left = styled.div`
   margin-bottom: 32px;
 `;
 
+const RightBottom = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export default class FilterSection extends React.Component<
   FilterSectionProps,
   any
@@ -53,7 +60,10 @@ export default class FilterSection extends React.Component<
           <RightTop>
             <Search />
           </RightTop>
-          <Questions>Forum questions</Questions>
+          <RightBottom>
+            <Questions>Forum questions</Questions>
+            <Select>Filter</Select>
+          </RightBottom>
         </Left>
         <Right>
           <LeftTop>

@@ -12,7 +12,7 @@ export default class Detail extends React.Component<DetailProps, any> {
     return (
       <Grid columns={24} gap="0px">
         <Cell width={1}>
-          <Sidebar />
+          <Sidebar isCollapsed={true} />
         </Cell>
         <Cell width={7}>
           <PatientSection />

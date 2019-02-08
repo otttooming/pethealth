@@ -6,6 +6,7 @@ import GearIcon from './components/GearIcon';
 import PawIcon from './components/PawIcon';
 import SearchIcon from './components/SearchIcon';
 import Squareblocks from './components/Squareblocks';
+import ArrowIcon from './components/ArrowIcon';
 
 export enum IconSize {
   BIG = 'big',
@@ -20,11 +21,13 @@ export enum IconName {
   PAW = 'paw',
   SEARCH = 'search',
   SQUAREBLOCKS = 'squareblocks',
+  ARROW = 'arrow',
 }
 
 export interface IconProps {
   name: IconName | null;
   size: IconSize;
+  style?: React.CSSProperties;
 }
 
 interface WrapperProps {
@@ -81,16 +84,24 @@ export default class Icon extends React.Component<IconProps, any> {
       return <Squareblocks />;
     }
 
+    if (name === IconName.ARROW) {
+      return <ArrowIcon />;
+    }
+
     return null;
   };
 
   public render() {
-    const { name, size } = this.props;
+    const { name, size, ...restProps } = this.props;
 
     if (!name) {
       return null;
     }
 
-    return <Wrapper size={size}>{this.renderIcon()}</Wrapper>;
+    return (
+      <Wrapper {...restProps} size={size}>
+        {this.renderIcon()}
+      </Wrapper>
+    );
   }
 }

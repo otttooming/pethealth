@@ -48,6 +48,11 @@ export default class FeedSection extends React.Component<
               <Card />
             </Link>
           </ListItem>
+          <ListItem>
+            <Link to="/detail">
+              <Card />
+            </Link>
+          </ListItem>
         </UnsortedList>
       </Wrapper>
     );
