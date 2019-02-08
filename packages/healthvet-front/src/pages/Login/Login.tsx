@@ -46,14 +46,15 @@ const FormWrapper = styled.div`
   left: 0;
   top: 0;
   color: white;
-  margin-top: 300px;
+  margin-top: 250px;
   margin-left: 200px;
 
   input[type='submit'] {
-    margin-top: 20px;
+    margin-top: 25px;
     background: #f57171;
     color: white;
     font-size: 18px;
+    font-weight: bold;
 
     &:hover {
       background-color: #e06666;
@@ -63,16 +64,20 @@ const FormWrapper = styled.div`
   input[type='text'] {
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 10px;
   }
 
   input[type='password'] {
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 10px;
   }
 `;
 
 const LoginLabel = styled.label`
   font-size: 18px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 const LoginText = styled.h1`
