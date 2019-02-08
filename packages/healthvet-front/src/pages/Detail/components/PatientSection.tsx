@@ -16,17 +16,17 @@ const Wrapper = styled.div`
 `;
 
 const Top = styled.div`
-  margin-top: 32px;
-  margin-bottom: 34px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 `;
 
 const Title = styled.h1`
   font-family: Nunito;
   font-style: normal;
-  font-weight: 600;
-  line-height: 36px;
-  font-size: 32px;
-  margin-bottom: 40px;
+  font-weight: Bold;
+  line-height: 18px;
+  font-size: 24px;
+  margin-bottom: 20px;
   color: #000000;
 `;
 
@@ -41,7 +41,7 @@ const Td = styled.td<TdProps>`
 `;
 
 const Table = styled.table`
-  margin-bottom: 44px;
+  margin-bottom: 20px;
 `;
 
 const Bottom = styled.ul`
@@ -66,8 +66,8 @@ const ListItem = styled.li`
 
 const NavWrapper = styled.div`
   position: absolute;
-  left: 16px;
-  top: 16px;
+  left: 15px;
+  top: 10px;
 `;
 
 export default class PatientSection extends React.Component<
