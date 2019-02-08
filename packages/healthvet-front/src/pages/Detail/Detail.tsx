@@ -14,10 +14,10 @@ export default class Detail extends React.Component<DetailProps, any> {
         <Cell width={1}>
           <Sidebar isCollapsed={true} />
         </Cell>
-        <Cell width={7}>
+        <Cell width={6}>
           <PatientSection />
         </Cell>
-        <Cell width={8}>
+        <Cell width={9}>
           <TimelineSection />
         </Cell>
         <Cell width={8}>
