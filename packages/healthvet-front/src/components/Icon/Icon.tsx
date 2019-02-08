@@ -38,7 +38,7 @@ interface WrapperProps {
 
 const getWrapperSize = ({ size }: WrapperProps) => {
   if (size === IconSize.BIG) {
-    return '213px';
+    return '130px';
   }
 
   if (size === IconSize.SMALL) {

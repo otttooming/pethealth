@@ -6,7 +6,7 @@ import ControlBar from '../../../components/ControlBar/ControlBar';
 export interface MessageSectionProps {}
 
 const Wrapper = styled.div`
-  padding: 32px;
+  padding: 10px;
   height: 100vh;
   overflow-y: scroll;
   background-color: #fff;
