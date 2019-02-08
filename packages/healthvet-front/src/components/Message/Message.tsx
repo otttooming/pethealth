@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Avatar from '../Avatar/Avatar';
+import Avatar, { AvatarSize } from '../Avatar/Avatar';
 import styled from 'styled-components';
 
 export interface MessageProps {
@@ -14,19 +14,22 @@ const Wrapper = styled.div`
   margin-right: 32px;
 `;
 
-const AvatarWrapper = styled.div`
+interface AvatarWrapperProps {
+  hasTitle: boolean;
+}
+
+const AvatarWrapper = styled.div<AvatarWrapperProps>`
   width: 91px;
   margin-right: 32px;
+  padding-left: ${({ hasTitle }) => (hasTitle ? '0px' : '24px')};
 `;
 
 const Title = styled.h1`
-  /* START SENDING MONEY */
-
   font-family: Nunito;
   font-style: normal;
   font-weight: bold;
   line-height: 22px;
-  font-size: 24px;
+  font-size: 22px;
 
   margin-top: 8px;
   margin-bottom: 16px;
@@ -39,7 +42,7 @@ const Description = styled.p`
   font-style: normal;
   font-weight: normal;
   line-height: 22px;
-  font-size: 16px;
+  font-size: 14px;
 
   color: rgba(0, 0, 0, 0.6);
 `;
@@ -53,8 +56,8 @@ export default class Message extends React.Component<MessageProps, any> {
     const { title, description } = this.props;
     return (
       <Wrapper>
-        <AvatarWrapper>
-          <Avatar />
+        <AvatarWrapper hasTitle={!!title}>
+          {!title ? <Avatar size={AvatarSize.INTERMEDIATE} /> : <Avatar />}
         </AvatarWrapper>
         <div>
           {title && <Title>{title}</Title>}

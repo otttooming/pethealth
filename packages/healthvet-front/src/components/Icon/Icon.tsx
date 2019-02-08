@@ -8,8 +8,11 @@ import SearchIcon from './components/SearchIcon';
 import Squareblocks from './components/Squareblocks';
 import ArrowIcon from './components/ArrowIcon';
 import ArrowLeftIcon from './components/ArrowLeftIcon';
+import MailIcon from './components/MailIcon';
+import PlusIcon from './components/PlusIcon';
 
 export enum IconSize {
+  HUGE = 'huge',
   BIG = 'big',
   MEDIUM = 'medium',
   SMALL = 'small',
@@ -24,6 +27,8 @@ export enum IconName {
   SQUAREBLOCKS = 'squareblocks',
   ARROW = 'arrow',
   ARROW_LEFT = 'arrow_left',
+  MAIL = 'mail',
+  PLUS = 'plus',
 }
 
 export interface IconProps {
@@ -37,6 +42,10 @@ interface WrapperProps {
 }
 
 const getWrapperSize = ({ size }: WrapperProps) => {
+  if (size === IconSize.HUGE) {
+    return '213px';
+  }
+
   if (size === IconSize.BIG) {
     return '130px';
   }
@@ -92,6 +101,14 @@ export default class Icon extends React.Component<IconProps, any> {
 
     if (name === IconName.ARROW_LEFT) {
       return <ArrowLeftIcon />;
+    }
+
+    if (name === IconName.MAIL) {
+      return <MailIcon />;
+    }
+
+    if (name === IconName.PLUS) {
+      return <PlusIcon />;
     }
 
     return null;

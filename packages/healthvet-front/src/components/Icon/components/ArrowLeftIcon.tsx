@@ -11,7 +11,7 @@ const ArrowLeftIcon: React.SFC<ArrowLeftIconProps> = props => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <mask
-      id="mask0"
+      id="mask012321321"
       maskUnits="userSpaceOnUse"
       x="5"
       y="11"
@@ -25,7 +25,7 @@ const ArrowLeftIcon: React.SFC<ArrowLeftIconProps> = props => (
         fill="#fff"
       />
     </mask>
-    <g mask="url(#mask0)">
+    <g mask="url(#mask012321321)">
       <rect
         x="-23.834"
         y="-23.833"

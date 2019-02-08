@@ -19,6 +19,8 @@ const Wrapper = styled.button`
   border-radius: 90px;
 
   border: 0;
+
+  box-shadow: 2px 2px 10px rgba(254, 79, 21, 0.3);
 `;
 
 export default class Button extends React.Component<ButtonProps, any> {

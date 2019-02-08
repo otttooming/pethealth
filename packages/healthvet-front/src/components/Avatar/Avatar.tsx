@@ -3,6 +3,7 @@ import avatar from './avatar.png';
 import styled from 'styled-components';
 
 export enum AvatarSize {
+  INTERMEDIATE = 'intermediate',
   MEDIUM = 'medium',
   NORMAL = 'normal',
   SMALL = 'small',
@@ -23,6 +24,10 @@ const getFigureSize = ({ size }: FigureProps) => {
 
   if (size === AvatarSize.NORMAL) {
     return '48px';
+  }
+
+  if (size === AvatarSize.INTERMEDIATE) {
+    return '67px';
   }
 
   return '91px';

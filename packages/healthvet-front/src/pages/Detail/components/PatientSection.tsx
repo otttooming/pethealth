@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 const Top = styled.div`
   margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 `;
 
 const Title = styled.h1`
@@ -81,7 +81,7 @@ export default class PatientSection extends React.Component<
           <NavigationBack to="/dashboard" />
         </NavWrapper>
         <Top>
-          <Icon name={IconName.PAW} size={IconSize.BIG} />
+          <Icon name={IconName.PAW} size={IconSize.HUGE} />
         </Top>
         <Title>Berry Dog II</Title>
 

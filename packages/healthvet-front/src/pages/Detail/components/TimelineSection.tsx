@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import CardEntry, {
   CardEntryProps,
 } from '../../../components/CardEntry/CardEntry';
+import Title from '../../../components/Title/Title';
+import Icon, { IconName } from '../../../components/Icon/Icon';
 
 export interface TimelineSectionProps {}
 
@@ -37,6 +39,10 @@ const ListItem = styled.li`
     right: 0;
     left: -40px;
   }
+`;
+
+const TitleWrapper = styled.div`
+  margin-bottom: 32px;
 `;
 
 export default class TimelineSection extends React.Component<
@@ -81,7 +87,16 @@ export default class TimelineSection extends React.Component<
   public render() {
     return (
       <Wrapper>
-        <UnsortedList>{this.renderCardItems()}</UnsortedList>
+        <TitleWrapper>
+          <Title>Patient medical history</Title>
+        </TitleWrapper>
+        <UnsortedList>
+          {this.renderCardItems()}
+
+          <ListItem>
+            <Icon name={IconName.PLUS} />
+          </ListItem>
+        </UnsortedList>
       </Wrapper>
     );
   }
