@@ -7,6 +7,7 @@ import PawIcon from './components/PawIcon';
 import SearchIcon from './components/SearchIcon';
 import Squareblocks from './components/Squareblocks';
 import ArrowIcon from './components/ArrowIcon';
+import ArrowLeftIcon from './components/ArrowLeftIcon';
 
 export enum IconSize {
   BIG = 'big',
@@ -22,6 +23,7 @@ export enum IconName {
   SEARCH = 'search',
   SQUAREBLOCKS = 'squareblocks',
   ARROW = 'arrow',
+  ARROW_LEFT = 'arrow_left',
 }
 
 export interface IconProps {
@@ -86,6 +88,10 @@ export default class Icon extends React.Component<IconProps, any> {
 
     if (name === IconName.ARROW) {
       return <ArrowIcon />;
+    }
+
+    if (name === IconName.ARROW_LEFT) {
+      return <ArrowLeftIcon />;
     }
 
     return null;

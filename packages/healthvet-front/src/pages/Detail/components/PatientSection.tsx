@@ -2,10 +2,12 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Icon, { IconName, IconSize } from '../../../components/Icon/Icon';
 import Button from '../../../components/Button/Button';
+import NavigationBack from '../../../components/NavigationBack/NavigationBack';
 
 export interface PatientSectionProps {}
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,6 +64,12 @@ const ListItem = styled.li`
   background: #c4c4c4;
 `;
 
+const NavWrapper = styled.div`
+  position: absolute;
+  left: 16px;
+  top: 16px;
+`;
+
 export default class PatientSection extends React.Component<
   PatientSectionProps,
   any
@@ -69,6 +77,9 @@ export default class PatientSection extends React.Component<
   public render() {
     return (
       <Wrapper>
+        <NavWrapper>
+          <NavigationBack to="/dashboard" />
+        </NavWrapper>
         <Top>
           <Icon name={IconName.PAW} size={IconSize.BIG} />
         </Top>

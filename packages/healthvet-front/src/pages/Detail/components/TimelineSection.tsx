@@ -7,7 +7,8 @@ import CardEntry, {
 export interface TimelineSectionProps {}
 
 const Wrapper = styled.div`
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
   padding: 32px;
   background: #f4f4f4;
 `;

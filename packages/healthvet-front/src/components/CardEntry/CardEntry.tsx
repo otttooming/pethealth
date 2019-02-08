@@ -14,7 +14,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 400px;
+  width: 400px;
   width: 100%;
   min-height: 182px;
 

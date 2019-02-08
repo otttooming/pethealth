@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Layout } from 'antd';
 import styled from 'styled-components';
-
+import hover_gif from './hover-gif.gif';
 import landing_img from './doggo1.svg';
 import logo from './logo-valge.svg';
 import { Redirect } from 'react-router';
@@ -22,22 +22,30 @@ const Image = styled.img`
   position: absolute;
   right: 0;
   top: 0;
-  width: inherit;
+  width: 60%;
   border: none;
-  margin: -2px;
 `;
 
 const Logo = styled.img`
   left: 0;
   top: 0;
-  padding: 80px;
+  padding: 56px;
+  width: 15%;
+  position: absolute;
 `;
 
-const Text = styled.h2`
-  padding-top: 20%;
-  padding-bottom: 5%;
+const StyledH2 = styled.h2`
+  padding-top: ;
   color: white;
-  font-size: xx-large;
+  font-size: 16px;
+  padding-left: 20px;
+`;
+
+const StyledH1 = styled.h1`
+  font-weight: bold;
+  padding-top: 144px;
+  color: white;
+  font-size: 36px;
   padding-left: 20px;
 `;
 
@@ -47,29 +55,33 @@ const Button1 = styled.button`
   border: 0;
   border-radius: 30px;
   color: white;
-  width: 400px;
-  height: 60px;
+  width: 300px;
+  height: 40px;
   text-align: center;
-  font-size: 26px;
+  font-size: 18px;
   margin: 4px 2px;
   opacity: 1;
   cursor: pointer;
 
   &:hover {
-    opacity: 0.6;
+    background-color: #e06666;
   }
 `;
 
 const ContentWrapper = styled.div`
-  position: absolute;
+  position: relative;
   left: 0;
-  bottom: 0;
-  margin-bottom: 15%;
-  margin-left: 5%;
-  width: 40%
+  margin-left: 56px;
+  margin-top: 240px;
+  width: 60%
   color: white;
   font-size: x-large;
   }
+`;
+
+const ButtonWrapper = styled.div`
+  margin-top: 36px;
+  margin-left: 16px;
 `;
 
 export interface LandingProps {}
@@ -82,21 +94,20 @@ export default class Landing extends React.Component<LandingProps, any> {
           <Logo src={logo} />
           <FlexList>
             <ContentWrapper>
-              <Text>
-                With HealthVet we provide solutions that empower your vision and
+              <StyledH1>Protecting all nine lives</StyledH1>
+              <StyledH2>
+                With PetHealth we provide solutions that empower your vision and
                 enrich animal healthcare with intuitive collaboration.
-              </Text>
-              <div style={{ padding: '20px' }}>
+              </StyledH2>
+              <ButtonWrapper>
                 <Link to="/login">
                   <Button1>Sign up</Button1>
                 </Link>
-              </div>
+              </ButtonWrapper>
             </ContentWrapper>
           </FlexList>
         </div>
-        <div style={{ width: '55%' }}>
-          <Image src={landing_img} />
-        </div>
+        <Image src={landing_img} />
       </Flex>
     );
   }

@@ -7,7 +7,8 @@ export interface MessageSectionProps {}
 
 const Wrapper = styled.div`
   padding: 32px;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
   background-color: #fff;
 `;
 
