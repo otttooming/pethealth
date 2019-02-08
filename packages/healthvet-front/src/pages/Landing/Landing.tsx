@@ -30,19 +30,22 @@ const Logo = styled.img`
   left: 0;
   top: 0;
   padding: 56px;
+  width: 15%;
+  position: absolute;
 `;
 
 const StyledH2 = styled.h2`
   padding-top: ;
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   padding-left: 20px;
 `;
 
 const StyledH1 = styled.h1`
+  font-weight: bold;
   padding-top: 144px;
   color: white;
-  font-size: 29px;
+  font-size: 36px;
   padding-left: 20px;
 `;
 
@@ -69,6 +72,7 @@ const ContentWrapper = styled.div`
   position: relative;
   left: 0;
   margin-left: 56px;
+  margin-top: 240px;
   width: 60%
   color: white;
   font-size: x-large;
@@ -76,7 +80,7 @@ const ContentWrapper = styled.div`
 `;
 
 const ButtonWrapper = styled.div`
-  margin-top: 74px;
+  margin-top: 36px;
   margin-left: 16px;
 `;
 

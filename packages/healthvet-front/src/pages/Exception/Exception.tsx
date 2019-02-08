@@ -19,7 +19,16 @@ const Image = styled.img`
   margin: -1px;
 `;
 
-const NotFondText = styled.h2``;
+const NotFoundText = styled.h2`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: white;
+  font-size: 28px;
+  margin-right: 80px;
+  margin-bottom: 32px;
+  font-weight: normal;
+`;
 
 export interface ExceptionProps {}
 
@@ -29,6 +38,7 @@ export default class Exception extends React.Component<ExceptionProps, any> {
       <div>
         <Logo src={logo} />
         <Image src={img_404} />
+        <NotFoundText>Page not found</NotFoundText>
       </div>
     );
   }

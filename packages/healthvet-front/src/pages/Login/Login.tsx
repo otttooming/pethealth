@@ -26,64 +26,63 @@ const FlexList = styled.div`
 const InputField = styled.input`
   border-radius: 30px;
   border: none;
-  width: -webkit-fill-available;
   padding: 10px;
   color: black;
   outline: none;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  width: 300px;
+  heigth: 40px;
 `;
 
 const Logo = styled.img`
   left: 0;
   top: 0;
-  padding: 80px;
+  padding: 56px;
+  width: 15%;
+  position: absolute;
 `;
 
 const FormWrapper = styled.div`
   position: absolute;
   left: 0;
-  bottom: 0;
-  margin-bottom: 10%;
-  margin-left: 15%;
-  width: 20%
+  top: 0;
   color: white;
-  font-size: x-large;
+  margin-top: 300px;
+  margin-left: 200px;
 
-  input[type=submit] {
-    background: #F57171;
+  input[type='submit'] {
+    margin-top: 20px;
+    background: #f57171;
     color: white;
+    font-size: 18px;
 
     &:hover {
-      opacity: 0.6;
+      background-color: #e06666;
     }
   }
 
-  input[type=text] {
+  input[type='text'] {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  input[type=password] {
+  input[type='password'] {
     padding-left: 20px;
     padding-right: 20px;
   }
 `;
 
 const LoginLabel = styled.label`
-  font-size: 30px;
+  font-size: 18px;
 `;
 
 const LoginText = styled.h1`
   color: white;
   text-align: center;
+  font-size: 36px;
+  font-weight: bold;
 `;
 
 function Form() {
-  const submitStyle = {
-    paddingTop: '20px',
-  };
-
   return (
     <FormWrapper>
       <form>
