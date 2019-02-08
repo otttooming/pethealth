@@ -9,9 +9,9 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-
-  background: #ffe7d6;
-  min-height: 100vh;
+  <<<<<<<headbackground: #ffe7d6;
+  =======background: #ffe6d4;
+  >>>>>>>80189434299261b19dfaf1b8bb5e4545d96bbbf0min-height: 100vh;
   padding: 32px;
 `;
 
