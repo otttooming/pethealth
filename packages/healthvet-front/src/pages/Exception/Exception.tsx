@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { default as AntException } from 'ant-design-pro/lib/Exception';
 import styled from 'styled-components';
-import img_404 from './img_404.svg';
+import img_404 from './part.gif';
 import logo from './logo-valge.svg';
 
 const Logo = styled.img`
@@ -16,7 +16,7 @@ const Image = styled.img`
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 70%;
+  width: 60%;
   border: none;
   margin: -1px;
 `;

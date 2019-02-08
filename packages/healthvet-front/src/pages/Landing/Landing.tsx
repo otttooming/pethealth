@@ -102,7 +102,7 @@ export default class Landing extends React.Component<LandingProps, any> {
               </StyledH2>
               <ButtonWrapper>
                 <Link to="/login">
-                  <Button1>Sign up</Button1>
+                  <Button1>Log in</Button1>
                 </Link>
               </ButtonWrapper>
             </ContentWrapper>
