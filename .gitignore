@@ -32,6 +32,10 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
+# Compiled target
+**/dist/
+**/build/
+
 # Dependency directories
 node_modules/
 jspm_packages/
@@ -65,3 +69,4 @@ typings/
 
 # MacOS specific files
 .DS_Store
+
