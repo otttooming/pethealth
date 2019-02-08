@@ -20,7 +20,7 @@ const Wrapper = styled.section`
 `;
 
 const Left = styled.div`
-  padding: 40px;
+  padding: 32px;
 `;
 
 const Center = styled.div`
@@ -29,7 +29,7 @@ const Center = styled.div`
 `;
 
 const Right = styled.div`
-  padding: 40px;
+  padding: 32px;
   padding-top: 35px;
   display: flex;
   flex-direction: column;

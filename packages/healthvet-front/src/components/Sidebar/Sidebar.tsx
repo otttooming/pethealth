@@ -12,7 +12,7 @@ const Wrapper = styled.aside`
 
   background: #ff6d6d;
 
-  padding: 48px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,7 @@ const MinimalWrapper = styled.aside`
 `;
 
 const Image = styled.img`
-  width: 80%;
+  width: 100%;
 `;
 
 export default class Sidebar extends React.Component<SidebarProps, any> {

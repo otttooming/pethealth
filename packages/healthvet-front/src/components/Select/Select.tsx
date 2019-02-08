@@ -17,11 +17,11 @@ const Wrapper = styled.button`
   font-size: 14px;
   text-align: center;
 
-  color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.25);
   padding: 4px 24px;
   border-radius: 90px;
 
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 2px solid rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   border-radius: 90px;
 `;

@@ -11,7 +11,6 @@ export interface FilterSectionProps {}
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 40px;
 `;
 
 const Right = styled.div`

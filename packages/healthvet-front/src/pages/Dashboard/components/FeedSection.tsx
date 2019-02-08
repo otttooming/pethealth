@@ -8,7 +8,8 @@ export interface FeedSectionProps {}
 
 const Wrapper = styled.div`
   background: #ffe7d6;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
   padding: 32px;
 `;
 
