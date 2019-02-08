@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Card from '../../../components/Card/Card';
 import { Link } from 'react-router-dom';
 import FilterSection from './FilterSection';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 export interface FeedSectionProps {}
 

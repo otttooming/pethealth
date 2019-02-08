@@ -9,7 +9,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-
   background: #ffe6d4;
   min-height: 100vh;
   padding: 32px;

@@ -23,16 +23,13 @@ const Right = styled.div`
 const Questions = styled.p`
   margin-bottom: 0;
   margin-right: 16px;
-
   font-family: Nunito;
   font-style: normal;
   font-weight: bold;
   line-height: 22px;
   font-size: 24px;
-
   color: rgba(0, 0, 0, 0.5);
 `;
-
 const RightTop = styled.div`
   margin-bottom: 32px;
 `;
@@ -49,10 +46,7 @@ const RightBottom = styled.div`
   align-items: center;
 `;
 
-export default class FilterSection extends React.Component<
-  FilterSectionProps,
-  any
-> {
+export default class FilterSection extends React.Component<FilterSectionProps> {
   public render() {
     return (
       <Wrapper>
