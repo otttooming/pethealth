@@ -22,7 +22,11 @@ const MinimalWrapper = styled.aside`
   min-height: 100vh;
   width: 100%;
 
-  background: #ff6d6d;
+  background: #ff7070;
+`;
+
+const Image = styled.img`
+  width: 80%;
 `;
 
 export default class Sidebar extends React.Component<SidebarProps, any> {
@@ -38,7 +42,7 @@ export default class Sidebar extends React.Component<SidebarProps, any> {
     }
     return (
       <Wrapper>
-        <img src={cat} alt="" />
+        <Image src={cat} />
       </Wrapper>
     );
   }

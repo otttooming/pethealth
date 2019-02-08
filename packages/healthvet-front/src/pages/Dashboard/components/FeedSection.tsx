@@ -7,7 +7,7 @@ import FilterSection from './FilterSection';
 export interface FeedSectionProps {}
 
 const Wrapper = styled.div`
-  background: #ffe6d4;
+  background: #ffe7d6;
   min-height: 100vh;
   padding: 32px;
 `;
