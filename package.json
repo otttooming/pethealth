@@ -34,9 +34,5 @@
       "npm run prettier",
       "git add"
     ]
-  },
-  "dependencies": {
-    "react-custom-scrollbars": "^4.2.1",
-    "react-perfect-scrollbar": "^1.4.4"
   }
 }

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Button, Layout } from 'antd';
 import styled from 'styled-components';
-import hover_gif from './hover-gif.gif';
-import landing_img from './doggo1.svg';
+import landing_img from './landing-gif.gif';
 import logo from './logo-valge.svg';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -30,8 +29,9 @@ const Logo = styled.img`
   left: 0;
   top: 0;
   padding: 56px;
-  width: 15%;
+  width: 20%;
   position: absolute;
+  margin-left: 9px;
 `;
 
 const StyledH2 = styled.h2`
@@ -97,8 +97,8 @@ export default class Landing extends React.Component<LandingProps, any> {
             <ContentWrapper>
               <StyledH1>Protecting all nine lives</StyledH1>
               <StyledH2>
-                With PetHealth we provide solutions that empower your vision and
-                enrich animal healthcare with intuitive collaboration.
+                Providing solutions that empower your vision and improve animal
+                healthcare with intuitive collaboration.
               </StyledH2>
               <ButtonWrapper>
                 <Link to="/login">

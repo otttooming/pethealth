@@ -3,7 +3,8 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from './logo-valge.svg';
-import cat_img from './kass.svg';
+import cat_img from './kass.gif';
+import cat_shadow from './Kassivari.svg';
 
 const Flex = styled.div`
   display: flex;
@@ -13,9 +14,11 @@ const Image = styled.img`
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 40%;
+  width: 55%;
   border: none;
-  margin: -1px;
+  margin-right: -100px;
+  margin-bottom: -40px;
+  z-index: 1;
 `;
 
 const FlexList = styled.div`
@@ -37,8 +40,9 @@ const Logo = styled.img`
   left: 0;
   top: 0;
   padding: 56px;
-  width: 15%;
+  width: 20%;
   position: absolute;
+  margin-left: 9px;
 `;
 
 const FormWrapper = styled.div`
@@ -87,6 +91,16 @@ const LoginText = styled.h1`
   font-weight: bold;
 `;
 
+const CatShadow = styled.img`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-bottom: 20px;
+  padding-right: 30px;
+  z-index: 0;
+  width: 45%;
+`;
+
 function Form() {
   return (
     <FormWrapper>
@@ -119,6 +133,7 @@ export default class Login extends React.Component<LoginProps, any> {
           <Form />
         </div>
         <Image src={cat_img} />
+        <CatShadow src={cat_shadow} />
       </Flex>
     );
   }
