@@ -4,6 +4,8 @@ import BellIcon from './components/BellIcon';
 import styled from 'styled-components';
 import GearIcon from './components/GearIcon';
 import PawIcon from './components/PawIcon';
+import SearchIcon from './components/SearchIcon';
+import Squareblocks from './components/Squareblocks';
 
 export enum IconSize {
   BIG = 'big',
@@ -16,6 +18,8 @@ export enum IconName {
   BELL = 'bell',
   GEAR = 'gear',
   PAW = 'paw',
+  SEARCH = 'search',
+  SQUAREBLOCKS = 'squareblocks',
 }
 
 export interface IconProps {
@@ -67,6 +71,14 @@ export default class Icon extends React.Component<IconProps, any> {
 
     if (name === IconName.PAW) {
       return <PawIcon />;
+    }
+
+    if (name === IconName.SEARCH) {
+      return <SearchIcon />;
+    }
+
+    if (name === IconName.SQUAREBLOCKS) {
+      return <Squareblocks />;
     }
 
     return null;
