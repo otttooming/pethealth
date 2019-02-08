@@ -7,7 +7,9 @@ import logo from './logo-valge.svg';
 const Logo = styled.img`
   left: 0;
   top: 0;
-  padding: 80px;
+  padding: 56px;
+  width: 15%;
+  position: absolute;
 `;
 
 const Image = styled.img`
