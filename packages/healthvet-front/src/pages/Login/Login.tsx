@@ -37,6 +37,8 @@ const Logo = styled.img`
   left: 0;
   top: 0;
   padding: 56px;
+  width: 15%;
+  position: absolute;
 `;
 
 const FormWrapper = styled.div`
@@ -45,12 +47,13 @@ const FormWrapper = styled.div`
   top: 0;
   color: white;
   margin-top: 300px;
-  margin-left: 160px;
+  margin-left: 200px;
 
   input[type='submit'] {
     margin-top: 20px;
     background: #f57171;
     color: white;
+    font-size: 18px;
 
     &:hover {
       background-color: #e06666;
@@ -75,7 +78,8 @@ const LoginLabel = styled.label`
 const LoginText = styled.h1`
   color: white;
   text-align: center;
-  font-size: 29px;
+  font-size: 36px;
+  font-weight: bold;
 `;
 
 function Form() {

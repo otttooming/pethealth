@@ -30,6 +30,8 @@ const Logo = styled.img`
   left: 0;
   top: 0;
   padding: 56px;
+  width: 15%;
+  position: absolute;
 `;
 
 const StyledH2 = styled.h2`
@@ -70,6 +72,7 @@ const ContentWrapper = styled.div`
   position: relative;
   left: 0;
   margin-left: 56px;
+  margin-top: 240px;
   width: 60%
   color: white;
   font-size: x-large;
