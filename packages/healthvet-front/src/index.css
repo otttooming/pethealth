@@ -9,8 +9,8 @@ body {
   background-image: linear-gradient(56.17deg, #ffc093 0.8%, #ff4848 100%);
   width: 100%;
   height: 100%;
-  font-family: 'Nunito';
   overflow: hidden;
+  font-family: 'Nunito', sans-serif;
 }
 
 code {

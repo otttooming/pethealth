@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import logo from './doggo1.png';
 import './App.css';
+import Detail from './pages/Detail/Detail';
 
 const RedComponent = styled.div`
   background: blue;
@@ -81,6 +82,7 @@ class App extends Component {
             <Route path="/topics" component={Topics} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/login" component={Login} />
+            <Route path="/detail" component={Detail} />
             <Route component={Exception} />
           </Switch>
         </div>
