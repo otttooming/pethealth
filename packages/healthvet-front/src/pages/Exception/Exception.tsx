@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { default as AntException } from 'ant-design-pro/lib/Exception';
 import styled from 'styled-components';
-import img_404 from './part.gif';
+import img_404_duck from './duck.webp';
+import img_404_hamster from './hamster.webp';
 import logo from './logo-valge.svg';
+import { Link } from 'react-router-dom';
 
 const Logo = styled.img`
   left: 0;
   top: 0;
   padding: 56px;
-  width: 15%;
   position: absolute;
 `;
 
@@ -38,9 +39,12 @@ export default class Exception extends React.Component<ExceptionProps, any> {
   public render() {
     return (
       <div>
-        <Logo src={logo} />
-        <Image src={img_404} />
-        <NotFoundText>Page not found</NotFoundText>
+        <Link to="/">
+          <Logo src={logo} />
+        </Link>
+        <Image src={img_404_duck} />
+
+        {/* <NotFoundText>Page not found</NotFoundText> */}
       </div>
     );
   }

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Icon, { IconName } from '../../../components/Icon/Icon';
 import Squareblocks from '../../../components/Icon/components/Squareblocks';
 import Select from '../../../components/Select/Select';
+import { Link } from 'react-router-dom';
 
 export interface FilterSectionProps {}
 
@@ -60,7 +61,9 @@ export default class FilterSection extends React.Component<FilterSectionProps> {
         </Left>
         <Right>
           <LeftTop>
-            <Button>Post</Button>
+            <Link to="/detail">
+              <Button>Post</Button>
+            </Link>
           </LeftTop>
           <Icon name={IconName.SQUAREBLOCKS} />
         </Right>

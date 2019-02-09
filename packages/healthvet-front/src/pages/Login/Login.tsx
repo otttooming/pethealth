@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from './logo-valge.svg';
-import cat_img from './kass.gif';
+import cat_img from './cat.webp';
 import cat_shadow from './Kassivari.svg';
 
 const Flex = styled.div`

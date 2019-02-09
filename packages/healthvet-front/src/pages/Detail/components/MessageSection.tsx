@@ -20,6 +20,9 @@ const Wrapper = styled.div`
   height: 100vh;
   overflow-y: scroll;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const Top = styled.div`
@@ -41,7 +44,6 @@ const ListItem = styled.li`
 const Footer = styled.div`
   position: sticky;
   bottom: 0;
-  margin-top: 100%;
 `;
 
 export default class MessageSection extends React.Component<
@@ -100,17 +102,20 @@ export default class MessageSection extends React.Component<
         {({ scrollTo }) => (
           <ScroolAreaFixed id="foo">
             <Wrapper>
-              <Top>
-                <Title>Messages</Title>
-                <ControlBar />
-              </Top>
+              <div>
+                <Top>
+                  <Title>Messages</Title>
+                  <ControlBar />
+                </Top>
 
-              {this.renderMessages()}
+                {this.renderMessages()}
+              </div>
 
               <Footer>
                 <TextField
                   placeholder="Write your text here"
                   onSubmit={() => {
+                    this.createNewMessage('');
                     scrollTo({ id: 'foo', x: 20, y: 500 });
                   }}
                 />

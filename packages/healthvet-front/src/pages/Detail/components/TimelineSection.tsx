@@ -8,6 +8,10 @@ import Icon, { IconName } from '../../../components/Icon/Icon';
 
 export interface TimelineSectionProps {}
 
+export interface TimelineSectionState {
+  cardItems: CardEntryProps[];
+}
+
 const Wrapper = styled.div`
   height: 100vh;
   overflow-y: scroll;
@@ -47,7 +51,7 @@ const TitleWrapper = styled.div`
 
 export default class TimelineSection extends React.Component<
   TimelineSectionProps,
-  any
+  TimelineSectionState
 > {
   cardItems: CardEntryProps[] = [
     {
@@ -76,8 +80,31 @@ export default class TimelineSection extends React.Component<
     },
   ];
 
+  state = {
+    cardItems: this.cardItems,
+  };
+
+  addItem = (event: React.SyntheticEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
+    const { cardItems } = this.state;
+
+    const card = {
+      title: '',
+      icon: '',
+      date: '',
+      personId: 1,
+    };
+
+    this.setState({
+      cardItems: [...cardItems, card],
+    });
+  };
+
   renderCardItems = () => {
-    return this.cardItems.map((item, key) => (
+    const { cardItems } = this.state;
+
+    return cardItems.map((item, key) => (
       <ListItem key={key}>
         <CardEntry {...item} />
       </ListItem>
@@ -94,7 +121,9 @@ export default class TimelineSection extends React.Component<
           {this.renderCardItems()}
 
           <ListItem>
-            <Icon name={IconName.PLUS} />
+            <a href="#" onClick={this.addItem}>
+              <Icon name={IconName.PLUS} />
+            </a>
           </ListItem>
         </UnsortedList>
       </Wrapper>

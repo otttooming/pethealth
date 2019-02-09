@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import Icon, { IconName, IconSize } from '../../../components/Icon/Icon';
 import Button from '../../../components/Button/Button';
 import NavigationBack from '../../../components/NavigationBack/NavigationBack';
+import gallery1 from './gallery1.png';
+import gallery2 from './gallery2.png';
+import gallery3 from './gallery3.png';
+import gallery4 from './gallery4.png';
 
 export interface PatientSectionProps {}
 
@@ -60,14 +64,16 @@ const ListItem = styled.li`
   list-style: none;
   width: 55px;
   height: 55px;
-
-  background: #c4c4c4;
 `;
 
 const NavWrapper = styled.div`
   position: absolute;
   left: 15px;
   top: 10px;
+`;
+
+const Image = styled.img`
+  width: 100%;
 `;
 
 export default class PatientSection extends React.Component<
@@ -111,12 +117,24 @@ export default class PatientSection extends React.Component<
         </Table>
 
         <Bottom>
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
+          <ListItem>
+            <Image src={gallery2} />
+          </ListItem>
+          <ListItem>
+            <Image src={gallery3} />
+          </ListItem>
+          <ListItem>
+            <Image src={gallery4} />
+          </ListItem>
+          <ListItem>
+            <Image src={gallery1} />
+          </ListItem>
+          <ListItem>
+            <Image src={gallery1} />
+          </ListItem>
+          <ListItem>
+            <Image src={gallery1} />
+          </ListItem>
         </Bottom>
 
         <Button>Delete</Button>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Layout } from 'antd';
 import styled from 'styled-components';
-import landing_img from './landing-gif.gif';
+import landing_img from './doctor.webp';
 import logo from './logo-valge.svg';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -35,7 +35,6 @@ const Logo = styled.img`
 `;
 
 const StyledH2 = styled.h2`
-  padding-top: ;
   color: white;
   font-size: 16px;
   padding-left: 20px;
@@ -74,10 +73,8 @@ const ContentWrapper = styled.div`
   left: 0;
   margin-left: 56px;
   margin-top: 240px;
-  width: 60%
+  width: 60%;
   color: white;
-  font-size: x-large;
-  }
 `;
 
 const ButtonWrapper = styled.div`
