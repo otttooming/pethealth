@@ -32,6 +32,7 @@ const Left = styled.div`
 const Center = styled.div`
   padding: 20px;
   padding-right: 90px;
+  width: 100%;
 `;
 
 const Right = styled.div`
