@@ -103,12 +103,12 @@ export default class Card extends React.Component<CardProps, any> {
   };
 
   public render() {
-    const { doctor, description, title, date } = this.props;
+    const { doctor, description, title, date, picture } = this.props;
 
     return (
       <Wrapper>
         <Left>
-          <Avatar />
+          <Avatar src={picture} />
           <Name>{doctor}</Name>
         </Left>
         <Center>

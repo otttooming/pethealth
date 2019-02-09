@@ -11,6 +11,7 @@ export enum AvatarSize {
 
 export interface AvatarProps {
   size: AvatarSize;
+  src: any;
 }
 
 interface FigureProps {
@@ -55,11 +56,11 @@ export default class Avatar extends React.Component<AvatarProps, any> {
   };
 
   public render() {
-    const { size } = this.props;
+    const { size, src } = this.props;
 
     return (
       <Figure size={size}>
-        <Image src={avatar} alt="" />
+        <Image src={src} alt="" />
       </Figure>
     );
   }

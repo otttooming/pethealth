@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Avatar, { AvatarSize } from '../../Avatar/Avatar';
 import styled from 'styled-components';
+import avatar from './Avatar1.svg';
 
 interface FooterProps {}
 
@@ -27,7 +28,7 @@ const Name = styled.p`
 const Footer: React.FC<FooterProps> = props => (
   <Wrapper>
     <Left>
-      <Avatar size={AvatarSize.SMALL} />
+      <Avatar size={AvatarSize.SMALL} src={avatar} />
     </Left>
     <Name>Dr. Mari Mumm</Name>
   </Wrapper>

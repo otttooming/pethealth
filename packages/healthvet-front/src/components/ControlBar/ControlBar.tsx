@@ -3,6 +3,7 @@ import Avatar, { AvatarSize } from '../Avatar/Avatar';
 import styled from 'styled-components';
 import Icon, { IconName, IconSize } from '../Icon/Icon';
 import { Link } from 'react-router-dom';
+import avatar from './Avatar1.svg';
 
 export interface ControlBarProps {}
 
@@ -31,7 +32,7 @@ export default class ControlBar extends React.Component<ControlBarProps, any> {
           <Icon name={IconName.GEAR} size={IconSize.SMALL} />
         </Middle>
         <Link to="/404">
-          <Avatar size={AvatarSize.NORMAL} />
+          <Avatar size={AvatarSize.NORMAL} src={avatar} />
         </Link>
       </Wrapper>
     );

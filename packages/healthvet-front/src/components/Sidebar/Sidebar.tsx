@@ -26,7 +26,8 @@ const MinimalWrapper = styled.aside`
 `;
 
 const Image = styled.img`
-  width: 100%;
+  width: 70%;
+  margin-top: 30px;
 `;
 
 export default class Sidebar extends React.Component<SidebarProps, any> {

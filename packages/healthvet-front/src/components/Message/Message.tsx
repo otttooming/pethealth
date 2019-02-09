@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Avatar, { AvatarSize } from '../Avatar/Avatar';
 import styled from 'styled-components';
+import avatar from './Avatar1.svg';
 
 export interface MessageProps {
   title: string | null;
@@ -57,7 +58,11 @@ export default class Message extends React.Component<MessageProps, any> {
     return (
       <Wrapper>
         <AvatarWrapper hasTitle={!!title}>
-          {!title ? <Avatar size={AvatarSize.INTERMEDIATE} /> : <Avatar />}
+          {!title ? (
+            <Avatar size={AvatarSize.INTERMEDIATE} src={avatar} />
+          ) : (
+            <Avatar src={avatar} />
+          )}
         </AvatarWrapper>
         <div>
           {title && <Title>{title}</Title>}
