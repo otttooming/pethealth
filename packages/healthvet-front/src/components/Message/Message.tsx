@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Avatar, { AvatarSize } from '../Avatar/Avatar';
 import styled from 'styled-components';
-import avatar from './Avatar1.svg';
+import avatar from './Avatar1.png';
 
 export interface MessageProps {
   title: string | null;
