@@ -35,17 +35,35 @@ const Logo = styled.img`
 `;
 
 const StyledH2 = styled.h2`
-  color: white;
-  font-size: 16px;
-  padding-left: 20px;
+  @media screen and (max-width: 1920px) {
+    color: white;
+    font-size: 20px;
+    padding-left: 20px;
+  }
+
+  @media screen and (max-width: 1280px) {
+    color: white;
+    font-size: 16px;
+    padding-left: 20px;
+  }
 `;
 
 const StyledH1 = styled.h1`
-  font-weight: bold;
-  padding-top: 144px;
-  color: white;
-  font-size: 36px;
-  padding-left: 20px;
+  @media screen and (max-width: 1920px) {
+    font-weight: bold;
+    padding-top: 144px;
+    color: white;
+    font-size: 50px;
+    padding-left: 20px;
+  }
+
+  @media screen and (max-width: 1280px) {
+    font-weight: bold;
+    padding-top: 144px;
+    color: white;
+    font-size: 36px;
+    padding-left: 20px;
+  }
 `;
 
 const Button1 = styled.button`
@@ -69,12 +87,23 @@ const Button1 = styled.button`
 `;
 
 const ContentWrapper = styled.div`
-  position: relative;
-  left: 0;
-  margin-left: 56px;
-  margin-top: 240px;
-  width: 60%;
-  color: white;
+  @media screen and (max-width: 1920px) {
+    position: relative;
+    left: 0;
+    margin-left: 80px;
+    margin-top: 400px;
+    width: 55%;
+    color: white;
+  }
+
+  @media screen and (max-width: 1280px) {
+    position: relative;
+    left: 0;
+    margin-left: 56px;
+    margin-top: 240px;
+    width: 60%;
+    color: white;
+  }
 `;
 
 const ButtonWrapper = styled.div`
