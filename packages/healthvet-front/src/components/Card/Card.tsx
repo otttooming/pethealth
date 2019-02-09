@@ -5,7 +5,13 @@ import catIcon from './cat.svg';
 import gutIcon from './Vector.svg';
 import plusIcon from './Group.svg';
 
-export interface CardProps {}
+export interface CardProps {
+  title: string;
+  doctor: string;
+  date: string;
+  description: string;
+  picture?: string;
+}
 
 const Wrapper = styled.section`
   display: flex;
@@ -53,7 +59,6 @@ const Description = styled.p`
   font-weight: normal;
   line-height: 22px;
   font-size: 16px;
-  overflow: hidden;
   height: 60px;
 
   color: rgba(0, 0, 0, 0.6);
@@ -82,23 +87,37 @@ const Icon = styled.img`
   margin-top: 10px;
 `;
 
+const ReadMore = styled.span`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  font-size: 15px;
+  margin-left: 16px;
+  color: #ff6d6d;
+`;
+
 export default class Card extends React.Component<CardProps, any> {
+  getTrimmedValue = (value: string, length: number) => {
+    return value.substring(0, length);
+  };
+
   public render() {
+    const { doctor, description, title, date } = this.props;
+
     return (
       <Wrapper>
         <Left>
           <Avatar />
-          <Name>Dr.Bergman</Name>
+          <Name>{doctor}</Name>
         </Left>
         <Center>
-          <Title>Nahainfektsioon suuremal lambakoeral</Title>
-          <Date>12.12.2018</Date>
+          <Title>{title}</Title>
+          <Date>{date}</Date>
           <Description>
-            Kampülobakterioos on haigus, mis esineb peamiselt lindudel.
-            Peamisteks nakkusallikateks ongi saastunud veekogud ja nakatunud
-            lindude liha. Kui koer sööb sellist liha, siis väljutab ta
-            väljaheitega nakkusohtlikke baktereid, mis võivad nakatada inimest.
-            Tavaliselt...
+            {this.getTrimmedValue(description, 100)}
+            {'...'}
+            <ReadMore>Read more</ReadMore>
           </Description>
         </Center>
         <Right>

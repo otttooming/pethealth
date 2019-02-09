@@ -5,7 +5,7 @@ interface BellIconProps {}
 const BellIcon: React.SFC<BellIconProps> = props => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask
-      id="mask0"
+      id="dajkljafkdfa"
       maskUnits="userSpaceOnUse"
       x="3"
       y="2"
@@ -19,7 +19,7 @@ const BellIcon: React.SFC<BellIconProps> = props => (
         fill="#fff"
       />
     </mask>
-    <g mask="url(#mask0)">
+    <g mask="url(#dajkljafkdfa)">
       <rect x="-13" y="-13" width="50" height="50" fill="#FF6D6D" />
       <mask
         id="mask1"
