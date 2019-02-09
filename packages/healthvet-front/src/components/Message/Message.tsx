@@ -43,7 +43,7 @@ const Description = styled.p`
   font-weight: normal;
   line-height: 22px;
   font-size: 14px;
-
+  margin-bottom: 0;
   color: rgba(0, 0, 0, 0.6);
 `;
 

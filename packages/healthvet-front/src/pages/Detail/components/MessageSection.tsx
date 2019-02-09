@@ -52,15 +52,13 @@ export default class MessageSection extends React.Component<
 > {
   messages: MessageProps[] = [
     {
-      title: 'Nahainfektsioon suuremal lambakoeral',
-      description:
-        'Nahainfektsioon suuremal lambakoeral kes on saanud pihta mingi autoga ja tal tuleb vist tagumine jalg üldse otsast ',
+      title: 'Gastointestinal problems',
+      description: `Gastrointestinal (GI) disorders and diseases affect a dog's stomach and intestines, resulting in pain and other problems. Any disorder that reduces the digestion.`,
       icon: '',
     },
     {
       title: null,
-      description:
-        'Nahainfektsioon suuremal lambakoeral kes on saanud pihta mingi autoga ja tal tuleb vist tagumine jalg üldse otsast ',
+      description: `Gastrointestinal (GI) disorders and diseases affect a dog's stomach and intestines, resulting in pain and other problems.`,
       icon: '',
     },
   ];
@@ -86,8 +84,7 @@ export default class MessageSection extends React.Component<
 
     const message: MessageProps = {
       title: '',
-      description:
-        'Nahainfektsioon suuremal lambakoeral kes on saanud pihta mingi autoga ja tal tuleb vist tagumine jalg üldse otsast ära ja siin on hästi palju teksti suuremal lambakoeral kes on saanud pihta mingi autoga... ',
+      description: `Gastrointestinal (GI) disorders and diseases affect a dog's stomach and intestines, resulting in pain and other problems.`,
       icon: '',
     };
 
