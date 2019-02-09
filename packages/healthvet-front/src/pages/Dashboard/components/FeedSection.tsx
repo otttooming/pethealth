@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import Card, { CardProps } from '../../../components/Card/Card';
 import { Link } from 'react-router-dom';
 import FilterSection from './FilterSection';
-import Avatar1 from './Avatar1.svg';
-import Avatar2 from './Avatar2.svg';
-import Avatar3 from './Avatar3.svg';
-import Avatar4 from './Avatar4.svg';
+import Avatar1 from './Avatar1.png';
+import Avatar2 from './Avatar2.png';
+import Avatar3 from './Avatar3.png';
+import Avatar4 from './Avatar4.png';
 
 export interface FeedSectionProps {}
 export interface FeedSectionState {
