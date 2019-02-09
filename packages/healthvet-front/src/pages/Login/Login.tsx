@@ -46,6 +46,33 @@ const Logo = styled.img`
 `;
 
 const FormWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: white;
+  margin-top: 440px;
+  margin-left: 200px;
+  input[type='submit'] {
+    margin-top: 25px;
+    background: #f57171;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    &:hover {
+      background-color: #e06666;
+    }
+  }
+  input[type='text'] {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+  }
+  input[type='password'] {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+  }
+
   @media screen and (max-width: 1920px) {
     position: absolute;
     left: 0;
@@ -114,6 +141,10 @@ const FormWrapper = styled.div`
 `;
 
 const LoginLabel = styled.label`
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
   @media screen and (max-width: 1920px) {
     font-size: 20px;
     margin-bottom: 10px;
@@ -128,6 +159,11 @@ const LoginLabel = styled.label`
 `;
 
 const LoginText = styled.h1`
+  color: white;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+
   @media screen and (max-width: 1280px) {
     color: white;
     text-align: center;
@@ -144,6 +180,14 @@ const LoginText = styled.h1`
 `;
 
 const CatShadow = styled.img`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-bottom: 50px;
+  padding-right: 100px;
+  z-index: 0;
+  width: 45%;
+
   @media screen and (max-width: 1280px) {
     position: absolute;
     bottom: 0;

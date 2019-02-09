@@ -35,6 +35,10 @@ const Logo = styled.img`
 `;
 
 const StyledH2 = styled.h2`
+  color: white;
+  font-size: 20px;
+  padding-left: 20px;
+
   @media screen and (max-width: 1920px) {
     color: white;
     font-size: 20px;
@@ -49,6 +53,12 @@ const StyledH2 = styled.h2`
 `;
 
 const StyledH1 = styled.h1`
+  font-weight: bold;
+  padding-top: 144px;
+  color: white;
+  font-size: 50px;
+  padding-left: 20px;
+
   @media screen and (max-width: 1920px) {
     font-weight: bold;
     padding-top: 144px;
@@ -87,6 +97,13 @@ const Button1 = styled.button`
 `;
 
 const ContentWrapper = styled.div`
+  position: relative;
+  left: 0;
+  margin-left: 80px;
+  margin-top: 400px;
+  width: 55%;
+  color: white;
+
   @media screen and (max-width: 1920px) {
     position: relative;
     left: 0;
