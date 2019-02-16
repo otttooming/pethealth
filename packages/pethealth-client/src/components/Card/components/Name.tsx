@@ -12,7 +12,8 @@ const style = {
   text: RX.Styles.createTextStyle({
     fontStyle: 'normal',
     fontSize: 14,
-    color: 'rgb(0, 0, 0, 0.6)',
+    opacity: 0.6,
+    color: 'rgb(0, 0, 0)',
     textAlign: 'center',
     fontWeight: 'bold',
   }),

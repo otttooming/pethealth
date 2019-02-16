@@ -11,19 +11,21 @@ const style = {
     marginTop: 8,
   }),
   text: RX.Styles.createTextStyle({
-    fontFamily: 'Nunito, Roboto, sans-serif',
+    // fontFamily: 'Nunito, Roboto, sans-serif',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: 24,
     lineHeight: 24 * 1.2,
-    color: 'rgb(0, 0, 0, 0.6)',
+    opacity: 0.6,
+    color: 'rgb(0, 0, 0)',
   }),
   date: RX.Styles.createTextStyle({
-    fontFamily: 'Nunito, Roboto, sans-serif',
+    // fontFamily: 'Nunito, Roboto, sans-serif',
     fontStyle: 'normal',
     fontSize: 12,
     lineHeight: 12 * 1.2,
-    color: 'rgb(0, 0, 0, 0.6)',
+    opacity: 0.6,
+    color: 'rgb(0, 0, 0)',
   }),
 };
 
