@@ -7,12 +7,12 @@ import Card from '../../components/Card';
 class Dashboard extends RX.Component {
   public render() {
     return (
-      <RX.View>
+      <RX.View style={{ overflow: 'visible' }}>
         <RX.Text>Dashboard view</RX.Text>
         <Avatar />
         <Icon name={IconName.PLUS} />
 
-        <Card name="Roboto" />
+        <Card name="Roboto" date="2019/02/16" />
       </RX.View>
     );
   }
