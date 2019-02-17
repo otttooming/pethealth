@@ -63,7 +63,6 @@ export default class FeedSection extends RX.Component<FeedSectionProps, any> {
 
     return patients.map((item, index) => (
       <RX.View style={style.listItem} key={index}>
-        {' '}
         <Link to="/detail" style={{ textDecoration: 'none' }}>
           <Card {...item} />
         </Link>
