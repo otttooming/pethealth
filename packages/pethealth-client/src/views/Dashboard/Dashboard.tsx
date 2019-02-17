@@ -27,7 +27,7 @@ const style = {
 class Dashboard extends RX.Component {
   public render() {
     return (
-      <RX.View style={style.wrapper}>
+      <RX.ScrollView style={style.wrapper}>
         <Grid>
           <Col>
             <RX.Text>Dashboard view</RX.Text>
@@ -38,9 +38,12 @@ class Dashboard extends RX.Component {
           <Col>
             <FeedSection />
           </Col>
-          <Col>Third</Col>
+
+          <Col>
+            <RX.Text>Third</RX.Text>
+          </Col>
         </Grid>
-      </RX.View>
+      </RX.ScrollView>
     );
   }
 }
