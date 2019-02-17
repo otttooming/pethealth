@@ -32,6 +32,7 @@ const getFigureSize = (size: AvatarSize): number => {
 
 function getStyle(size: AvatarSize) {
   return RX.Styles.createViewStyle({
+    overflow: 'visible',
     position: 'relative',
     marginBottom: 0,
     width: getFigureSize(size),
@@ -39,8 +40,18 @@ function getStyle(size: AvatarSize) {
     borderRadius: getFigureSize(size),
     shadowOpacity: 0.4,
     shadowRadius: 5,
-    shadowColor: 'rgba(0, 0, 0, 0.4)',
+    shadowColor: '#000',
     shadowOffset: { height: 0, width: 0 },
+  });
+}
+
+function getRoundStyle(size: AvatarSize) {
+  return RX.Styles.createViewStyle({
+    position: 'relative',
+    marginBottom: 0,
+    width: getFigureSize(size),
+    height: getFigureSize(size),
+    borderRadius: getFigureSize(size),
   });
 }
 
@@ -56,7 +67,9 @@ class Avatar extends RX.Component<AvatarProps, any> {
 
     return (
       <RX.View style={getStyle(size)}>
-        <Image source={source} />
+        <RX.View style={getRoundStyle(size)}>
+          <Image source={source} />
+        </RX.View>
       </RX.View>
     );
   }
