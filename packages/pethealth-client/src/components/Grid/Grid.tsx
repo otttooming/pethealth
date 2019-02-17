@@ -9,6 +9,7 @@ const style = {
     flexDirection: 'row',
     alignSelf: 'stretch',
     flex: 1,
+    flexWrap: 'wrap',
   }),
 };
 
