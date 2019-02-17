@@ -71,7 +71,7 @@ class Card extends RX.Component<Props, any> {
       shadowOpacity: 0.27,
       shadowRadius: 16,
       shadowColor: 'rgb(254, 79, 21)',
-      shadowOffset: { height: 0, width: 4 },
+      shadowOffset: { height: 0, width: 0 },
       overflow: 'visible',
     });
   };
