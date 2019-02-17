@@ -5,12 +5,16 @@ import Name from './components/Name';
 import Title from './components/Title';
 import Icon, { IconName } from '../Icon';
 import Description from './components/Description';
+import withScreenSize from '../../utils/withScreenSize';
+import { ScreenSizeInjectedProps } from '../../utils/withScreenSize/withScreenSize';
 
 export interface CardProps {
   name: string;
   date: string;
   description: string;
 }
+
+type Props = CardProps & ScreenSizeInjectedProps;
 
 const style = {
   wrapper: RX.Styles.createViewStyle({
@@ -43,27 +47,81 @@ const style = {
   }),
 };
 
-class Card extends RX.Component<CardProps, any> {
+class Card extends RX.Component<Props, any> {
   static defaultProps = {
-    name: null,
-    date: null,
-    description: null,
+    name: undefined,
+    date: undefined,
+    description: undefined,
+  };
+
+  getWrapperStyle = () => {
+    const {
+      screen: { isLarge },
+    } = this.props;
+
+    return RX.Styles.createViewStyle({
+      flexDirection: isLarge ? 'row' : 'column',
+      alignItems: 'center',
+      alignSelf: 'stretch',
+      backgroundColor: '#fff',
+      borderStyle: 'solid',
+      borderColor: '#fff',
+      borderWidth: 2,
+      borderRadius: 20,
+      shadowOpacity: 0.27,
+      shadowRadius: 16,
+      shadowColor: 'rgb(254, 79, 21)',
+      shadowOffset: { height: 0, width: 4 },
+      overflow: 'visible',
+    });
+  };
+
+  getCenterStyle = () => {
+    const {
+      screen: { isLarge, isSmall },
+    } = this.props;
+
+    const padding = isSmall ? 16 : 24;
+
+    return RX.Styles.createViewStyle({
+      alignSelf: 'stretch',
+      flex: 1,
+      paddingTop: padding,
+      paddingBottom: padding,
+      paddingLeft: padding,
+      paddingRight: isLarge ? 88 : padding,
+    });
+  };
+
+  getRightStyle = () => {
+    const {
+      screen: { isLarge, isSmall },
+    } = this.props;
+
+    const padding = isSmall ? 16 : 24;
+
+    return RX.Styles.createViewStyle({
+      flexDirection: isLarge ? 'column' : 'row',
+      justifyContent: isLarge ? 'flex-start' : 'center',
+      alignSelf: 'stretch',
+      padding,
+    });
   };
 
   public render() {
     const { name, date, description } = this.props;
 
     return (
-      <RX.View style={style.wrapper}>
+      <RX.View style={this.getWrapperStyle()}>
         <RX.View style={style.left}>
           <Avatar />
           <Name name={name} />
         </RX.View>
-        <RX.View style={style.center}>
+        <RX.View style={this.getCenterStyle()}>
           <Title title={name} date={date} />
           <Description description={description} />
         </RX.View>
-        <RX.View style={style.right}>
+        <RX.View style={this.getRightStyle()}>
           <Icon name={IconName.PLUS} />
           <Icon name={IconName.PLUS} />
           <Icon name={IconName.PLUS} />
@@ -73,4 +131,4 @@ class Card extends RX.Component<CardProps, any> {
   }
 }
 
-export default Card;
+export default withScreenSize()<CardProps>(Card);
