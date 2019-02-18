@@ -4,6 +4,7 @@ import Grid, { Col } from '../../components/Grid';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import withScreenSize from '../../utils/withScreenSize';
 import { ScreenSizeInjectedProps } from '../../utils/withScreenSize/withScreenSize';
+import Patient from '../../components/Patient';
 
 type Props = ScreenSizeInjectedProps;
 
@@ -41,7 +42,9 @@ class Detail extends React.Component<Props, any> {
             </Col>
           )}
 
-          <Col>{/* <PatientSection /> */}</Col>
+          <Col>
+            <Patient />
+          </Col>
           <Col>{/* <TimelineSection /> */}</Col>
           <Col>{/* <MessageSection /> */}</Col>
         </Grid>
