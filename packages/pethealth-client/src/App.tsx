@@ -4,6 +4,7 @@ import Routing, { Router } from './utils/routing/routing';
 import Landing from './views/Landing/Landing';
 import Login from './views/Login/Login';
 import Dashboard from './views/Dashboard/Dashboard';
+import Detail from './views/Detail';
 const { Route, Switch } = Routing;
 
 export class App extends RX.Component {
@@ -14,6 +15,7 @@ export class App extends RX.Component {
           <Route exact={true} path="/" component={Landing} />
           <Route exact={true} path="/login" component={Login} />
           <Route exact={true} path="/dashboard" component={Dashboard} />
+          <Route exact={true} path="/detail" component={Detail} />
         </Switch>
       </Router>
     );
