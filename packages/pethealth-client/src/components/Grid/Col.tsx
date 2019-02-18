@@ -1,20 +1,12 @@
 import RX, { UserInterface } from 'reactxp';
 import * as React from 'react';
 
-export interface ColProps {}
+export interface ColProps {
+  style?: RX.Types.ViewStyle;
+}
 interface State {
   window: RX.Types.Dimensions;
 }
-
-const style = {
-  wrapper: RX.Styles.createViewStyle({
-    overflow: 'visible',
-    minHeight: 40,
-    padding: 8,
-    flexGrow: 1,
-    flexBasis: 0,
-  }),
-};
 
 class Col extends RX.Component<ColProps, State> {
   static defaultProps = {};
@@ -52,18 +44,23 @@ class Col extends RX.Component<ColProps, State> {
   };
 
   getStyle = () => {
+    const { style } = this.props;
+    const {
+      window: { height: minHeight },
+    } = this.state;
+
     return RX.Styles.createViewStyle({
       overflow: 'visible',
-      minHeight: 40,
-      padding: 8,
+      minHeight,
       flexGrow: 1,
       flexBasis: 0,
       minWidth: this.getMinWidth(),
+      ...style,
     });
   };
 
   public render() {
-    const { children } = this.props;
+    const { children, style } = this.props;
 
     return <RX.View style={this.getStyle()}>{children}</RX.View>;
   }
