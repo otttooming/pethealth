@@ -5,6 +5,7 @@ import FeedSection from './FeedSection';
 import Sidebar from '../../components/Sidebar';
 import withScreenSize from '../../utils/withScreenSize';
 import { ScreenSizeInjectedProps } from '../../utils/withScreenSize/withScreenSize';
+import RightSection from './RightSection';
 
 type Props = ScreenSizeInjectedProps;
 
@@ -48,7 +49,7 @@ class Dashboard extends RX.Component<Props> {
 
           {(isLarge || isMedium) && (
             <Col style={{ maxWidth: isMedium ? 160 : 256 }}>
-              <RX.Text>Third</RX.Text>
+              <RightSection />
             </Col>
           )}
         </Grid>
