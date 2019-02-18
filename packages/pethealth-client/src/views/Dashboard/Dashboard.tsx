@@ -1,9 +1,8 @@
 import React from 'react';
 import RX from 'reactxp';
-import Avatar from '../../components/Avatar';
-import Icon, { IconName } from '../../components/Icon';
 import Grid, { Col } from '../../components/Grid';
 import FeedSection from './FeedSection';
+import Sidebar from '../../components/Sidebar';
 
 const style = {
   wrapper: RX.Styles.createViewStyle({
@@ -29,10 +28,8 @@ class Dashboard extends RX.Component {
     return (
       <RX.ScrollView style={style.wrapper}>
         <Grid>
-          <Col>
-            <RX.Text>Dashboard view</RX.Text>
-            <Avatar />
-            <Icon name={IconName.PLUS} />
+          <Col style={{ maxWidth: 320 }}>
+            <Sidebar />
           </Col>
 
           <Col>
