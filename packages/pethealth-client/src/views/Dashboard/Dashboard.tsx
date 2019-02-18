@@ -3,6 +3,10 @@ import RX from 'reactxp';
 import Grid, { Col } from '../../components/Grid';
 import FeedSection from './FeedSection';
 import Sidebar from '../../components/Sidebar';
+import withScreenSize from '../../utils/withScreenSize';
+import { ScreenSizeInjectedProps } from '../../utils/withScreenSize/withScreenSize';
+
+type Props = ScreenSizeInjectedProps;
 
 const style = {
   wrapper: RX.Styles.createViewStyle({
@@ -23,26 +27,34 @@ const style = {
   }),
 };
 
-class Dashboard extends RX.Component {
+class Dashboard extends RX.Component<Props> {
   public render() {
+    const {
+      screen: { isLarge, isMedium },
+    } = this.props;
+
     return (
       <RX.ScrollView style={style.wrapper}>
         <Grid>
-          <Col style={{ maxWidth: 320 }}>
-            <Sidebar />
-          </Col>
+          {isLarge && (
+            <Col style={{ maxWidth: 256 }}>
+              <Sidebar />
+            </Col>
+          )}
 
           <Col>
             <FeedSection />
           </Col>
 
-          <Col>
-            <RX.Text>Third</RX.Text>
-          </Col>
+          {(isLarge || isMedium) && (
+            <Col style={{ maxWidth: isMedium ? 160 : 256 }}>
+              <RX.Text>Third</RX.Text>
+            </Col>
+          )}
         </Grid>
       </RX.ScrollView>
     );
   }
 }
 
-export default Dashboard;
+export default withScreenSize()<Props>(Dashboard);
