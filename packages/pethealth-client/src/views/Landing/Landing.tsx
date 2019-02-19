@@ -3,15 +3,12 @@ import RX from 'reactxp';
 import { Link } from '../../utils/routing/routing';
 import Button from '../../components/Button';
 import { ButtonType } from '../../components/Button/Button';
+import withScreenSize from '../../utils/withScreenSize';
+import { ScreenSizeInjectedProps } from '../../utils/withScreenSize/withScreenSize';
+
+export type Props = ScreenSizeInjectedProps;
 
 const style = {
-  wrapper: RX.Styles.createViewStyle({
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: 'rgb(255, 109, 109)',
-    height: '100%' as any,
-  }),
   footer: RX.Styles.createViewStyle({
     paddingTop: 32,
   }),
@@ -33,11 +30,11 @@ const style = {
   }),
 };
 
-class Landing extends RX.Component {
+class Landing extends RX.Component<Props> {
   public render() {
     return (
       <RX.ScrollView>
-        <RX.View style={style.wrapper}>
+        <RX.View style={this.getWrapperStyle()}>
           <RX.Image
             style={style.image}
             source="https://res.cloudinary.com/dqa53guw9/image/upload/v1550518304/logo-valge.png"
@@ -60,6 +57,20 @@ class Landing extends RX.Component {
       </RX.ScrollView>
     );
   }
+
+  private getWrapperStyle = () => {
+    const {
+      dimensions: { height: minHeight },
+    } = this.props;
+
+    return RX.Styles.createViewStyle({
+      alignItems: 'center',
+      alignSelf: 'stretch',
+      justifyContent: 'center',
+      backgroundColor: 'rgb(255, 109, 109)',
+      minHeight,
+    });
+  };
 }
 
-export default Landing;
+export default withScreenSize()<Props>(Landing);
