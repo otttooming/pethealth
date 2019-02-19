@@ -43,13 +43,17 @@ class Detail extends React.Component<Props, any> {
             </Col>
           )}
 
-          <Col>
-            <Patient />
-          </Col>
+          {isLarge && (
+            <Col>
+              <Patient />
+            </Col>
+          )}
+
           <Col>
             <Timeline />
           </Col>
-          <Col>{/* <MessageSection /> */}</Col>
+
+          {isLarge && <Col>{/* <MessageSection /> */}</Col>}
         </Grid>
       </RX.ScrollView>
     );
