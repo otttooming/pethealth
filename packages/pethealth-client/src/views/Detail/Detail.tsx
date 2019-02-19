@@ -5,6 +5,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import withScreenSize from '../../utils/withScreenSize';
 import { ScreenSizeInjectedProps } from '../../utils/withScreenSize/withScreenSize';
 import Patient from '../../components/Patient';
+import Timeline from '../../components/Timeline';
 
 type Props = ScreenSizeInjectedProps;
 
@@ -45,7 +46,9 @@ class Detail extends React.Component<Props, any> {
           <Col>
             <Patient />
           </Col>
-          <Col>{/* <TimelineSection /> */}</Col>
+          <Col>
+            <Timeline />
+          </Col>
           <Col>{/* <MessageSection /> */}</Col>
         </Grid>
       </RX.ScrollView>
