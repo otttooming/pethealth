@@ -7,12 +7,19 @@ export interface ScreenSize {
   isLarge: boolean;
 }
 
+export interface ScreenDimensions {
+  width: number;
+  height: number;
+}
+
 export interface ScreenSizeInjectedProps {
   screen: ScreenSize;
+  dimensions: ScreenDimensions;
 }
 
 interface ScreenSizeComponentState {
   screen: ScreenSize;
+  dimensions: ScreenDimensions;
 }
 
 function withScreenSize(): <P extends object>(
@@ -29,6 +36,10 @@ function withScreenSize(): <P extends object>(
           isMedium: false,
           isLarge: false,
         },
+        dimensions: {
+          width: 0,
+          height: 0,
+        },
       };
 
       constructor(props: P) {
@@ -36,6 +47,7 @@ function withScreenSize(): <P extends object>(
 
         this.state = {
           screen: this.getSize(),
+          dimensions: this.getDimensions(),
         };
       }
 
@@ -58,9 +70,21 @@ function withScreenSize(): <P extends object>(
         return screen;
       };
 
+      getDimensions = () => {
+        const { width, height } = UserInterface.measureWindow();
+
+        return { width, height };
+      };
+
       public render() {
-        const { screen } = this.state;
-        return <WrappedComponent {...this.props} screen={screen} />;
+        const { screen, dimensions } = this.state;
+        return (
+          <WrappedComponent
+            {...this.props}
+            screen={screen}
+            dimensions={dimensions}
+          />
+        );
       }
     };
 }
