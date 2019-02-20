@@ -1,6 +1,5 @@
 import React from 'react';
 import RX from 'reactxp';
-import { Link } from '../../utils/routing/routing';
 import Button from '../../components/Button';
 import { ButtonType } from '../../components/Button/Button';
 import withScreenSize from '../../utils/withScreenSize';
