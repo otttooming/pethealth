@@ -123,7 +123,17 @@ class Login extends RX.Component<Props, State> {
 
     const options = { variables: { email, password } };
 
-    await request(options);
+    const response = await request(options);
+
+    const token = !!response && response.data && response.data.login.token;
+
+    const isTokenAvailable = (
+      value: string | undefined | boolean,
+    ): value is string => typeof value === 'string';
+
+    if (isTokenAvailable(token)) {
+      RX.Storage.setItem('token', token);
+    }
   };
 
   private setEmail = (email: string) => {
