@@ -12,26 +12,6 @@ export interface ButtonProps {
   onPress: () => void;
 }
 
-const style = {
-  wrapper: RX.Styles.createButtonStyle({
-    overflow: 'visible',
-    backgroundColor: '#ff6d6d',
-    borderRadius: 90,
-  }),
-  text: RX.Styles.createTextStyle({
-    fontStyle: 'normal',
-    lineHeight: 22,
-    fontSize: 17,
-    textAlign: 'center',
-    color: '#fff',
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingRight: 40,
-    paddingLeft: 40,
-    borderWidth: 0,
-  }),
-};
-
 class Button extends RX.Component<ButtonProps, any> {
   static defaultProps = {
     type: ButtonType.RED,
