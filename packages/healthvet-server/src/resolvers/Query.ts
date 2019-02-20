@@ -9,7 +9,15 @@ export const Query: QueryResolvers.Type = {
     return context.prisma.user({ id: userId });
   },
   feed: (parent, args, context) => {
-    return context.prisma.posts({ where: { published: true } });
+    const userId = getUserId(context);
+
+    if (!userId) {
+      throw new Error('Not authorized');
+    }
+
+    return context.prisma.posts({
+      where: { author: { id: userId }, published: true },
+    });
   },
   filterPosts: (parent, { searchString }, context) => {
     return context.prisma.posts({
