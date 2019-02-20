@@ -9,6 +9,7 @@ export enum ButtonType {
 export interface ButtonProps {
   type: ButtonType;
   to?: string;
+  onPress: () => void;
 }
 
 const style = {
@@ -34,10 +35,11 @@ const style = {
 class Button extends RX.Component<ButtonProps, any> {
   static defaultProps = {
     type: ButtonType.RED,
+    onPress: () => {},
   };
 
   public render() {
-    const { to } = this.props;
+    const { to, onPress } = this.props;
 
     const getIsString: (value: string | undefined) => boolean = (
       value: string | undefined,
@@ -55,7 +57,7 @@ class Button extends RX.Component<ButtonProps, any> {
     }
 
     return (
-      <RX.Button style={this.getWrapperStyle()}>
+      <RX.Button style={this.getWrapperStyle()} onPress={onPress}>
         {this.renderTextContent()}
       </RX.Button>
     );
