@@ -1,5 +1,6 @@
 import * as React from 'react';
 import RX from 'reactxp';
+import { Link } from '../../utils/routing/routing';
 
 export enum ButtonType {
   WHITE = 'white',
@@ -7,6 +8,7 @@ export enum ButtonType {
 }
 export interface ButtonProps {
   type: ButtonType;
+  to?: string;
 }
 
 const style = {
@@ -35,16 +37,39 @@ class Button extends RX.Component<ButtonProps, any> {
   };
 
   public render() {
-    const { children } = this.props;
+    const { to } = this.props;
+
+    const getIsString: (value: string | undefined) => boolean = (
+      value: string | undefined,
+    ) => typeof value === 'string';
+
+    const getIsLink = (value: string | undefined): value is string =>
+      getIsString(value);
+
+    if (getIsLink(to)) {
+      return (
+        <Link to={to} style={this.getWrapperStyle() as React.CSSProperties}>
+          {this.renderTextContent()}
+        </Link>
+      );
+    }
 
     return (
       <RX.Button style={this.getWrapperStyle()}>
-        <RX.Text selectable={true} style={this.getButtonStyle()}>
-          {children}
-        </RX.Text>
+        {this.renderTextContent()}
       </RX.Button>
     );
   }
+
+  private renderTextContent = () => {
+    const { children } = this.props;
+
+    return (
+      <RX.Text selectable={true} style={this.getButtonStyle()}>
+        {children}
+      </RX.Text>
+    );
+  };
 
   private getWrapperStyle = () => {
     const { type } = this.props;
