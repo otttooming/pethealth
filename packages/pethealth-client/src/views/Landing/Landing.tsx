@@ -49,9 +49,9 @@ class Landing extends RX.Component<Props> {
           </RX.Text>
 
           <RX.View style={style.footer}>
-            <Link to="/login">
-              <Button type={ButtonType.WHITE}>Link to login</Button>
-            </Link>
+            <Button to="/login" type={ButtonType.WHITE}>
+              Link to login
+            </Button>
           </RX.View>
         </RX.View>
       </RX.ScrollView>
