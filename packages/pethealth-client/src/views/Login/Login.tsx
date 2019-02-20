@@ -4,8 +4,17 @@ import Button from '../../components/Button';
 import { ButtonType } from '../../components/Button/Button';
 import withScreenSize from '../../utils/withScreenSize';
 import { ScreenSizeInjectedProps } from '../../utils/withScreenSize/withScreenSize';
+import {
+  AuthLoginComponent,
+  AuthLoginMutationFn,
+} from '../../generated-models';
 
 export type Props = ScreenSizeInjectedProps;
+
+interface State {
+  email: string;
+  password: string;
+}
 
 const style = {
   center: RX.Styles.createViewStyle({
@@ -46,36 +55,88 @@ const style = {
   }),
 };
 
-class Login extends RX.Component<Props> {
+class Login extends RX.Component<Props, State> {
+  state = {
+    email: '',
+    password: '',
+  };
+
   public render() {
     return (
-      <RX.ScrollView>
-        <RX.View style={this.getWrapperStyle()}>
-          <RX.Image
-            style={style.image}
-            source="https://res.cloudinary.com/dqa53guw9/image/upload/v1550518304/logo-valge.png"
-          />
-          <RX.Text selectable={true} style={style.title}>
-            Log in
-          </RX.Text>
+      <AuthLoginComponent>
+        {(request, { data }) => {
+          const isLoginSuccessful = !!data && !!data.login.token;
 
-          <RX.View style={style.center}>
-            <RX.Text style={style.label}>Username</RX.Text>
-            <RX.TextInput style={style.input} />
+          return (
+            <RX.ScrollView>
+              <RX.View style={this.getWrapperStyle()}>
+                <RX.Image
+                  style={style.image}
+                  source="https://res.cloudinary.com/dqa53guw9/image/upload/v1550518304/logo-valge.png"
+                />
+                <RX.Text selectable={true} style={style.title}>
+                  Log in
+                </RX.Text>
 
-            <RX.Text style={style.label}>Password</RX.Text>
-            <RX.TextInput style={style.input} />
-          </RX.View>
+                <RX.View style={style.center}>
+                  <RX.Text style={style.label}>email</RX.Text>
+                  <RX.TextInput
+                    style={style.input}
+                    onChangeText={this.setEmail}
+                  />
 
-          <RX.View style={style.footer}>
-            <Button to="/dashboard" type={ButtonType.WHITE}>
-              Submit
-            </Button>
-          </RX.View>
-        </RX.View>
-      </RX.ScrollView>
+                  <RX.Text style={style.label}>Password</RX.Text>
+                  <RX.TextInput
+                    style={style.input}
+                    onChangeText={this.setPassword}
+                  />
+                </RX.View>
+
+                <RX.View style={style.footer}>
+                  {isLoginSuccessful && (
+                    <Button to="/dashboard" type={ButtonType.WHITE}>
+                      Go to Dashboard
+                    </Button>
+                  )}
+
+                  {!isLoginSuccessful && (
+                    <Button
+                      type={ButtonType.WHITE}
+                      onPress={this.submitLogin(request)}
+                    >
+                      Submit
+                    </Button>
+                  )}
+                </RX.View>
+              </RX.View>
+            </RX.ScrollView>
+          );
+        }}
+      </AuthLoginComponent>
     );
   }
+
+  private submitLogin = (request: AuthLoginMutationFn) => async (): Promise<
+    void
+  > => {
+    const { password, email } = this.state;
+
+    const options = { variables: { email, password } };
+
+    await request(options);
+  };
+
+  private setEmail = (email: string) => {
+    this.setState({
+      email,
+    });
+  };
+
+  private setPassword = (password: string) => {
+    this.setState({
+      password,
+    });
+  };
 
   private getWrapperStyle = () => {
     const {
