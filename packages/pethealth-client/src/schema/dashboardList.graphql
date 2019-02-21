@@ -1,0 +1,10 @@
+query dashboardList {
+  feed {
+    id
+    content
+    createdAt
+    author {
+      name
+    }
+  }
+}
