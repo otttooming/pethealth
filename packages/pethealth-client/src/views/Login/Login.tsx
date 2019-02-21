@@ -52,6 +52,7 @@ const style = {
     color: '#000',
     height: 40,
     marginTop: 8,
+    backgroundColor: '#fff',
   }),
 };
 
@@ -83,12 +84,14 @@ class Login extends RX.Component<Props, State> {
                   <RX.TextInput
                     style={style.input}
                     onChangeText={this.setEmail}
+                    autoCapitalize="none"
                   />
 
                   <RX.Text style={style.label}>Password</RX.Text>
                   <RX.TextInput
                     style={style.input}
                     onChangeText={this.setPassword}
+                    autoCapitalize="none"
                   />
                 </RX.View>
 
