@@ -64,9 +64,9 @@ export default class FeedSection extends RX.Component<FeedSectionProps, any> {
   };
 
   renderCardItems = ({ feed = [] }: DashboardListQuery) => {
-    return feed.map(({ content, author, createdAt }, index) => (
+    return feed.map(({ id, content, author, createdAt }, index) => (
       <RX.View style={style.listItem} key={index}>
-        <Link to="/detail" style={{ textDecoration: 'none' }}>
+        <Link to={`/detail/${id}`} style={{ textDecoration: 'none' }}>
           <Card
             description={!content ? undefined : content}
             name={!author.name ? undefined : author.name}

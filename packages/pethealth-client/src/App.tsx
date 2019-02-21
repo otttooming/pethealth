@@ -15,7 +15,7 @@ export class App extends RX.Component {
           <Route exact={true} path="/" component={Landing} />
           <Route exact={true} path="/login" component={Login} />
           <Route exact={true} path="/dashboard" component={Dashboard} />
-          <Route exact={true} path="/detail" component={Detail} />
+          <Route path="/detail/:id" component={Detail} />
         </Switch>
       </Router>
     );
