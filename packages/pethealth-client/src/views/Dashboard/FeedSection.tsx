@@ -3,8 +3,13 @@ import RX from 'reactxp';
 import Card from '../../components/Card';
 import { Link } from '../../utils/routing/routing';
 import { CardProps } from '../../components/Card/Card';
+import {
+  DashboardListProps,
+  DashboardListComponent,
+  DashboardListQuery,
+} from '../../generated-models';
 
-export interface FeedSectionProps {}
+export interface FeedSectionProps extends DashboardListProps {}
 
 export interface FeedSectionState {
   patients: CardProps[];
@@ -58,13 +63,15 @@ export default class FeedSection extends RX.Component<FeedSectionProps, any> {
     patients: this.patients,
   };
 
-  renderCardItems = () => {
-    const { patients } = this.state;
-
-    return patients.map((item, index) => (
+  renderCardItems = ({ feed = [] }: DashboardListQuery) => {
+    return feed.map(({ content, author, createdAt }, index) => (
       <RX.View style={style.listItem} key={index}>
         <Link to="/detail" style={{ textDecoration: 'none' }}>
-          <Card {...item} />
+          <Card
+            description={!content ? undefined : content}
+            name={!author.name ? undefined : author.name}
+            date={!createdAt ? undefined : createdAt}
+          />
         </Link>
       </RX.View>
     ));
@@ -76,7 +83,11 @@ export default class FeedSection extends RX.Component<FeedSectionProps, any> {
         {/* <FilterSection /> */}
 
         <RX.ScrollView style={style.list}>
-          {this.renderCardItems()}
+          <DashboardListComponent>
+            {({ data, error }) =>
+              !error && !!data && this.renderCardItems(data)
+            }
+          </DashboardListComponent>
         </RX.ScrollView>
       </RX.View>
     );
