@@ -1,5 +1,6 @@
 import * as React from 'react';
 import RX from 'reactxp';
+import { RouteComponentProps } from 'react-router';
 import Grid, { Col } from '../../components/Grid';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import withScreenSize from '../../utils/withScreenSize';
@@ -7,7 +8,7 @@ import { ScreenSizeInjectedProps } from '../../utils/withScreenSize/withScreenSi
 import Patient from '../../components/Patient';
 import Timeline from '../../components/Timeline';
 
-type Props = ScreenSizeInjectedProps;
+type Props = ScreenSizeInjectedProps & RouteComponentProps;
 
 const style = {
   wrapper: RX.Styles.createViewStyle({
