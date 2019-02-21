@@ -2,7 +2,7 @@ import * as React from 'react';
 import RX from 'reactxp';
 
 interface NameProps {
-  name: string;
+  name?: string;
 }
 
 const style = {

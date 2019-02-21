@@ -2,7 +2,7 @@ import * as React from 'react';
 import RX from 'reactxp';
 
 interface DescriptionProps {
-  description: string;
+  description: string | undefined;
 }
 
 const style = {

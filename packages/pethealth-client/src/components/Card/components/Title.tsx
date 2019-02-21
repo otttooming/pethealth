@@ -2,8 +2,8 @@ import * as React from 'react';
 import RX from 'reactxp';
 
 interface NameProps {
-  title: string;
-  date: string;
+  title?: string;
+  date?: string;
 }
 
 const style = {

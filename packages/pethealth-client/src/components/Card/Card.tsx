@@ -9,9 +9,9 @@ import withScreenSize from '../../utils/withScreenSize';
 import { ScreenSizeInjectedProps } from '../../utils/withScreenSize/withScreenSize';
 
 export interface CardProps {
-  name: string;
-  date: string;
-  description: string;
+  name?: string;
+  date?: string;
+  description?: string;
 }
 
 type Props = CardProps & ScreenSizeInjectedProps;
