@@ -5,6 +5,11 @@ import styled from 'styled-components';
 import logo from './logo-valge.svg';
 import cat_img from './cat.webp';
 import cat_shadow from './Kassivari.svg';
+import {
+  AuthLoginComponent,
+  AuthLoginMutationFn,
+} from '../../generated-models';
+import Button from '../../components/Button/Button';
 
 const Flex = styled.div`
   display: flex;
@@ -209,29 +214,96 @@ const CatShadow = styled.img`
   }
 `;
 
-function Form() {
-  return (
-    <FormWrapper>
-      <form>
-        <FlexList>
-          <LoginText>Log in</LoginText>
-          <LoginLabel>Username</LoginLabel>
-          <InputField type="text" />
-          <LoginLabel>Password</LoginLabel>
-          <InputField type="password" />
-          <div>
-            <Link to="/dashboard">
-              <InputField type="submit" color="#f4511e" />
-            </Link>
-          </div>
-        </FlexList>
-      </form>
-    </FormWrapper>
-  );
+interface State {
+  email: string;
+  password: string;
+}
+
+class Form extends React.Component<any, State> {
+  state = {
+    password: '',
+    email: '',
+  };
+
+  render() {
+    return (
+      <AuthLoginComponent>
+        {(request, { data }) => {
+          const isLoginSuccessful = !!data && !!data.login.token;
+
+          return (
+            <FormWrapper>
+              <form>
+                <FlexList>
+                  <LoginText>Log in</LoginText>
+                  <LoginLabel>Username</LoginLabel>
+                  <InputField type="text" onChange={this.setEmail} />
+                  <LoginLabel>Password</LoginLabel>
+                  <InputField type="text" onChange={this.setPassword} />
+                  <div>
+                    {isLoginSuccessful && (
+                      <Link to="/dashboard">
+                        <InputField type="submit" color="#f4511e" />
+                      </Link>
+                    )}
+
+                    {!isLoginSuccessful && (
+                      <Button onClick={this.submitLogin(request)}>
+                        <span>Submit</span>
+                      </Button>
+                    )}
+                  </div>
+                </FlexList>
+              </form>
+            </FormWrapper>
+          );
+        }}
+      </AuthLoginComponent>
+    );
+  }
+
+  private submitLogin = (request: AuthLoginMutationFn) => async (): Promise<
+    void
+  > => {
+    const { password, email } = this.state;
+
+    const options = { variables: { email, password } };
+
+    const response = await request(options);
+
+    const token = !!response && response.data && response.data.login.token;
+
+    const isTokenAvailable = (
+      value: string | undefined | boolean,
+    ): value is string => typeof value === 'string';
+
+    if (isTokenAvailable(token)) {
+      localStorage.setItem('token', token);
+    }
+  };
+
+  private setEmail = (event: React.SyntheticEvent<HTMLInputElement>): void => {
+    const email = event.currentTarget.value || '';
+
+    this.setState({
+      email,
+    });
+  };
+
+  private setPassword = (
+    event: React.SyntheticEvent<HTMLInputElement>,
+  ): void => {
+    const password = event.currentTarget.value || '';
+
+    this.setState({
+      password,
+    });
+  };
 }
 
 export interface LoginProps {}
 
+// tslint:disable
 export default class Login extends React.Component<LoginProps, any> {
   public render() {
     return (
