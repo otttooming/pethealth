@@ -9,7 +9,12 @@
     "@types/react-dom": "16.0.11",
     "ant-design-pro": "^2.2.1",
     "antd": "^3.13.1",
+    "apollo-boost": "0.1.28",
+    "apollo-link-context": "1.0.14",
+    "graphql": "14.1.1",
+    "graphql-tag": "2.10.1",
     "react": "^16.7.0",
+    "react-apollo": "^2.4.1",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3",
@@ -20,6 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "gen:graphql": "gql-gen",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rimraf dist && rimraf build",
@@ -37,8 +43,13 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/graphql": "14.0.7",
     "@types/react-router-dom": "^4.3.1",
     "@types/styled-components": "^4.1.8",
+    "graphql-code-generator": "0.16.1",
+    "graphql-codegen-typescript-client": "0.16.1",
+    "graphql-codegen-typescript-common": "0.16.1",
+    "graphql-codegen-typescript-react-apollo": "0.16.1",
     "typescript": "3.3.1"
   }
 }

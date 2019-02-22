@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ApolloProvider } from 'react-apollo';
 import Button from 'antd/lib/button';
 import styled from 'styled-components';
 import Landing from './pages/Landing/Landing';
@@ -6,6 +7,7 @@ import Exception from './pages/Exception/Exception';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import client from './utils/apollo';
 
 import logo from './doggo1.png';
 import './App.css';
@@ -74,19 +76,21 @@ function Topic({ match }: any) {
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact={true} path="/" component={Landing} />
-            <Route path="/about" component={About} />
-            <Route path="/topics" component={Topics} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/login" component={Login} />
-            <Route path="/detail" component={Detail} />
-            <Route component={Exception} />
-          </Switch>
-        </div>
-      </Router>
+      <ApolloProvider client={client}>
+        <Router>
+          <div>
+            <Switch>
+              <Route exact={true} path="/" component={Landing} />
+              <Route path="/about" component={About} />
+              <Route path="/topics" component={Topics} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/login" component={Login} />
+              <Route path="/detail" component={Detail} />
+              <Route component={Exception} />
+            </Switch>
+          </div>
+        </Router>
+      </ApolloProvider>
     );
   }
 }
