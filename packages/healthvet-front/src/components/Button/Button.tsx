@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-export interface ButtonProps {}
+export interface ButtonProps {
+  onClick: () => void;
+}
 
 const Wrapper = styled.button`
   background: #ff6d6d;
@@ -24,9 +26,21 @@ const Wrapper = styled.button`
 `;
 
 export default class Button extends React.Component<ButtonProps, any> {
+  static defaultProps = {
+    onClick: () => {},
+  };
+
   public render() {
     const { children } = this.props;
 
-    return <Wrapper>{children}</Wrapper>;
+    return <Wrapper onClick={this.onClick}>{children}</Wrapper>;
   }
+
+  private onClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
+    const { onClick } = this.props;
+
+    event.preventDefault();
+
+    onClick();
+  };
 }
