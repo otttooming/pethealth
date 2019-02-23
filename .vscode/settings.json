@@ -4,5 +4,10 @@
     "**/.git": true,
     "**/node_modules": true
   },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  },
   "typescript.tsdk": "node_modules/typescript/lib"
 }
