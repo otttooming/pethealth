@@ -3,7 +3,7 @@
   "private": true,
   "main": "index.js",
   "version": "0.0.1",
-  "scripts": {
+  "scripts-inactive": {
     "rn-cli": "node node_modules/react-native/local-cli/cli.js",
     "start": "npm run start:web",
     "start:android": "yarn rn-cli run-android",
