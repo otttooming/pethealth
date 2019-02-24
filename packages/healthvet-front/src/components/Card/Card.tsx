@@ -17,7 +17,6 @@ const Wrapper = styled.section`
   display: flex;
   align-items: center;
   width: 100%;
-  /* height: 156px; */
   background: #ffffff;
   border: 2px solid #ffffff;
   box-sizing: border-box;
@@ -98,8 +97,8 @@ const ReadMore = styled.span`
   color: #ff6d6d;
 `;
 
-export default class Card extends React.Component<CardProps, any> {
-  getTrimmedValue = (value: string, length: number) => {
+class Card extends React.Component<CardProps, any> {
+  getTrimmedValue = (value: string, length: number): string => {
     return value.substring(0, length);
   };
 
@@ -130,3 +129,5 @@ export default class Card extends React.Component<CardProps, any> {
     );
   }
 }
+
+export default Card;

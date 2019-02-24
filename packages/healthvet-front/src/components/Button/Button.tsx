@@ -25,9 +25,9 @@ const Wrapper = styled.button`
   box-shadow: 2px 2px 10px rgba(254, 79, 21, 0.3);
 `;
 
-export default class Button extends React.Component<ButtonProps, any> {
+class Button extends React.Component<ButtonProps, any> {
   static defaultProps = {
-    onClick: () => {},
+    onClick: () => null,
   };
 
   public render() {
@@ -44,3 +44,5 @@ export default class Button extends React.Component<ButtonProps, any> {
     onClick();
   };
 }
+
+export default Button;
