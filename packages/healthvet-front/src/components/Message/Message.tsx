@@ -59,7 +59,7 @@ export default class Message extends React.Component<MessageProps, any> {
       <Wrapper>
         <AvatarWrapper hasTitle={!!title}>
           {!title ? (
-            <Avatar size={AvatarSize.INTERMEDIATE} src={avatar} />
+            <Avatar size={AvatarSize.LARGE} src={avatar} />
           ) : (
             <Avatar src={avatar} />
           )}

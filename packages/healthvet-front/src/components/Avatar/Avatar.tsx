@@ -1,17 +1,16 @@
 import * as React from 'react';
-import avatar from './avatar.png';
 import styled from 'styled-components';
 
 export enum AvatarSize {
-  INTERMEDIATE = 'intermediate',
-  MEDIUM = 'medium',
+  DEFAULT = 'default',
+  LARGE = 'large',
   NORMAL = 'normal',
   SMALL = 'small',
 }
 
 export interface AvatarProps {
   size: AvatarSize;
-  src: any;
+  src: string;
 }
 
 interface FigureProps {
@@ -20,18 +19,18 @@ interface FigureProps {
 
 const getFigureSize = ({ size }: FigureProps) => {
   if (size === AvatarSize.SMALL) {
-    return '27px';
+    return '24px';
   }
 
   if (size === AvatarSize.NORMAL) {
     return '48px';
   }
 
-  if (size === AvatarSize.INTERMEDIATE) {
-    return '67px';
+  if (size === AvatarSize.LARGE) {
+    return '72px';
   }
 
-  return '91px';
+  return '96px';
 };
 
 const Figure = styled.figure<FigureProps>`
@@ -50,9 +49,10 @@ const Image = styled.img`
   background: #c4c4c4;
 `;
 
-export default class Avatar extends React.Component<AvatarProps, any> {
+class Avatar extends React.Component<AvatarProps, any> {
   static defaultProps = {
-    size: AvatarSize.MEDIUM,
+    size: AvatarSize.DEFAULT,
+    src: '',
   };
 
   public render() {
@@ -65,3 +65,5 @@ export default class Avatar extends React.Component<AvatarProps, any> {
     );
   }
 }
+
+export default Avatar;
