@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@pethealth/ui-lib": "*",
     "@types/jest": "24.0.0",
     "@types/node": "10.12.21",
-    "@types/react": "16.8.1",
-    "@types/react-dom": "16.0.11",
+    "@types/styled-components": "4.1.10",
     "ant-design-pro": "^2.2.1",
     "antd": "^3.13.1",
     "apollo-boost": "0.1.28",
@@ -19,7 +19,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3",
     "react-scroll-to": "^2.0.5",
-    "styled-components": "^4.1.3",
+    "styled-components": "4.1.3",
     "styled-css-grid": "^1.2.1"
   },
   "scripts": {
@@ -44,8 +44,9 @@
   ],
   "devDependencies": {
     "@types/graphql": "14.0.7",
+    "@types/react": "^16.8.4",
+    "@types/react-dom": "^16.8.2",
     "@types/react-router-dom": "^4.3.1",
-    "@types/styled-components": "^4.1.8",
     "graphql-code-generator": "0.16.1",
     "graphql-codegen-typescript-client": "0.16.1",
     "graphql-codegen-typescript-common": "0.16.1",
