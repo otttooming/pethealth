@@ -1,0 +1,115 @@
+{
+  "name": "@pethealth/ui-lib",
+  "version": "1.0.0",
+  "description": "Reusable components for React projects",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "npm-run-all storybook build:watch --parallel",
+    "docs": "NODE_ENV=production webpack -p",
+    "storybook": "start-storybook --ci --quiet -p 9001 -c .storybook",
+    "build": "NODE_ENV=production webpack && npm run build:types",
+    "build:types": "tsc -p tsconfig.dist.json",
+    "build:watch": "nodemon",
+    "clean": "rm -rf dist",
+    "dist": "npm run clean && npm run build",
+    "lint": "npm run tslint && echo 'tslint check: OK'",
+    "tslint": "tslint --project ./tsconfig.json",
+    "test": "jest --no-cache",
+    "test:watch": "jest --watch",
+    "test:update": " jest -u"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "16.7.0",
+    "react-dom": "16.7.0",
+    "styled-components": "4.1.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.1.5",
+    "@babel/core": "7.1.6",
+    "@babel/plugin-external-helpers": "7.0.0",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/plugin-proposal-decorators": "7.1.2",
+    "@babel/plugin-syntax-dynamic-import": "7.0.0",
+    "@babel/plugin-transform-async-to-generator": "7.1.0",
+    "@babel/plugin-transform-modules-commonjs": "7.1.0",
+    "@babel/plugin-transform-runtime": "7.1.0",
+    "@babel/polyfill": "7.0.0",
+    "@babel/preset-env": "7.1.6",
+    "@babel/preset-react": "7.0.0",
+    "@babel/preset-typescript": "7.1.0",
+    "@babel/runtime": "7.1.5",
+    "@storybook/addon-knobs": "4.1.3",
+    "@storybook/react": "4.1.3",
+    "@types/babel-core": "6.25.5",
+    "@types/babel__core": "^7.0.4",
+    "@types/enzyme": "3.1.15",
+    "@types/enzyme-adapter-react-16": "1.0.3",
+    "@types/enzyme-to-json": "1.5.2",
+    "@types/jest": "23.3.10",
+    "@types/jest-cli": "23.6.0",
+    "@types/prettier": "1.15.2",
+    "@types/react": "16.8.1",
+    "@types/react-dom": "16.0.11",
+    "@types/rimraf": "2.0.2",
+    "@types/storybook__addon-knobs": "4.0.0",
+    "@types/storybook__react": "4.0.0",
+    "@types/styled-components": "4.1.10",
+    "@types/webpack": "4.4.24",
+    "babel-loader": "8.0.4",
+    "babel-plugin-import": "1.11.0",
+    "downshift": "^3.1.8",
+    "enzyme": "3.8.0",
+    "enzyme-adapter-react-16": "1.7.1",
+    "enzyme-to-json": "3.3.5",
+    "jest": "23.6.0",
+    "jest-cli": "23.6.0",
+    "nodemon": "^1.18.10",
+    "npm-run-all": "4.1.5",
+    "prettier": "1.15.3",
+    "react-popper": "1.3.2",
+    "rimraf": "2.6.2",
+    "source-map-loader": "0.2.4",
+    "styled-components": "4.1.3",
+    "ts-jest": "23.10.5",
+    "ts-loader": "5.3.2",
+    "tslint": "5.12.0",
+    "tslint-config-prettier": "1.17.0",
+    "tslint-eslint-rules": "5.4.0",
+    "tslint-loader": "3.6.0",
+    "tslint-plugin-prettier": "2.0.1",
+    "tslint-react": "3.6.0",
+    "typescript": "3.2.2",
+    "utility-types": "3.0.0",
+    "webpack": "4.16.0",
+    "webpack-cli": "3.1.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "verbose": true,
+    "bail": false,
+    "collectCoverage": true,
+    "setupTestFrameworkScriptFile": "<rootDir>/src/common/testHelpers/setupTestFrameworkScriptFile.ts",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
+}
