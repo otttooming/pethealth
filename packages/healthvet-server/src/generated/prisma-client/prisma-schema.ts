@@ -1,4 +1,8 @@
 export const typeDefs = /* GraphQL */ `
+  type AggregateHistory {
+    count: Int!
+  }
+
   type AggregatePost {
     count: Int!
   }
@@ -13,9 +17,278 @@ export const typeDefs = /* GraphQL */ `
 
   scalar DateTime
 
+  type History {
+    id: ID!
+    author: User!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    title: String
+    content: String
+  }
+
+  type HistoryConnection {
+    pageInfo: PageInfo!
+    edges: [HistoryEdge]!
+    aggregate: AggregateHistory!
+  }
+
+  input HistoryCreateInput {
+    author: UserCreateOneInput!
+    title: String
+    content: String
+  }
+
+  input HistoryCreateManyInput {
+    create: [HistoryCreateInput!]
+    connect: [HistoryWhereUniqueInput!]
+  }
+
+  type HistoryEdge {
+    node: History!
+    cursor: String!
+  }
+
+  enum HistoryOrderByInput {
+    id_ASC
+    id_DESC
+    createdAt_ASC
+    createdAt_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    title_ASC
+    title_DESC
+    content_ASC
+    content_DESC
+  }
+
+  type HistoryPreviousValues {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    title: String
+    content: String
+  }
+
+  input HistoryScalarWhereInput {
+    id: ID
+    id_not: ID
+    id_in: [ID!]
+    id_not_in: [ID!]
+    id_lt: ID
+    id_lte: ID
+    id_gt: ID
+    id_gte: ID
+    id_contains: ID
+    id_not_contains: ID
+    id_starts_with: ID
+    id_not_starts_with: ID
+    id_ends_with: ID
+    id_not_ends_with: ID
+    createdAt: DateTime
+    createdAt_not: DateTime
+    createdAt_in: [DateTime!]
+    createdAt_not_in: [DateTime!]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    updatedAt: DateTime
+    updatedAt_not: DateTime
+    updatedAt_in: [DateTime!]
+    updatedAt_not_in: [DateTime!]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    title: String
+    title_not: String
+    title_in: [String!]
+    title_not_in: [String!]
+    title_lt: String
+    title_lte: String
+    title_gt: String
+    title_gte: String
+    title_contains: String
+    title_not_contains: String
+    title_starts_with: String
+    title_not_starts_with: String
+    title_ends_with: String
+    title_not_ends_with: String
+    content: String
+    content_not: String
+    content_in: [String!]
+    content_not_in: [String!]
+    content_lt: String
+    content_lte: String
+    content_gt: String
+    content_gte: String
+    content_contains: String
+    content_not_contains: String
+    content_starts_with: String
+    content_not_starts_with: String
+    content_ends_with: String
+    content_not_ends_with: String
+    AND: [HistoryScalarWhereInput!]
+    OR: [HistoryScalarWhereInput!]
+    NOT: [HistoryScalarWhereInput!]
+  }
+
+  type HistorySubscriptionPayload {
+    mutation: MutationType!
+    node: History
+    updatedFields: [String!]
+    previousValues: HistoryPreviousValues
+  }
+
+  input HistorySubscriptionWhereInput {
+    mutation_in: [MutationType!]
+    updatedFields_contains: String
+    updatedFields_contains_every: [String!]
+    updatedFields_contains_some: [String!]
+    node: HistoryWhereInput
+    AND: [HistorySubscriptionWhereInput!]
+    OR: [HistorySubscriptionWhereInput!]
+    NOT: [HistorySubscriptionWhereInput!]
+  }
+
+  input HistoryUpdateDataInput {
+    author: UserUpdateOneRequiredInput
+    title: String
+    content: String
+  }
+
+  input HistoryUpdateInput {
+    author: UserUpdateOneRequiredInput
+    title: String
+    content: String
+  }
+
+  input HistoryUpdateManyDataInput {
+    title: String
+    content: String
+  }
+
+  input HistoryUpdateManyInput {
+    create: [HistoryCreateInput!]
+    update: [HistoryUpdateWithWhereUniqueNestedInput!]
+    upsert: [HistoryUpsertWithWhereUniqueNestedInput!]
+    delete: [HistoryWhereUniqueInput!]
+    connect: [HistoryWhereUniqueInput!]
+    set: [HistoryWhereUniqueInput!]
+    disconnect: [HistoryWhereUniqueInput!]
+    deleteMany: [HistoryScalarWhereInput!]
+    updateMany: [HistoryUpdateManyWithWhereNestedInput!]
+  }
+
+  input HistoryUpdateManyMutationInput {
+    title: String
+    content: String
+  }
+
+  input HistoryUpdateManyWithWhereNestedInput {
+    where: HistoryScalarWhereInput!
+    data: HistoryUpdateManyDataInput!
+  }
+
+  input HistoryUpdateWithWhereUniqueNestedInput {
+    where: HistoryWhereUniqueInput!
+    data: HistoryUpdateDataInput!
+  }
+
+  input HistoryUpsertWithWhereUniqueNestedInput {
+    where: HistoryWhereUniqueInput!
+    update: HistoryUpdateDataInput!
+    create: HistoryCreateInput!
+  }
+
+  input HistoryWhereInput {
+    id: ID
+    id_not: ID
+    id_in: [ID!]
+    id_not_in: [ID!]
+    id_lt: ID
+    id_lte: ID
+    id_gt: ID
+    id_gte: ID
+    id_contains: ID
+    id_not_contains: ID
+    id_starts_with: ID
+    id_not_starts_with: ID
+    id_ends_with: ID
+    id_not_ends_with: ID
+    author: UserWhereInput
+    createdAt: DateTime
+    createdAt_not: DateTime
+    createdAt_in: [DateTime!]
+    createdAt_not_in: [DateTime!]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    updatedAt: DateTime
+    updatedAt_not: DateTime
+    updatedAt_in: [DateTime!]
+    updatedAt_not_in: [DateTime!]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    title: String
+    title_not: String
+    title_in: [String!]
+    title_not_in: [String!]
+    title_lt: String
+    title_lte: String
+    title_gt: String
+    title_gte: String
+    title_contains: String
+    title_not_contains: String
+    title_starts_with: String
+    title_not_starts_with: String
+    title_ends_with: String
+    title_not_ends_with: String
+    content: String
+    content_not: String
+    content_in: [String!]
+    content_not_in: [String!]
+    content_lt: String
+    content_lte: String
+    content_gt: String
+    content_gte: String
+    content_contains: String
+    content_not_contains: String
+    content_starts_with: String
+    content_not_starts_with: String
+    content_ends_with: String
+    content_not_ends_with: String
+    AND: [HistoryWhereInput!]
+    OR: [HistoryWhereInput!]
+    NOT: [HistoryWhereInput!]
+  }
+
+  input HistoryWhereUniqueInput {
+    id: ID
+  }
+
   scalar Long
 
   type Mutation {
+    createHistory(data: HistoryCreateInput!): History!
+    updateHistory(
+      data: HistoryUpdateInput!
+      where: HistoryWhereUniqueInput!
+    ): History
+    updateManyHistories(
+      data: HistoryUpdateManyMutationInput!
+      where: HistoryWhereInput
+    ): BatchPayload!
+    upsertHistory(
+      where: HistoryWhereUniqueInput!
+      create: HistoryCreateInput!
+      update: HistoryUpdateInput!
+    ): History!
+    deleteHistory(where: HistoryWhereUniqueInput!): History
+    deleteManyHistories(where: HistoryWhereInput): BatchPayload!
     createPost(data: PostCreateInput!): Post!
     updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
     updateManyPosts(
@@ -69,6 +342,15 @@ export const typeDefs = /* GraphQL */ `
     title: String!
     content: String
     author: User!
+    histories(
+      where: HistoryWhereInput
+      orderBy: HistoryOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): [History!]
   }
 
   type PostConnection {
@@ -82,6 +364,7 @@ export const typeDefs = /* GraphQL */ `
     title: String!
     content: String
     author: UserCreateOneWithoutPostsInput!
+    histories: HistoryCreateManyInput
   }
 
   input PostCreateManyWithoutAuthorInput {
@@ -93,6 +376,7 @@ export const typeDefs = /* GraphQL */ `
     published: Boolean
     title: String!
     content: String
+    histories: HistoryCreateManyInput
   }
 
   type PostEdge {
@@ -213,6 +497,7 @@ export const typeDefs = /* GraphQL */ `
     title: String
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
+    histories: HistoryUpdateManyInput
   }
 
   input PostUpdateManyDataInput {
@@ -231,6 +516,7 @@ export const typeDefs = /* GraphQL */ `
     create: [PostCreateWithoutAuthorInput!]
     delete: [PostWhereUniqueInput!]
     connect: [PostWhereUniqueInput!]
+    set: [PostWhereUniqueInput!]
     disconnect: [PostWhereUniqueInput!]
     update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
     upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
@@ -247,6 +533,7 @@ export const typeDefs = /* GraphQL */ `
     published: Boolean
     title: String
     content: String
+    histories: HistoryUpdateManyInput
   }
 
   input PostUpdateWithWhereUniqueWithoutAuthorInput {
@@ -322,6 +609,9 @@ export const typeDefs = /* GraphQL */ `
     content_ends_with: String
     content_not_ends_with: String
     author: UserWhereInput
+    histories_every: HistoryWhereInput
+    histories_some: HistoryWhereInput
+    histories_none: HistoryWhereInput
     AND: [PostWhereInput!]
     OR: [PostWhereInput!]
     NOT: [PostWhereInput!]
@@ -332,6 +622,25 @@ export const typeDefs = /* GraphQL */ `
   }
 
   type Query {
+    history(where: HistoryWhereUniqueInput!): History
+    histories(
+      where: HistoryWhereInput
+      orderBy: HistoryOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): [History]!
+    historiesConnection(
+      where: HistoryWhereInput
+      orderBy: HistoryOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): HistoryConnection!
     post(where: PostWhereUniqueInput!): Post
     posts(
       where: PostWhereInput
@@ -374,6 +683,7 @@ export const typeDefs = /* GraphQL */ `
   }
 
   type Subscription {
+    history(where: HistorySubscriptionWhereInput): HistorySubscriptionPayload
     post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
     user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   }
@@ -405,6 +715,11 @@ export const typeDefs = /* GraphQL */ `
     password: String!
     name: String
     posts: PostCreateManyWithoutAuthorInput
+  }
+
+  input UserCreateOneInput {
+    create: UserCreateInput
+    connect: UserWhereUniqueInput
   }
 
   input UserCreateOneWithoutPostsInput {
@@ -463,6 +778,13 @@ export const typeDefs = /* GraphQL */ `
     NOT: [UserSubscriptionWhereInput!]
   }
 
+  input UserUpdateDataInput {
+    email: String
+    password: String
+    name: String
+    posts: PostUpdateManyWithoutAuthorInput
+  }
+
   input UserUpdateInput {
     email: String
     password: String
@@ -476,6 +798,13 @@ export const typeDefs = /* GraphQL */ `
     name: String
   }
 
+  input UserUpdateOneRequiredInput {
+    create: UserCreateInput
+    update: UserUpdateDataInput
+    upsert: UserUpsertNestedInput
+    connect: UserWhereUniqueInput
+  }
+
   input UserUpdateOneRequiredWithoutPostsInput {
     create: UserCreateWithoutPostsInput
     update: UserUpdateWithoutPostsDataInput
@@ -487,6 +816,11 @@ export const typeDefs = /* GraphQL */ `
     email: String
     password: String
     name: String
+  }
+
+  input UserUpsertNestedInput {
+    update: UserUpdateDataInput!
+    create: UserCreateInput!
   }
 
   input UserUpsertWithoutPostsInput {

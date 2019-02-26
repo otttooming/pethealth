@@ -6,6 +6,7 @@ type Post {
   title: String!
   content: String
   author: User!
+  histories: [History!]!
 }
 
 type User {
@@ -14,4 +15,13 @@ type User {
   password: String!
   name: String
   posts: [Post!]!
+}
+
+type History {
+  id: ID! @unique
+  author: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  content: String
 }

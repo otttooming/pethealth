@@ -28,6 +28,16 @@ type Post {
   title: String!
   content: String
   author: User!
+  histories: [History!]!
+}
+
+type History {
+  id: ID!
+  author: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  content: String
 }
 
 type User {
