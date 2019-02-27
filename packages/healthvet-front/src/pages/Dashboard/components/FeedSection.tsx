@@ -7,6 +7,10 @@ import Avatar1 from './Avatar1.png';
 import Avatar2 from './Avatar2.png';
 import Avatar3 from './Avatar3.png';
 import Avatar4 from './Avatar4.png';
+import {
+  GetDashboardListComponent,
+  GetDashboardListQuery,
+} from '../../../generated-models';
 
 export interface FeedSectionProps {}
 export interface FeedSectionState {
@@ -70,26 +74,46 @@ export default class FeedSection extends React.Component<
     patients: this.patients,
   };
 
-  renderCardItems = () => {
-    const { patients } = this.state;
+  renderCardItems = (data: GetDashboardListQuery | undefined) => {
+    if (!data) {
+      return null;
+    }
 
-    return patients.map((item, index) => (
-      <ListItem key={index}>
-        {' '}
-        <Link to="/detail">
-          <Card {...item} />
-        </Link>
-      </ListItem>
-    ));
+    const { feed = [] } = data;
+
+    return feed.map(
+      ({
+        id,
+        title,
+        author: { name: doctor },
+        content: description,
+        createdAt: date,
+      }) => (
+        <ListItem key={id}>
+          <Link to="/detail">
+            <Card
+              title={title}
+              date={date}
+              doctor={doctor || ''}
+              description={description || ''}
+            />
+          </Link>
+        </ListItem>
+      ),
+    );
   };
 
   public render() {
     return (
-      <Wrapper>
-        <FilterSection />
+      <GetDashboardListComponent>
+        {({ data }) => (
+          <Wrapper>
+            <FilterSection />
 
-        <UnsortedList>{this.renderCardItems()}</UnsortedList>
-      </Wrapper>
+            <UnsortedList>{this.renderCardItems(data)}</UnsortedList>
+          </Wrapper>
+        )}
+      </GetDashboardListComponent>
     );
   }
 }

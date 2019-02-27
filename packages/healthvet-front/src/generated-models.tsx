@@ -49,9 +49,36 @@ export type DashboardListAuthor = {
   name: Maybe<string>;
 };
 
+export type GetDashboardListVariables = {};
+
+export type GetDashboardListQuery = {
+  __typename?: 'Query';
+
+  feed: GetDashboardListFeed[];
+};
+
+export type GetDashboardListFeed = {
+  __typename?: 'Post';
+
+  id: string;
+
+  title: string;
+
+  content: Maybe<string>;
+
+  createdAt: DateTime;
+
+  author: GetDashboardListAuthor;
+};
+
+export type GetDashboardListAuthor = {
+  __typename?: 'User';
+
+  name: Maybe<string>;
+};
+
 import * as ReactApollo from 'react-apollo';
 import * as React from 'react';
-
 import gql from 'graphql-tag';
 
 // ====================================================
@@ -146,4 +173,52 @@ export function DashboardListHOC<TProps, TChildProps = any>(
     DashboardListVariables,
     DashboardListProps<TChildProps>
   >(DashboardListDocument, operationOptions);
+}
+export const GetDashboardListDocument = gql`
+  query getDashboardList {
+    feed {
+      id
+      title
+      content
+      createdAt
+      author {
+        name
+      }
+    }
+  }
+`;
+export class GetDashboardListComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<GetDashboardListQuery, GetDashboardListVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetDashboardListQuery, GetDashboardListVariables>
+        query={GetDashboardListDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type GetDashboardListProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetDashboardListQuery, GetDashboardListVariables>
+> &
+  TChildProps;
+export function GetDashboardListHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetDashboardListQuery,
+        GetDashboardListVariables,
+        GetDashboardListProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetDashboardListQuery,
+    GetDashboardListVariables,
+    GetDashboardListProps<TChildProps>
+  >(GetDashboardListDocument, operationOptions);
 }

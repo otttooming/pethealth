@@ -1,0 +1,11 @@
+query getDashboardList {
+  feed {
+    id
+    title
+    content
+    createdAt
+    author {
+      name
+    }
+  }
+}
