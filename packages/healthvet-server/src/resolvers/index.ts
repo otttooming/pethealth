@@ -4,6 +4,7 @@ import { Query } from './Query';
 import { User } from './User';
 import { Post } from './Post';
 import { History } from './History';
+import { Message } from './Message';
 import { Mutation } from './Mutation';
 import { AuthPayload } from './AuthPayload';
 
@@ -14,4 +15,5 @@ export const resolvers: Resolvers = {
   Mutation,
   AuthPayload,
   History,
+  Message,
 };

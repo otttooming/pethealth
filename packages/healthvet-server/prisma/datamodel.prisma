@@ -7,6 +7,7 @@ type Post {
   content: String
   author: User!
   histories: [History!]!
+  messages: [Message!]!
 }
 
 type User {
@@ -23,5 +24,14 @@ type History {
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String
+  content: String
+}
+
+type Message {
+  id: ID! @unique
+  author: User!
+  post: Post!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   content: String
 }

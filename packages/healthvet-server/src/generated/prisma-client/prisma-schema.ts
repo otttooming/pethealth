@@ -3,6 +3,10 @@ export const typeDefs = /* GraphQL */ `
     count: Int!
   }
 
+  type AggregateMessage {
+    count: Int!
+  }
+
   type AggregatePost {
     count: Int!
   }
@@ -272,6 +276,231 @@ export const typeDefs = /* GraphQL */ `
 
   scalar Long
 
+  type Message {
+    id: ID!
+    author: User!
+    post: Post!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    content: String
+  }
+
+  type MessageConnection {
+    pageInfo: PageInfo!
+    edges: [MessageEdge]!
+    aggregate: AggregateMessage!
+  }
+
+  input MessageCreateInput {
+    author: UserCreateOneInput!
+    post: PostCreateOneWithoutMessagesInput!
+    content: String
+  }
+
+  input MessageCreateManyWithoutPostInput {
+    create: [MessageCreateWithoutPostInput!]
+    connect: [MessageWhereUniqueInput!]
+  }
+
+  input MessageCreateWithoutPostInput {
+    author: UserCreateOneInput!
+    content: String
+  }
+
+  type MessageEdge {
+    node: Message!
+    cursor: String!
+  }
+
+  enum MessageOrderByInput {
+    id_ASC
+    id_DESC
+    createdAt_ASC
+    createdAt_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    content_ASC
+    content_DESC
+  }
+
+  type MessagePreviousValues {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    content: String
+  }
+
+  input MessageScalarWhereInput {
+    id: ID
+    id_not: ID
+    id_in: [ID!]
+    id_not_in: [ID!]
+    id_lt: ID
+    id_lte: ID
+    id_gt: ID
+    id_gte: ID
+    id_contains: ID
+    id_not_contains: ID
+    id_starts_with: ID
+    id_not_starts_with: ID
+    id_ends_with: ID
+    id_not_ends_with: ID
+    createdAt: DateTime
+    createdAt_not: DateTime
+    createdAt_in: [DateTime!]
+    createdAt_not_in: [DateTime!]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    updatedAt: DateTime
+    updatedAt_not: DateTime
+    updatedAt_in: [DateTime!]
+    updatedAt_not_in: [DateTime!]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    content: String
+    content_not: String
+    content_in: [String!]
+    content_not_in: [String!]
+    content_lt: String
+    content_lte: String
+    content_gt: String
+    content_gte: String
+    content_contains: String
+    content_not_contains: String
+    content_starts_with: String
+    content_not_starts_with: String
+    content_ends_with: String
+    content_not_ends_with: String
+    AND: [MessageScalarWhereInput!]
+    OR: [MessageScalarWhereInput!]
+    NOT: [MessageScalarWhereInput!]
+  }
+
+  type MessageSubscriptionPayload {
+    mutation: MutationType!
+    node: Message
+    updatedFields: [String!]
+    previousValues: MessagePreviousValues
+  }
+
+  input MessageSubscriptionWhereInput {
+    mutation_in: [MutationType!]
+    updatedFields_contains: String
+    updatedFields_contains_every: [String!]
+    updatedFields_contains_some: [String!]
+    node: MessageWhereInput
+    AND: [MessageSubscriptionWhereInput!]
+    OR: [MessageSubscriptionWhereInput!]
+    NOT: [MessageSubscriptionWhereInput!]
+  }
+
+  input MessageUpdateInput {
+    author: UserUpdateOneRequiredInput
+    post: PostUpdateOneRequiredWithoutMessagesInput
+    content: String
+  }
+
+  input MessageUpdateManyDataInput {
+    content: String
+  }
+
+  input MessageUpdateManyMutationInput {
+    content: String
+  }
+
+  input MessageUpdateManyWithoutPostInput {
+    create: [MessageCreateWithoutPostInput!]
+    delete: [MessageWhereUniqueInput!]
+    connect: [MessageWhereUniqueInput!]
+    set: [MessageWhereUniqueInput!]
+    disconnect: [MessageWhereUniqueInput!]
+    update: [MessageUpdateWithWhereUniqueWithoutPostInput!]
+    upsert: [MessageUpsertWithWhereUniqueWithoutPostInput!]
+    deleteMany: [MessageScalarWhereInput!]
+    updateMany: [MessageUpdateManyWithWhereNestedInput!]
+  }
+
+  input MessageUpdateManyWithWhereNestedInput {
+    where: MessageScalarWhereInput!
+    data: MessageUpdateManyDataInput!
+  }
+
+  input MessageUpdateWithoutPostDataInput {
+    author: UserUpdateOneRequiredInput
+    content: String
+  }
+
+  input MessageUpdateWithWhereUniqueWithoutPostInput {
+    where: MessageWhereUniqueInput!
+    data: MessageUpdateWithoutPostDataInput!
+  }
+
+  input MessageUpsertWithWhereUniqueWithoutPostInput {
+    where: MessageWhereUniqueInput!
+    update: MessageUpdateWithoutPostDataInput!
+    create: MessageCreateWithoutPostInput!
+  }
+
+  input MessageWhereInput {
+    id: ID
+    id_not: ID
+    id_in: [ID!]
+    id_not_in: [ID!]
+    id_lt: ID
+    id_lte: ID
+    id_gt: ID
+    id_gte: ID
+    id_contains: ID
+    id_not_contains: ID
+    id_starts_with: ID
+    id_not_starts_with: ID
+    id_ends_with: ID
+    id_not_ends_with: ID
+    author: UserWhereInput
+    post: PostWhereInput
+    createdAt: DateTime
+    createdAt_not: DateTime
+    createdAt_in: [DateTime!]
+    createdAt_not_in: [DateTime!]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    updatedAt: DateTime
+    updatedAt_not: DateTime
+    updatedAt_in: [DateTime!]
+    updatedAt_not_in: [DateTime!]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    content: String
+    content_not: String
+    content_in: [String!]
+    content_not_in: [String!]
+    content_lt: String
+    content_lte: String
+    content_gt: String
+    content_gte: String
+    content_contains: String
+    content_not_contains: String
+    content_starts_with: String
+    content_not_starts_with: String
+    content_ends_with: String
+    content_not_ends_with: String
+    AND: [MessageWhereInput!]
+    OR: [MessageWhereInput!]
+    NOT: [MessageWhereInput!]
+  }
+
+  input MessageWhereUniqueInput {
+    id: ID
+  }
+
   type Mutation {
     createHistory(data: HistoryCreateInput!): History!
     updateHistory(
@@ -289,6 +518,22 @@ export const typeDefs = /* GraphQL */ `
     ): History!
     deleteHistory(where: HistoryWhereUniqueInput!): History
     deleteManyHistories(where: HistoryWhereInput): BatchPayload!
+    createMessage(data: MessageCreateInput!): Message!
+    updateMessage(
+      data: MessageUpdateInput!
+      where: MessageWhereUniqueInput!
+    ): Message
+    updateManyMessages(
+      data: MessageUpdateManyMutationInput!
+      where: MessageWhereInput
+    ): BatchPayload!
+    upsertMessage(
+      where: MessageWhereUniqueInput!
+      create: MessageCreateInput!
+      update: MessageUpdateInput!
+    ): Message!
+    deleteMessage(where: MessageWhereUniqueInput!): Message
+    deleteManyMessages(where: MessageWhereInput): BatchPayload!
     createPost(data: PostCreateInput!): Post!
     updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
     updateManyPosts(
@@ -351,6 +596,15 @@ export const typeDefs = /* GraphQL */ `
       first: Int
       last: Int
     ): [History!]
+    messages(
+      where: MessageWhereInput
+      orderBy: MessageOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): [Message!]
   }
 
   type PostConnection {
@@ -365,6 +619,7 @@ export const typeDefs = /* GraphQL */ `
     content: String
     author: UserCreateOneWithoutPostsInput!
     histories: HistoryCreateManyInput
+    messages: MessageCreateManyWithoutPostInput
   }
 
   input PostCreateManyWithoutAuthorInput {
@@ -372,10 +627,24 @@ export const typeDefs = /* GraphQL */ `
     connect: [PostWhereUniqueInput!]
   }
 
+  input PostCreateOneWithoutMessagesInput {
+    create: PostCreateWithoutMessagesInput
+    connect: PostWhereUniqueInput
+  }
+
   input PostCreateWithoutAuthorInput {
     published: Boolean
     title: String!
     content: String
+    histories: HistoryCreateManyInput
+    messages: MessageCreateManyWithoutPostInput
+  }
+
+  input PostCreateWithoutMessagesInput {
+    published: Boolean
+    title: String!
+    content: String
+    author: UserCreateOneWithoutPostsInput!
     histories: HistoryCreateManyInput
   }
 
@@ -498,6 +767,7 @@ export const typeDefs = /* GraphQL */ `
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
     histories: HistoryUpdateManyInput
+    messages: MessageUpdateManyWithoutPostInput
   }
 
   input PostUpdateManyDataInput {
@@ -529,16 +799,37 @@ export const typeDefs = /* GraphQL */ `
     data: PostUpdateManyDataInput!
   }
 
+  input PostUpdateOneRequiredWithoutMessagesInput {
+    create: PostCreateWithoutMessagesInput
+    update: PostUpdateWithoutMessagesDataInput
+    upsert: PostUpsertWithoutMessagesInput
+    connect: PostWhereUniqueInput
+  }
+
   input PostUpdateWithoutAuthorDataInput {
     published: Boolean
     title: String
     content: String
+    histories: HistoryUpdateManyInput
+    messages: MessageUpdateManyWithoutPostInput
+  }
+
+  input PostUpdateWithoutMessagesDataInput {
+    published: Boolean
+    title: String
+    content: String
+    author: UserUpdateOneRequiredWithoutPostsInput
     histories: HistoryUpdateManyInput
   }
 
   input PostUpdateWithWhereUniqueWithoutAuthorInput {
     where: PostWhereUniqueInput!
     data: PostUpdateWithoutAuthorDataInput!
+  }
+
+  input PostUpsertWithoutMessagesInput {
+    update: PostUpdateWithoutMessagesDataInput!
+    create: PostCreateWithoutMessagesInput!
   }
 
   input PostUpsertWithWhereUniqueWithoutAuthorInput {
@@ -612,6 +903,9 @@ export const typeDefs = /* GraphQL */ `
     histories_every: HistoryWhereInput
     histories_some: HistoryWhereInput
     histories_none: HistoryWhereInput
+    messages_every: MessageWhereInput
+    messages_some: MessageWhereInput
+    messages_none: MessageWhereInput
     AND: [PostWhereInput!]
     OR: [PostWhereInput!]
     NOT: [PostWhereInput!]
@@ -641,6 +935,25 @@ export const typeDefs = /* GraphQL */ `
       first: Int
       last: Int
     ): HistoryConnection!
+    message(where: MessageWhereUniqueInput!): Message
+    messages(
+      where: MessageWhereInput
+      orderBy: MessageOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): [Message]!
+    messagesConnection(
+      where: MessageWhereInput
+      orderBy: MessageOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): MessageConnection!
     post(where: PostWhereUniqueInput!): Post
     posts(
       where: PostWhereInput
@@ -684,6 +997,7 @@ export const typeDefs = /* GraphQL */ `
 
   type Subscription {
     history(where: HistorySubscriptionWhereInput): HistorySubscriptionPayload
+    message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
     post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
     user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   }

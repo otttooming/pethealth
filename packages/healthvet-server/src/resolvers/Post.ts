@@ -9,4 +9,7 @@ export const Post: PostResolvers.Type = {
   histories: ({ id }, args, ctx) => {
     return ctx.prisma.post({ id }).histories();
   },
+  messages: ({ id }, args, ctx) => {
+    return ctx.prisma.post({ id }).messages();
+  },
 };

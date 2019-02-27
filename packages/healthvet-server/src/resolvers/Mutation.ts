@@ -48,4 +48,12 @@ export const Mutation: MutationResolvers.Type = {
       data: { published: true },
     });
   },
+  createMessage: async (parent, { postId, content }, context) => {
+    const userId = getUserId(context);
+    return context.prisma.createMessage({
+      content,
+      post: { connect: { id: postId } },
+      author: { connect: { id: userId } },
+    });
+  },
 };

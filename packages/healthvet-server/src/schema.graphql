@@ -13,6 +13,7 @@ type Mutation {
   publish(id: ID!): Post
   signup(email: String!, password: String!, name: String): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  createMessage(postId: ID!, content: String!): Message!
 }
 
 type AuthPayload {
@@ -29,6 +30,7 @@ type Post {
   content: String
   author: User!
   histories: [History!]!
+  messages: [Message!]!
 }
 
 type History {
@@ -37,6 +39,15 @@ type History {
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String
+  content: String
+}
+
+type Message {
+  id: ID!
+  author: User!
+  post: Post!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   content: String
 }
 
