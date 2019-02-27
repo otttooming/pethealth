@@ -6,4 +6,7 @@ export const History: HistoryResolvers.Type = {
   author: (parent, args, ctx) => {
     throw new Error('Resolver not implemented');
   },
+  post: ({ id }, args, ctx) => {
+    return ctx.prisma.history({ id }).post();
+  },
 };

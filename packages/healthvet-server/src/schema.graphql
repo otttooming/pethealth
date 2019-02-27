@@ -36,6 +36,7 @@ type Post {
 type History {
   id: ID!
   author: User!
+  post: Post!
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String

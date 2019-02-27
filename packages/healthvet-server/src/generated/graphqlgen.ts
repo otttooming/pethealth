@@ -665,6 +665,23 @@ export namespace HistoryResolvers {
         ) => User | Promise<User>;
       };
 
+  export type PostResolver =
+    | ((
+        parent: History,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Post | Promise<Post>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: History,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Post | Promise<Post>;
+      };
+
   export type CreatedAtResolver =
     | ((
         parent: History,
@@ -766,6 +783,23 @@ export namespace HistoryResolvers {
             ctx: Context,
             info: GraphQLResolveInfo,
           ) => User | Promise<User>;
+        };
+
+    post:
+      | ((
+          parent: History,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Post | Promise<Post>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: History,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Post | Promise<Post>;
         };
 
     createdAt:

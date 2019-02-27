@@ -24,6 +24,7 @@ export const typeDefs = /* GraphQL */ `
   type History {
     id: ID!
     author: User!
+    post: Post!
     createdAt: DateTime!
     updatedAt: DateTime!
     title: String
@@ -38,13 +39,20 @@ export const typeDefs = /* GraphQL */ `
 
   input HistoryCreateInput {
     author: UserCreateOneInput!
+    post: PostCreateOneWithoutHistoriesInput!
     title: String
     content: String
   }
 
-  input HistoryCreateManyInput {
-    create: [HistoryCreateInput!]
+  input HistoryCreateManyWithoutPostInput {
+    create: [HistoryCreateWithoutPostInput!]
     connect: [HistoryWhereUniqueInput!]
+  }
+
+  input HistoryCreateWithoutPostInput {
+    author: UserCreateOneInput!
+    title: String
+    content: String
   }
 
   type HistoryEdge {
@@ -155,14 +163,9 @@ export const typeDefs = /* GraphQL */ `
     NOT: [HistorySubscriptionWhereInput!]
   }
 
-  input HistoryUpdateDataInput {
-    author: UserUpdateOneRequiredInput
-    title: String
-    content: String
-  }
-
   input HistoryUpdateInput {
     author: UserUpdateOneRequiredInput
+    post: PostUpdateOneRequiredWithoutHistoriesInput
     title: String
     content: String
   }
@@ -172,21 +175,21 @@ export const typeDefs = /* GraphQL */ `
     content: String
   }
 
-  input HistoryUpdateManyInput {
-    create: [HistoryCreateInput!]
-    update: [HistoryUpdateWithWhereUniqueNestedInput!]
-    upsert: [HistoryUpsertWithWhereUniqueNestedInput!]
+  input HistoryUpdateManyMutationInput {
+    title: String
+    content: String
+  }
+
+  input HistoryUpdateManyWithoutPostInput {
+    create: [HistoryCreateWithoutPostInput!]
     delete: [HistoryWhereUniqueInput!]
     connect: [HistoryWhereUniqueInput!]
     set: [HistoryWhereUniqueInput!]
     disconnect: [HistoryWhereUniqueInput!]
+    update: [HistoryUpdateWithWhereUniqueWithoutPostInput!]
+    upsert: [HistoryUpsertWithWhereUniqueWithoutPostInput!]
     deleteMany: [HistoryScalarWhereInput!]
     updateMany: [HistoryUpdateManyWithWhereNestedInput!]
-  }
-
-  input HistoryUpdateManyMutationInput {
-    title: String
-    content: String
   }
 
   input HistoryUpdateManyWithWhereNestedInput {
@@ -194,15 +197,21 @@ export const typeDefs = /* GraphQL */ `
     data: HistoryUpdateManyDataInput!
   }
 
-  input HistoryUpdateWithWhereUniqueNestedInput {
-    where: HistoryWhereUniqueInput!
-    data: HistoryUpdateDataInput!
+  input HistoryUpdateWithoutPostDataInput {
+    author: UserUpdateOneRequiredInput
+    title: String
+    content: String
   }
 
-  input HistoryUpsertWithWhereUniqueNestedInput {
+  input HistoryUpdateWithWhereUniqueWithoutPostInput {
     where: HistoryWhereUniqueInput!
-    update: HistoryUpdateDataInput!
-    create: HistoryCreateInput!
+    data: HistoryUpdateWithoutPostDataInput!
+  }
+
+  input HistoryUpsertWithWhereUniqueWithoutPostInput {
+    where: HistoryWhereUniqueInput!
+    update: HistoryUpdateWithoutPostDataInput!
+    create: HistoryCreateWithoutPostInput!
   }
 
   input HistoryWhereInput {
@@ -221,6 +230,7 @@ export const typeDefs = /* GraphQL */ `
     id_ends_with: ID
     id_not_ends_with: ID
     author: UserWhereInput
+    post: PostWhereInput
     createdAt: DateTime
     createdAt_not: DateTime
     createdAt_in: [DateTime!]
@@ -618,13 +628,18 @@ export const typeDefs = /* GraphQL */ `
     title: String!
     content: String
     author: UserCreateOneWithoutPostsInput!
-    histories: HistoryCreateManyInput
+    histories: HistoryCreateManyWithoutPostInput
     messages: MessageCreateManyWithoutPostInput
   }
 
   input PostCreateManyWithoutAuthorInput {
     create: [PostCreateWithoutAuthorInput!]
     connect: [PostWhereUniqueInput!]
+  }
+
+  input PostCreateOneWithoutHistoriesInput {
+    create: PostCreateWithoutHistoriesInput
+    connect: PostWhereUniqueInput
   }
 
   input PostCreateOneWithoutMessagesInput {
@@ -636,7 +651,15 @@ export const typeDefs = /* GraphQL */ `
     published: Boolean
     title: String!
     content: String
-    histories: HistoryCreateManyInput
+    histories: HistoryCreateManyWithoutPostInput
+    messages: MessageCreateManyWithoutPostInput
+  }
+
+  input PostCreateWithoutHistoriesInput {
+    published: Boolean
+    title: String!
+    content: String
+    author: UserCreateOneWithoutPostsInput!
     messages: MessageCreateManyWithoutPostInput
   }
 
@@ -645,7 +668,7 @@ export const typeDefs = /* GraphQL */ `
     title: String!
     content: String
     author: UserCreateOneWithoutPostsInput!
-    histories: HistoryCreateManyInput
+    histories: HistoryCreateManyWithoutPostInput
   }
 
   type PostEdge {
@@ -766,7 +789,7 @@ export const typeDefs = /* GraphQL */ `
     title: String
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
-    histories: HistoryUpdateManyInput
+    histories: HistoryUpdateManyWithoutPostInput
     messages: MessageUpdateManyWithoutPostInput
   }
 
@@ -799,6 +822,13 @@ export const typeDefs = /* GraphQL */ `
     data: PostUpdateManyDataInput!
   }
 
+  input PostUpdateOneRequiredWithoutHistoriesInput {
+    create: PostCreateWithoutHistoriesInput
+    update: PostUpdateWithoutHistoriesDataInput
+    upsert: PostUpsertWithoutHistoriesInput
+    connect: PostWhereUniqueInput
+  }
+
   input PostUpdateOneRequiredWithoutMessagesInput {
     create: PostCreateWithoutMessagesInput
     update: PostUpdateWithoutMessagesDataInput
@@ -810,7 +840,15 @@ export const typeDefs = /* GraphQL */ `
     published: Boolean
     title: String
     content: String
-    histories: HistoryUpdateManyInput
+    histories: HistoryUpdateManyWithoutPostInput
+    messages: MessageUpdateManyWithoutPostInput
+  }
+
+  input PostUpdateWithoutHistoriesDataInput {
+    published: Boolean
+    title: String
+    content: String
+    author: UserUpdateOneRequiredWithoutPostsInput
     messages: MessageUpdateManyWithoutPostInput
   }
 
@@ -819,12 +857,17 @@ export const typeDefs = /* GraphQL */ `
     title: String
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
-    histories: HistoryUpdateManyInput
+    histories: HistoryUpdateManyWithoutPostInput
   }
 
   input PostUpdateWithWhereUniqueWithoutAuthorInput {
     where: PostWhereUniqueInput!
     data: PostUpdateWithoutAuthorDataInput!
+  }
+
+  input PostUpsertWithoutHistoriesInput {
+    update: PostUpdateWithoutHistoriesDataInput!
+    create: PostCreateWithoutHistoriesInput!
   }
 
   input PostUpsertWithoutMessagesInput {

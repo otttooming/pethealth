@@ -21,6 +21,7 @@ type User {
 type History {
   id: ID! @unique
   author: User!
+  post: Post!
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String
