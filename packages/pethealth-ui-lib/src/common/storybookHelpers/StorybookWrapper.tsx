@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GlobalStyle } from '../../components/GlobalStyle/GlobalStyle';
+import { GlobalStyle } from '../../atoms/GlobalStyle/GlobalStyle';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
