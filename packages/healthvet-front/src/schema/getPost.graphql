@@ -1,0 +1,14 @@
+query getPost($id: ID!) {
+  post(id: $id) {
+    id
+    title
+    histories {
+      title
+      content
+      createdAt
+    }
+    messages {
+      content
+    }
+  }
+}

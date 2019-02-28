@@ -77,6 +77,44 @@ export type GetDashboardListAuthor = {
   name: Maybe<string>;
 };
 
+export type GetPostVariables = {
+  id: string;
+};
+
+export type GetPostQuery = {
+  __typename?: 'Query';
+
+  post: Maybe<GetPostPost>;
+};
+
+export type GetPostPost = {
+  __typename?: 'Post';
+
+  id: string;
+
+  title: string;
+
+  histories: GetPostHistories[];
+
+  messages: GetPostMessages[];
+};
+
+export type GetPostHistories = {
+  __typename?: 'History';
+
+  title: Maybe<string>;
+
+  content: Maybe<string>;
+
+  createdAt: DateTime;
+};
+
+export type GetPostMessages = {
+  __typename?: 'Message';
+
+  content: Maybe<string>;
+};
+
 import * as ReactApollo from 'react-apollo';
 import * as React from 'react';
 import gql from 'graphql-tag';
@@ -221,4 +259,53 @@ export function GetDashboardListHOC<TProps, TChildProps = any>(
     GetDashboardListVariables,
     GetDashboardListProps<TChildProps>
   >(GetDashboardListDocument, operationOptions);
+}
+export const GetPostDocument = gql`
+  query getPost($id: ID!) {
+    post(id: $id) {
+      id
+      title
+      histories {
+        title
+        content
+        createdAt
+      }
+      messages {
+        content
+      }
+    }
+  }
+`;
+export class GetPostComponent extends React.Component<
+  Partial<ReactApollo.QueryProps<GetPostQuery, GetPostVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetPostQuery, GetPostVariables>
+        query={GetPostDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type GetPostProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetPostQuery, GetPostVariables>
+> &
+  TChildProps;
+export function GetPostHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetPostQuery,
+        GetPostVariables,
+        GetPostProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetPostQuery,
+    GetPostVariables,
+    GetPostProps<TChildProps>
+  >(GetPostDocument, operationOptions);
 }
