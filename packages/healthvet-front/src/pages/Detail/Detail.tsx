@@ -4,11 +4,18 @@ import MessageSection from './components/MessageSection';
 import TimelineSection from './components/TimelineSection';
 import PatientSection from './components/PatientSection';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import { RouteComponentProps } from 'react-router';
 
-export interface DetailProps {}
+export interface DetailProps extends RouteComponentProps {}
 
 export default class Detail extends React.Component<DetailProps, any> {
   public render() {
+    const {
+      location: {
+        state: { id },
+      },
+    } = this.props;
+
     return (
       <Grid columns={24} gap="0px">
         <Cell width={1}>
@@ -21,7 +28,7 @@ export default class Detail extends React.Component<DetailProps, any> {
           <TimelineSection />
         </Cell>
         <Cell width={8}>
-          <MessageSection />
+          <MessageSection postId={id} />
         </Cell>
       </Grid>
     );

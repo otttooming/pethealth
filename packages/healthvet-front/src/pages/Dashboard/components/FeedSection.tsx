@@ -90,7 +90,12 @@ export default class FeedSection extends React.Component<
         createdAt: date,
       }) => (
         <ListItem key={id}>
-          <Link to="/detail">
+          <Link
+            to={{
+              pathname: '/detail',
+              state: { id },
+            }}
+          >
             <Card
               title={title}
               date={date}

@@ -8,7 +8,9 @@ import Title from '../../../components/Title/Title';
 
 const ScroolAreaFixed: any = ScrollArea;
 
-export interface MessageSectionProps {}
+export interface MessageSectionProps {
+  postId: string;
+}
 export interface MessageSectionState {
   messages: MessageProps[];
 }
