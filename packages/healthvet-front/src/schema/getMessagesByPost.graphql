@@ -1,0 +1,8 @@
+query getMessagesByPost($id: ID!) {
+  listMessagesByPost(postId: $id) {
+    content
+    author {
+      name
+    }
+  }
+}

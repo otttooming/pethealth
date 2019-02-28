@@ -77,6 +77,30 @@ export type GetDashboardListAuthor = {
   name: Maybe<string>;
 };
 
+export type GetMessagesByPostVariables = {
+  id: string;
+};
+
+export type GetMessagesByPostQuery = {
+  __typename?: 'Query';
+
+  listMessagesByPost: GetMessagesByPostListMessagesByPost[];
+};
+
+export type GetMessagesByPostListMessagesByPost = {
+  __typename?: 'Message';
+
+  content: Maybe<string>;
+
+  author: GetMessagesByPostAuthor;
+};
+
+export type GetMessagesByPostAuthor = {
+  __typename?: 'User';
+
+  name: Maybe<string>;
+};
+
 export type GetPostVariables = {
   id: string;
 };
@@ -259,6 +283,51 @@ export function GetDashboardListHOC<TProps, TChildProps = any>(
     GetDashboardListVariables,
     GetDashboardListProps<TChildProps>
   >(GetDashboardListDocument, operationOptions);
+}
+export const GetMessagesByPostDocument = gql`
+  query getMessagesByPost($id: ID!) {
+    listMessagesByPost(postId: $id) {
+      content
+      author {
+        name
+      }
+    }
+  }
+`;
+export class GetMessagesByPostComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<GetMessagesByPostQuery, GetMessagesByPostVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetMessagesByPostQuery, GetMessagesByPostVariables>
+        query={GetMessagesByPostDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type GetMessagesByPostProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetMessagesByPostQuery, GetMessagesByPostVariables>
+> &
+  TChildProps;
+export function GetMessagesByPostHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetMessagesByPostQuery,
+        GetMessagesByPostVariables,
+        GetMessagesByPostProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetMessagesByPostQuery,
+    GetMessagesByPostVariables,
+    GetMessagesByPostProps<TChildProps>
+  >(GetMessagesByPostDocument, operationOptions);
 }
 export const GetPostDocument = gql`
   query getPost($id: ID!) {

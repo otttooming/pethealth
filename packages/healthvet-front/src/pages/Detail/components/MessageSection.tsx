@@ -5,6 +5,7 @@ import ControlBar from '../../../components/ControlBar/ControlBar';
 import TextField from '../../../components/TextField/TextField';
 import { ScrollTo, ScrollArea } from 'react-scroll-to';
 import Title from '../../../components/Title/Title';
+import { GetMessagesByPostComponent } from '../../../generated-models';
 
 const ScroolAreaFixed: any = ScrollArea;
 
@@ -70,14 +71,28 @@ export default class MessageSection extends React.Component<
   };
 
   renderMessages = () => {
+    const { postId: id } = this.props;
+
     return (
-      <UnsortedList>
-        {this.state.messages.map((item, index) => (
-          <ListItem key={index}>
-            <Message {...item} />
-          </ListItem>
-        ))}
-      </UnsortedList>
+      <GetMessagesByPostComponent variables={{ id }}>
+        {({ data }) => {
+          if (!data) {
+            return null;
+          }
+
+          const { listMessagesByPost = [] } = data;
+
+          return (
+            <UnsortedList>
+              {listMessagesByPost.map(({ content }, index) => (
+                <ListItem key={index}>
+                  <Message description={content || ''} icon="" />
+                </ListItem>
+              ))}
+            </UnsortedList>
+          );
+        }}
+      </GetMessagesByPostComponent>
     );
   };
 
