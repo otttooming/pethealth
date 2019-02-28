@@ -36,4 +36,13 @@ export const Query: QueryResolvers.Type = {
   post: (parent, { id }, context) => {
     return context.prisma.post({ id });
   },
+  listMessagesByPost: (parent, { postId }, context) => {
+    return context.prisma.messages({
+      where: {
+        post: {
+          id: postId,
+        },
+      },
+    });
+  },
 };

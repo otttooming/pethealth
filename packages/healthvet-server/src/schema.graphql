@@ -5,6 +5,7 @@ type Query {
   feed: [Post!]!
   filterPosts(searchString: String): [Post!]!
   post(id: ID!): Post
+  listMessagesByPost(postId: ID!): [Message!]!
 }
 
 type Mutation {

@@ -15,6 +15,10 @@ export namespace QueryResolvers {
     id: string;
   }
 
+  export interface ArgsListMessagesByPost {
+    postId: string;
+  }
+
   export type MeResolver =
     | ((
         parent: undefined,
@@ -81,6 +85,23 @@ export namespace QueryResolvers {
           ctx: Context,
           info: GraphQLResolveInfo,
         ) => Post | null | Promise<Post | null>;
+      };
+
+  export type ListMessagesByPostResolver =
+    | ((
+        parent: undefined,
+        args: ArgsListMessagesByPost,
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Message[] | Promise<Message[]>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsListMessagesByPost,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Message[] | Promise<Message[]>;
       };
 
   export interface Type {
@@ -150,6 +171,23 @@ export namespace QueryResolvers {
             ctx: Context,
             info: GraphQLResolveInfo,
           ) => Post | null | Promise<Post | null>;
+        };
+
+    listMessagesByPost:
+      | ((
+          parent: undefined,
+          args: ArgsListMessagesByPost,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Message[] | Promise<Message[]>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsListMessagesByPost,
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Message[] | Promise<Message[]>;
         };
   }
 }
