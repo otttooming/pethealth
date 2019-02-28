@@ -45,4 +45,13 @@ export const Query: QueryResolvers.Type = {
       },
     });
   },
+  listHistoriesByPost: (parent, { postId }, context) => {
+    return context.prisma.histories({
+      where: {
+        post: {
+          id: postId,
+        },
+      },
+    });
+  },
 };

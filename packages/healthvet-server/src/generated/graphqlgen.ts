@@ -19,6 +19,10 @@ export namespace QueryResolvers {
     postId: string;
   }
 
+  export interface ArgsListHistoriesByPost {
+    postId: string;
+  }
+
   export type MeResolver =
     | ((
         parent: undefined,
@@ -102,6 +106,23 @@ export namespace QueryResolvers {
           ctx: Context,
           info: GraphQLResolveInfo,
         ) => Message[] | Promise<Message[]>;
+      };
+
+  export type ListHistoriesByPostResolver =
+    | ((
+        parent: undefined,
+        args: ArgsListHistoriesByPost,
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => History[] | Promise<History[]>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsListHistoriesByPost,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => History[] | Promise<History[]>;
       };
 
   export interface Type {
@@ -188,6 +209,23 @@ export namespace QueryResolvers {
             ctx: Context,
             info: GraphQLResolveInfo,
           ) => Message[] | Promise<Message[]>;
+        };
+
+    listHistoriesByPost:
+      | ((
+          parent: undefined,
+          args: ArgsListHistoriesByPost,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => History[] | Promise<History[]>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsListHistoriesByPost,
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => History[] | Promise<History[]>;
         };
   }
 }
