@@ -4,8 +4,14 @@ import Title from '../../../components/Title/Title';
 import Icon, { IconName } from '../../../components/Icon/Icon';
 import { CardEntry } from '@pethealth/ui-lib';
 import { CardEntryProps } from '@pethealth/ui-lib/dist/molecules/CardEntry/CardEntry';
+import {
+  GetHistoriesByPostComponent,
+  GetHistoriesByPostQuery,
+} from '../../../generated-models';
 
-export interface TimelineSectionProps {}
+export interface TimelineSectionProps {
+  postId: string;
+}
 
 export interface TimelineSectionState {
   cardItems: CardEntryProps[];
@@ -100,32 +106,42 @@ export default class TimelineSection extends React.Component<
     });
   };
 
-  renderCardItems = () => {
-    const { cardItems } = this.state;
+  renderCardItems = (data: GetHistoriesByPostQuery | undefined) => {
+    if (!data) {
+      return null;
+    }
 
-    return cardItems.map((item, key) => (
+    const { listHistoriesByPost = [] } = data;
+
+    return listHistoriesByPost.map(({ title, createdAt }, key) => (
       <ListItem key={key}>
-        <CardEntry {...item} />
+        <CardEntry title={title || ''} date={createdAt} icon="" personId={1} />
       </ListItem>
     ));
   };
 
   public render() {
-    return (
-      <Wrapper>
-        <TitleWrapper>
-          <Title>Patient medical history</Title>
-        </TitleWrapper>
-        <UnsortedList>
-          {this.renderCardItems()}
+    const { postId: id } = this.props;
 
-          <ListItem>
-            <a href="#" onClick={this.addItem}>
-              <Icon name={IconName.PLUS} />
-            </a>
-          </ListItem>
-        </UnsortedList>
-      </Wrapper>
+    return (
+      <GetHistoriesByPostComponent variables={{ id }}>
+        {({ data }) => (
+          <Wrapper>
+            <TitleWrapper>
+              <Title>Patient medical history</Title>
+            </TitleWrapper>
+            <UnsortedList>
+              {this.renderCardItems(data)}
+
+              <ListItem>
+                <a href="#" onClick={this.addItem}>
+                  <Icon name={IconName.PLUS} />
+                </a>
+              </ListItem>
+            </UnsortedList>
+          </Wrapper>
+        )}
+      </GetHistoriesByPostComponent>
     );
   }
 }

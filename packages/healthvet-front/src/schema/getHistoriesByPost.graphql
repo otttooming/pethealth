@@ -1,0 +1,10 @@
+query getHistoriesByPost($id: ID!) {
+  listHistoriesByPost(postId: $id) {
+    title
+    content
+    createdAt
+    author {
+      name
+    }
+  }
+}

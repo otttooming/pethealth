@@ -94,6 +94,34 @@ export type GetDashboardListAuthor = {
   name: Maybe<string>;
 };
 
+export type GetHistoriesByPostVariables = {
+  id: string;
+};
+
+export type GetHistoriesByPostQuery = {
+  __typename?: 'Query';
+
+  listHistoriesByPost: GetHistoriesByPostListHistoriesByPost[];
+};
+
+export type GetHistoriesByPostListHistoriesByPost = {
+  __typename?: 'History';
+
+  title: Maybe<string>;
+
+  content: Maybe<string>;
+
+  createdAt: DateTime;
+
+  author: GetHistoriesByPostAuthor;
+};
+
+export type GetHistoriesByPostAuthor = {
+  __typename?: 'User';
+
+  name: Maybe<string>;
+};
+
 export type GetMessagesByPostVariables = {
   id: string;
 };
@@ -346,6 +374,53 @@ export function GetDashboardListHOC<TProps, TChildProps = any>(
     GetDashboardListVariables,
     GetDashboardListProps<TChildProps>
   >(GetDashboardListDocument, operationOptions);
+}
+export const GetHistoriesByPostDocument = gql`
+  query getHistoriesByPost($id: ID!) {
+    listHistoriesByPost(postId: $id) {
+      title
+      content
+      createdAt
+      author {
+        name
+      }
+    }
+  }
+`;
+export class GetHistoriesByPostComponent extends React.Component<
+  Partial<
+    ReactApollo.QueryProps<GetHistoriesByPostQuery, GetHistoriesByPostVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Query<GetHistoriesByPostQuery, GetHistoriesByPostVariables>
+        query={GetHistoriesByPostDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type GetHistoriesByPostProps<TChildProps = any> = Partial<
+  ReactApollo.DataProps<GetHistoriesByPostQuery, GetHistoriesByPostVariables>
+> &
+  TChildProps;
+export function GetHistoriesByPostHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        GetHistoriesByPostQuery,
+        GetHistoriesByPostVariables,
+        GetHistoriesByPostProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    GetHistoriesByPostQuery,
+    GetHistoriesByPostVariables,
+    GetHistoriesByPostProps<TChildProps>
+  >(GetHistoriesByPostDocument, operationOptions);
 }
 export const GetMessagesByPostDocument = gql`
   query getMessagesByPost($id: ID!) {

@@ -25,7 +25,7 @@ export default class Detail extends React.Component<DetailProps, any> {
           <PatientSection />
         </Cell>
         <Cell width={9}>
-          <TimelineSection />
+          <TimelineSection postId={id} />
         </Cell>
         <Cell width={8}>
           <MessageSection postId={id} />
