@@ -6,8 +6,8 @@ import { MessageResolvers } from '../generated/graphqlgen';
 export const Message: MessageResolvers.Type = {
   ...MessageResolvers.defaultResolvers,
 
-  author: (parent, args, ctx) => {
-    throw new Error('Resolver not implemented');
+  author: ({ id }, args, ctx) => {
+    return ctx.prisma.message({ id }).author();
   },
   post: ({ id }, args, ctx) => {
     return ctx.prisma.message({ id }).post();
