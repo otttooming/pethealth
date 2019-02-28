@@ -23,6 +23,23 @@ export type AuthLoginLogin = {
   token: string;
 };
 
+export type CreateMessageVariables = {
+  id: string;
+  content: string;
+};
+
+export type CreateMessageMutation = {
+  __typename?: 'Mutation';
+
+  createMessage: CreateMessageCreateMessage;
+};
+
+export type CreateMessageCreateMessage = {
+  __typename?: 'Message';
+
+  content: Maybe<string>;
+};
+
 export type DashboardListVariables = {};
 
 export type DashboardListQuery = {
@@ -190,6 +207,52 @@ export function AuthLoginHOC<TProps, TChildProps = any>(
     AuthLoginVariables,
     AuthLoginProps<TChildProps>
   >(AuthLoginDocument, operationOptions);
+}
+export const CreateMessageDocument = gql`
+  mutation createMessage($id: ID!, $content: String!) {
+    createMessage(postId: $id, content: $content) {
+      content
+    }
+  }
+`;
+export class CreateMessageComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<CreateMessageMutation, CreateMessageVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<CreateMessageMutation, CreateMessageVariables>
+        mutation={CreateMessageDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type CreateMessageProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<CreateMessageMutation, CreateMessageVariables>
+> &
+  TChildProps;
+export type CreateMessageMutationFn = ReactApollo.MutationFn<
+  CreateMessageMutation,
+  CreateMessageVariables
+>;
+export function CreateMessageHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        CreateMessageMutation,
+        CreateMessageVariables,
+        CreateMessageProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    CreateMessageMutation,
+    CreateMessageVariables,
+    CreateMessageProps<TChildProps>
+  >(CreateMessageDocument, operationOptions);
 }
 export const DashboardListDocument = gql`
   query dashboardList {

@@ -1,0 +1,5 @@
+mutation createMessage($id: ID!, $content: String!) {
+  createMessage(postId: $id, content: $content) {
+    content
+  }
+}

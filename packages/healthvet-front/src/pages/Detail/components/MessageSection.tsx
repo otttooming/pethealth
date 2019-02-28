@@ -5,7 +5,12 @@ import ControlBar from '../../../components/ControlBar/ControlBar';
 import TextField from '../../../components/TextField/TextField';
 import { ScrollTo, ScrollArea } from 'react-scroll-to';
 import Title from '../../../components/Title/Title';
-import { GetMessagesByPostComponent } from '../../../generated-models';
+import {
+  GetMessagesByPostComponent,
+  CreateMessageComponent,
+  CreateMessageMutationFn,
+  GetMessagesByPostHOC,
+} from '../../../generated-models';
 
 const ScroolAreaFixed: any = ScrollArea;
 
@@ -70,15 +75,19 @@ export default class MessageSection extends React.Component<
     messages: this.messages,
   };
 
+  refetch: (() => void) | null = null;
+
   renderMessages = () => {
     const { postId: id } = this.props;
 
     return (
       <GetMessagesByPostComponent variables={{ id }}>
-        {({ data }) => {
+        {({ data, refetch }) => {
           if (!data) {
             return null;
           }
+
+          this.refetch = refetch;
 
           const { listMessagesByPost = [] } = data;
 
@@ -110,6 +119,19 @@ export default class MessageSection extends React.Component<
     });
   };
 
+  renderTextField = () => {
+    return (
+      <CreateMessageComponent>
+        {request => (
+          <TextField
+            placeholder="Write your text here"
+            onSubmit={this.createMessage(request)}
+          />
+        )}
+      </CreateMessageComponent>
+    );
+  };
+
   public render() {
     return (
       <ScrollTo>
@@ -125,19 +147,25 @@ export default class MessageSection extends React.Component<
                 {this.renderMessages()}
               </div>
 
-              <Footer>
-                <TextField
-                  placeholder="Write your text here"
-                  onSubmit={() => {
-                    this.createNewMessage('');
-                    scrollTo({ id: 'foo', x: 20, y: 500 });
-                  }}
-                />
-              </Footer>
+              <Footer>{this.renderTextField()}</Footer>
             </Wrapper>
           </ScroolAreaFixed>
         )}
       </ScrollTo>
     );
   }
+
+  private createMessage = (request: CreateMessageMutationFn) => async (
+    content: string,
+  ): Promise<void> => {
+    const { postId: id } = this.props;
+
+    const options = { variables: { id, content } };
+
+    await request(options);
+
+    if (this.refetch) {
+      this.refetch();
+    }
+  };
 }
