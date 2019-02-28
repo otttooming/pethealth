@@ -34,7 +34,7 @@
     "lint:ts": "tslint --project ./tsconfig.json",
     "prettier": "prettier --write --config .prettierrc \"**/*.{js,jsx,ts,tsx,json,css,scss,md,yaml,yml}\"",
     "deploy": "lerna run deploy --parallel",
-    "gen:graphql": "lerna run gen:graphql"
+    "generate": "lerna run generate"
   },
   "workspaces": [
     "packages/*"

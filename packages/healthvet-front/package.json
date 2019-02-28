@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "gen:graphql": "gql-gen",
+    "generate": "gql-gen",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rimraf dist && rimraf build",
