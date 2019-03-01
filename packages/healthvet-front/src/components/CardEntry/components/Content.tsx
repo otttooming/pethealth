@@ -1,7 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-export interface ContentProps {}
+export interface ContentProps {
+  value: string;
+  onClick: (event: any) => void;
+}
 
 const Wrapper = styled.div`
   font-family: Nunito;
@@ -15,13 +18,12 @@ const Wrapper = styled.div`
 `;
 
 export default class Content extends React.Component<ContentProps, any> {
+  handleClick = (event: any) => {
+    const { onClick } = this.props;
+    onClick(event);
+  };
+
   public render() {
-    return (
-      <Wrapper>
-        There has been a bone fracture in the section 4 and it seems it will be
-        cured in 10 - 12 weeks. Right now the cast will be implemented and we
-        will see if the recovery will be as fast as we are expecting.
-      </Wrapper>
-    );
+    return <Wrapper onClick={this.handleClick}>{this.props.value}</Wrapper>;
   }
 }

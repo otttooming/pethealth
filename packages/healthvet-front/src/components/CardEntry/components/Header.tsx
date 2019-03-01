@@ -2,7 +2,11 @@ import * as React from 'react';
 import Icon, { IconName } from '../../Icon/Icon';
 import styled from 'styled-components';
 
-export interface HeaderProps {}
+export interface HeaderProps {
+  title: string;
+  date: string;
+  onClick: (event: any) => void;
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,15 +45,20 @@ const Time = styled.p`
 `;
 
 export default class Header extends React.Component<HeaderProps, any> {
+  handleClick = (event: any) => {
+    const { onClick } = this.props;
+    onClick(event);
+  };
+
   public render() {
     return (
-      <Wrapper>
+      <Wrapper onClick={this.handleClick}>
         <Left>
           <Icon name={IconName.BONE} />
         </Left>
         <Right>
-          <Title>Bone fracture</Title>
-          <Time>24.02.2013</Time>
+          <div>{this.props.title}</div>
+          <div>{this.props.date}</div>
         </Right>
       </Wrapper>
     );
