@@ -28,12 +28,13 @@
     "clean:build": "lerna exec -- rimraf dist",
     "clean:node": "lerna exec -- rimraf node_modules",
     "clean:lerna": "rimraf node_modules",
-    "dist": "lerna run dist",
+    "dist": "lerna run dist && lerna run build",
     "start": "yarn run dist && lerna run start --parallel",
     "lint": "npm run lint:ts && echo 'tslint check: OK'",
     "lint:ts": "tslint --project ./tsconfig.json",
     "prettier": "prettier --write --config .prettierrc \"**/*.{js,jsx,ts,tsx,json,css,scss,md,yaml,yml}\"",
-    "deploy": "lerna run deploy --parallel",
+    "deploy": "now",
+    "now-build": "yarn run bootstrap && lerna run now-build",
     "generate": "lerna run generate"
   },
   "workspaces": [

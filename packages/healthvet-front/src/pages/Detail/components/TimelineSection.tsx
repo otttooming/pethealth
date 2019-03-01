@@ -2,12 +2,13 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Title from '../../../components/Title/Title';
 import Icon, { IconName } from '../../../components/Icon/Icon';
-import { CardEntry } from '@pethealth/ui-lib';
-import { CardEntryProps } from '@pethealth/ui-lib/dist/molecules/CardEntry/CardEntry';
 import {
   GetHistoriesByPostComponent,
   GetHistoriesByPostQuery,
 } from '../../../generated-models';
+import CardEntry, {
+  CardEntryProps,
+} from '../../../components/CardEntry/CardEntry';
 
 export interface TimelineSectionProps {
   postId: string;

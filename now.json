@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "name": "healthvet",
+  "builds": [
+    {
+      "src": "packages/healthvet-front/package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "^/static/(.*)",
+      "dest": "packages/healthvet-front/static/$1"
+    },
+    {
+      "src": "^/favicon.ico",
+      "dest": "packages/healthvet-front/favicon.ico"
+    },
+    {
+      "src": "^/asset-manifest.json",
+      "dest": "packages/healthvet-front/asset-manifest.json"
+    },
+    {
+      "src": "^/manifest.json",
+      "dest": "packages/healthvet-front/manifest.json"
+    },
+    {
+      "src": "^/service-worker.js",
+      "headers": {
+        "cache-control": "s-maxage=0"
+      },
+      "dest": "packages/healthvet-front/service-worker.js"
+    },
+    {
+      "src": "^/precache-manifest.(.*)",
+      "dest": "packages/healthvet-front/precache-manifest.$1"
+    },
+    {
+      "src": "^/(.*)",
+      "dest": "packages/healthvet-front/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
