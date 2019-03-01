@@ -92,7 +92,7 @@ export default class FeedSection extends React.Component<
         <ListItem key={id}>
           <Link
             to={{
-              pathname: '/detail',
+              pathname: `detail/${id}`,
               state: { id },
             }}
           >
