@@ -23,7 +23,9 @@ interface Params {
 type HocExtends = RouteComponentProps<Params> &
   MutateProps<CreateDraftMutation, CreateDraftVariables>;
 
-export interface PatientSectionProps extends HocExtends {}
+export interface PatientSectionProps extends HocExtends {
+  onChangeEditable: (isEditmode: boolean) => void;
+}
 
 const Wrapper = styled.div`
   position: relative;
@@ -92,6 +94,10 @@ const Image = styled.img`
 `;
 
 class PatientSection extends React.Component<PatientSectionProps, any> {
+  static defaultProps = {
+    onChangeEditable: () => null,
+  };
+
   state = {
     species: '',
     breed: '',
@@ -112,9 +118,19 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
   };
 
   changeEditable = () => {
-    this.setState({
-      isEditable: !this.state.isEditable,
-    });
+    this.setState(
+      {
+        isEditable: !this.state.isEditable,
+      },
+      this.onChangeEditable,
+    );
+  };
+
+  onChangeEditable = () => {
+    const { onChangeEditable } = this.props;
+    const { isEditable } = this.state;
+
+    onChangeEditable(isEditable);
   };
 
   public render() {
@@ -210,12 +226,12 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
             <Image src={gallery1} />
           </ListItem>
         </Bottom>
+
         {isEditable ? (
           <Button onClick={this.changeEditable}> Save </Button>
         ) : (
           <Button onClick={this.changeEditable}> Edit </Button>
         )}
-        <Button>Delete</Button>
 
         {this.renderPostModify()}
       </Wrapper>
