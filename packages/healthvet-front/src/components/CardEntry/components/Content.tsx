@@ -18,6 +18,10 @@ const Wrapper = styled.div`
 `;
 
 export default class Content extends React.Component<ContentProps, any> {
+  static defaultProps = {
+    onClick: () => null,
+  };
+
   handleClick = (event: any) => {
     const { onClick } = this.props;
     onClick(event);

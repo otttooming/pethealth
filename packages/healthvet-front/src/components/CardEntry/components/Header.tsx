@@ -45,6 +45,10 @@ const Time = styled.p`
 `;
 
 export default class Header extends React.Component<HeaderProps, any> {
+  static defaultProps = {
+    onClick: () => null,
+  };
+
   handleClick = (event: any) => {
     const { onClick } = this.props;
     onClick(event);
