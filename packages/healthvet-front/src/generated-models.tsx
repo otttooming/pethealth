@@ -46,6 +46,24 @@ export type CreateDraftCreateDraft = {
   title: string;
 };
 
+export type CreateHistoryVariables = {
+  id: string;
+  title: string;
+  content: string;
+};
+
+export type CreateHistoryMutation = {
+  __typename?: 'Mutation';
+
+  createHistory: CreateHistoryCreateHistory;
+};
+
+export type CreateHistoryCreateHistory = {
+  __typename?: 'History';
+
+  id: string;
+};
+
 export type CreateMessageVariables = {
   id: string;
   content: string;
@@ -319,6 +337,52 @@ export function CreateDraftHOC<TProps, TChildProps = any>(
     CreateDraftVariables,
     CreateDraftProps<TChildProps>
   >(CreateDraftDocument, operationOptions);
+}
+export const CreateHistoryDocument = gql`
+  mutation createHistory($id: ID!, $title: String!, $content: String!) {
+    createHistory(postId: $id, title: $title, content: $content) {
+      id
+    }
+  }
+`;
+export class CreateHistoryComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<CreateHistoryMutation, CreateHistoryVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<CreateHistoryMutation, CreateHistoryVariables>
+        mutation={CreateHistoryDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type CreateHistoryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<CreateHistoryMutation, CreateHistoryVariables>
+> &
+  TChildProps;
+export type CreateHistoryMutationFn = ReactApollo.MutationFn<
+  CreateHistoryMutation,
+  CreateHistoryVariables
+>;
+export function CreateHistoryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        CreateHistoryMutation,
+        CreateHistoryVariables,
+        CreateHistoryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    CreateHistoryMutation,
+    CreateHistoryVariables,
+    CreateHistoryProps<TChildProps>
+  >(CreateHistoryDocument, operationOptions);
 }
 export const CreateMessageDocument = gql`
   mutation createMessage($id: ID!, $content: String!) {

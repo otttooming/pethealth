@@ -21,6 +21,7 @@ type Mutation {
   signup(email: String!, password: String!, name: String): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   createMessage(postId: ID!, content: String!): Message!
+  createHistory(postId: ID!, title: String!, content: String!): History!
 }
 
 type AuthPayload {

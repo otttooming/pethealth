@@ -1233,6 +1233,12 @@ export namespace MutationResolvers {
     content: string;
   }
 
+  export interface ArgsCreateHistory {
+    postId: string;
+    title: string;
+    content: string;
+  }
+
   export type CreateDraftResolver =
     | ((
         parent: undefined,
@@ -1333,6 +1339,23 @@ export namespace MutationResolvers {
           ctx: Context,
           info: GraphQLResolveInfo,
         ) => Message | Promise<Message>;
+      };
+
+  export type CreateHistoryResolver =
+    | ((
+        parent: undefined,
+        args: ArgsCreateHistory,
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => History | Promise<History>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: undefined,
+          args: ArgsCreateHistory,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => History | Promise<History>;
       };
 
   export interface Type {
@@ -1436,6 +1459,23 @@ export namespace MutationResolvers {
             ctx: Context,
             info: GraphQLResolveInfo,
           ) => Message | Promise<Message>;
+        };
+
+    createHistory:
+      | ((
+          parent: undefined,
+          args: ArgsCreateHistory,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => History | Promise<History>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: undefined,
+            args: ArgsCreateHistory,
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => History | Promise<History>;
         };
   }
 }
