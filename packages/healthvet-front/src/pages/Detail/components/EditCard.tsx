@@ -29,6 +29,7 @@ class EditCard extends React.Component<EditCardProps, any> {
         <CardEntry
           title={''}
           date={''}
+          content={''}
           icon=""
           personId={1}
           onSubmit={this.handleSubmit}

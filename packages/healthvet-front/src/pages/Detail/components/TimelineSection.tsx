@@ -82,9 +82,15 @@ export default class TimelineSection extends React.Component<
 
     const { listHistoriesByPost = [] } = data;
 
-    return listHistoriesByPost.map(({ title, createdAt }, key) => (
+    return listHistoriesByPost.map(({ title, createdAt, content }, key) => (
       <ListItem key={key}>
-        <CardEntry title={title || ''} date={createdAt} icon="" personId={1} />
+        <CardEntry
+          title={title || ''}
+          date={createdAt}
+          icon=""
+          content={content || ''}
+          personId={1}
+        />
       </ListItem>
     ));
   };

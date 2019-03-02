@@ -15,7 +15,16 @@ export interface CardEntryProps {
   icon: string;
   date: string;
   personId: number;
+  content: string;
   onSubmit: (values: CardEntrySubmitValues) => void;
+  isEditable: boolean;
+}
+
+interface State {
+  title: string;
+  icon: string;
+  date: string;
+  content: string;
   isEditable: boolean;
 }
 
@@ -57,7 +66,7 @@ const EditableTitle = styled.textarea`
   }
 `;
 
-export default class CardEntry extends React.Component<CardEntryProps, any> {
+export default class CardEntry extends React.Component<CardEntryProps, State> {
   static defaultProps = {
     onSubmit: () => null,
     isEditable: false,
@@ -81,7 +90,7 @@ export default class CardEntry extends React.Component<CardEntryProps, any> {
 
     this.setState(
       {
-        text: value,
+        content: value,
         isEditable: false,
         date: `${day < 10 ? `0${day}` : `${day}`}:${
           month < 10 ? `0${month}` : `${month}`
@@ -93,7 +102,7 @@ export default class CardEntry extends React.Component<CardEntryProps, any> {
 
   onSubmit = () => {
     const { onSubmit } = this.props;
-    const { text: content, title } = this.state;
+    const { content, title } = this.state;
 
     onSubmit({ content, title });
   };
@@ -133,12 +142,12 @@ export default class CardEntry extends React.Component<CardEntryProps, any> {
 
         {this.state.isEditable ? (
           <TextField
-            defaultValue={this.state.text}
+            defaultValue={this.state.content}
             placeholder="Write your text here"
             onSubmit={this.changeMessageText}
           />
         ) : (
-          <Content onClick={this.changeEditable} value={this.state.text} />
+          <Content onClick={this.changeEditable} value={this.state.content} />
         )}
 
         <Footer />
