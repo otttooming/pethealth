@@ -31,11 +31,12 @@ export const Mutation: MutationResolvers.Type = {
       user,
     };
   },
-  createDraft: async (parent, { title, content }, context) => {
+  createDraft: async (parent, { title, content, type }, context) => {
     const userId = getUserId(context);
     return context.prisma.createPost({
       title,
       content,
+      type,
       published: true,
       author: { connect: { id: userId } },
     });

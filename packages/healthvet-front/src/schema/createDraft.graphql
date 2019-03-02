@@ -1,5 +1,5 @@
-mutation createDraft($title: String!) {
-  createDraft(title: $title) {
+mutation createDraft($title: String!, $type: PostType) {
+  createDraft(title: $title, type: $type) {
     id
     title
   }
