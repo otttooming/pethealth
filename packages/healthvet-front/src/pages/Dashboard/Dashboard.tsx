@@ -3,7 +3,7 @@ import { Grid, Cell } from 'styled-css-grid';
 
 import Sidebar from '../../components/Sidebar/Sidebar';
 import FeedSection from './components/FeedSection';
-import RightSection from './components/RightSection';
+import SidebarSecondary from '../../components/SidebarSecondary';
 
 export interface DetailProps {}
 
@@ -18,7 +18,7 @@ export default class Detail extends React.Component<DetailProps, any> {
           <FeedSection />
         </Cell>
         <Cell width={4}>
-          <RightSection />
+          <SidebarSecondary />
         </Cell>
       </Grid>
     );

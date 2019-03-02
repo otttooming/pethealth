@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import ControlBar from '../../../components/ControlBar/ControlBar';
+import ControlBar from '../../components/ControlBar/ControlBar';
 import cat from './kass.svg';
 
 export interface RightSectionProps {}
