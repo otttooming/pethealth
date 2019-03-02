@@ -4,6 +4,8 @@ import { GraphQLResolveInfo } from 'graphql';
 import { User, Post, History, Message } from './prisma-client';
 import { AuthPayload, Context } from '../types';
 
+export type PostType = 'MEDICAL_RECORD' | 'FORUM_POST';
+
 export namespace QueryResolvers {
   export const defaultResolvers = {};
 
@@ -382,6 +384,7 @@ export namespace PostResolvers {
     createdAt: (parent: Post) => parent.createdAt,
     updatedAt: (parent: Post) => parent.updatedAt,
     published: (parent: Post) => parent.published,
+    type: (parent: Post) => parent.type,
     title: (parent: Post) => parent.title,
     content: (parent: Post) =>
       parent.content === undefined ? null : parent.content,
@@ -453,6 +456,23 @@ export namespace PostResolvers {
           ctx: Context,
           info: GraphQLResolveInfo,
         ) => boolean | Promise<boolean>;
+      };
+
+  export type TypeResolver =
+    | ((
+        parent: Post,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => PostType | Promise<PostType>)
+    | {
+        fragment: string;
+        resolve: (
+          parent: Post,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => PostType | Promise<PostType>;
       };
 
   export type TitleResolver =
@@ -607,6 +627,23 @@ export namespace PostResolvers {
             ctx: Context,
             info: GraphQLResolveInfo,
           ) => boolean | Promise<boolean>;
+        };
+
+    type:
+      | ((
+          parent: Post,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => PostType | Promise<PostType>)
+      | {
+          fragment: string;
+          resolve: (
+            parent: Post,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => PostType | Promise<PostType>;
         };
 
     title:

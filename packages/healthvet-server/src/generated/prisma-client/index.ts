@@ -216,6 +216,8 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type PostType = 'MEDICAL_RECORD' | 'FORUM_POST';
+
 export type PostOrderByInput =
   | 'id_ASC'
   | 'id_DESC'
@@ -225,6 +227,8 @@ export type PostOrderByInput =
   | 'updatedAt_DESC'
   | 'published_ASC'
   | 'published_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
   | 'title_ASC'
   | 'title_DESC'
   | 'content_ASC'
@@ -268,22 +272,13 @@ export type UserOrderByInput =
 
 export type MutationType = 'CREATED' | 'UPDATED' | 'DELETED';
 
-export interface HistoryUpdateManyWithoutPostInput {
-  create?: HistoryCreateWithoutPostInput[] | HistoryCreateWithoutPostInput;
-  delete?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
-  connect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
-  set?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
-  disconnect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
-  update?:
-    | HistoryUpdateWithWhereUniqueWithoutPostInput[]
-    | HistoryUpdateWithWhereUniqueWithoutPostInput;
-  upsert?:
-    | HistoryUpsertWithWhereUniqueWithoutPostInput[]
-    | HistoryUpsertWithWhereUniqueWithoutPostInput;
-  deleteMany?: HistoryScalarWhereInput[] | HistoryScalarWhereInput;
-  updateMany?:
-    | HistoryUpdateManyWithWhereNestedInput[]
-    | HistoryUpdateManyWithWhereNestedInput;
+export interface PostUpdateWithoutAuthorDataInput {
+  published?: Boolean;
+  type?: PostType;
+  title?: String;
+  content?: String;
+  histories?: HistoryUpdateManyWithoutPostInput;
+  messages?: MessageUpdateManyWithoutPostInput;
 }
 
 export type HistoryWhereUniqueInput = AtLeastOne<{
@@ -371,6 +366,7 @@ export interface MessageWhereInput {
 
 export interface PostCreateWithoutHistoriesInput {
   published?: Boolean;
+  type?: PostType;
   title: String;
   content?: String;
   author: UserCreateOneWithoutPostsInput;
@@ -426,6 +422,10 @@ export interface PostWhereInput {
   updatedAt_gte?: DateTimeInput;
   published?: Boolean;
   published_not?: Boolean;
+  type?: PostType;
+  type_not?: PostType;
+  type_in?: PostType[] | PostType;
+  type_not_in?: PostType[] | PostType;
   title?: String;
   title_not?: String;
   title_in?: String[] | String;
@@ -487,6 +487,7 @@ export interface HistoryUpdateInput {
 
 export interface PostUpdateManyMutationInput {
   published?: Boolean;
+  type?: PostType;
   title?: String;
   content?: String;
 }
@@ -500,6 +501,7 @@ export interface UserUpdateOneRequiredInput {
 
 export interface PostCreateInput {
   published?: Boolean;
+  type?: PostType;
   title: String;
   content?: String;
   author: UserCreateOneWithoutPostsInput;
@@ -538,6 +540,7 @@ export interface PostUpdateManyWithoutAuthorInput {
 
 export interface PostUpdateWithoutMessagesDataInput {
   published?: Boolean;
+  type?: PostType;
   title?: String;
   content?: String;
   author?: UserUpdateOneRequiredWithoutPostsInput;
@@ -556,25 +559,36 @@ export interface PostUpdateOneRequiredWithoutMessagesInput {
   connect?: PostWhereUniqueInput;
 }
 
-export interface PostUpdateWithoutAuthorDataInput {
-  published?: Boolean;
-  title?: String;
-  content?: String;
-  histories?: HistoryUpdateManyWithoutPostInput;
-  messages?: MessageUpdateManyWithoutPostInput;
+export interface UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsDataInput;
+  create: UserCreateWithoutPostsInput;
 }
 
 export interface PostCreateWithoutMessagesInput {
   published?: Boolean;
+  type?: PostType;
   title: String;
   content?: String;
   author: UserCreateOneWithoutPostsInput;
   histories?: HistoryCreateManyWithoutPostInput;
 }
 
-export interface UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput;
-  create: UserCreateWithoutPostsInput;
+export interface HistoryUpdateManyWithoutPostInput {
+  create?: HistoryCreateWithoutPostInput[] | HistoryCreateWithoutPostInput;
+  delete?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
+  connect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
+  set?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
+  disconnect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
+  update?:
+    | HistoryUpdateWithWhereUniqueWithoutPostInput[]
+    | HistoryUpdateWithWhereUniqueWithoutPostInput;
+  upsert?:
+    | HistoryUpsertWithWhereUniqueWithoutPostInput[]
+    | HistoryUpsertWithWhereUniqueWithoutPostInput;
+  deleteMany?: HistoryScalarWhereInput[] | HistoryScalarWhereInput;
+  updateMany?:
+    | HistoryUpdateManyWithWhereNestedInput[]
+    | HistoryUpdateManyWithWhereNestedInput;
 }
 
 export interface PostCreateOneWithoutMessagesInput {
@@ -1010,6 +1024,10 @@ export interface PostScalarWhereInput {
   updatedAt_gte?: DateTimeInput;
   published?: Boolean;
   published_not?: Boolean;
+  type?: PostType;
+  type_not?: PostType;
+  type_in?: PostType[] | PostType;
+  type_not_in?: PostType[] | PostType;
   title?: String;
   title_not?: String;
   title_in?: String[] | String;
@@ -1061,12 +1079,14 @@ export interface MessageCreateInput {
 
 export interface PostUpdateManyDataInput {
   published?: Boolean;
+  type?: PostType;
   title?: String;
   content?: String;
 }
 
 export interface PostCreateWithoutAuthorInput {
   published?: Boolean;
+  type?: PostType;
   title: String;
   content?: String;
   histories?: HistoryCreateManyWithoutPostInput;
@@ -1082,6 +1102,7 @@ export interface UserUpdateOneRequiredWithoutPostsInput {
 
 export interface PostUpdateWithoutHistoriesDataInput {
   published?: Boolean;
+  type?: PostType;
   title?: String;
   content?: String;
   author?: UserUpdateOneRequiredWithoutPostsInput;
@@ -1126,6 +1147,7 @@ export interface MessageUpdateInput {
 
 export interface PostUpdateInput {
   published?: Boolean;
+  type?: PostType;
   title?: String;
   content?: String;
   author?: UserUpdateOneRequiredWithoutPostsInput;
@@ -1365,6 +1387,7 @@ export interface PostPreviousValues {
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
   published: Boolean;
+  type: PostType;
   title: String;
   content?: String;
 }
@@ -1376,6 +1399,7 @@ export interface PostPreviousValuesPromise
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
   published: () => Promise<Boolean>;
+  type: () => Promise<PostType>;
   title: () => Promise<String>;
   content: () => Promise<String>;
 }
@@ -1387,6 +1411,7 @@ export interface PostPreviousValuesSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   published: () => Promise<AsyncIterator<Boolean>>;
+  type: () => Promise<AsyncIterator<PostType>>;
   title: () => Promise<AsyncIterator<String>>;
   content: () => Promise<AsyncIterator<String>>;
 }
@@ -1597,6 +1622,7 @@ export interface Post {
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
   published: Boolean;
+  type: PostType;
   title: String;
   content?: String;
 }
@@ -1606,6 +1632,7 @@ export interface PostPromise extends Promise<Post>, Fragmentable {
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
   published: () => Promise<Boolean>;
+  type: () => Promise<PostType>;
   title: () => Promise<String>;
   content: () => Promise<String>;
   author: <T = UserPromise>() => T;
@@ -1636,6 +1663,7 @@ export interface PostSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   published: () => Promise<AsyncIterator<Boolean>>;
+  type: () => Promise<AsyncIterator<PostType>>;
   title: () => Promise<AsyncIterator<String>>;
   content: () => Promise<AsyncIterator<String>>;
   author: <T = UserSubscription>() => T;
@@ -1814,6 +1842,10 @@ export const models: Model[] = [
   },
   {
     name: 'Post',
+    embedded: false,
+  },
+  {
+    name: 'PostType',
     embedded: false,
   },
   {

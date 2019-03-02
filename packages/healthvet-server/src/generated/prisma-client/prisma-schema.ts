@@ -594,6 +594,7 @@ export const typeDefs = /* GraphQL */ `
     createdAt: DateTime!
     updatedAt: DateTime!
     published: Boolean!
+    type: PostType!
     title: String!
     content: String
     author: User!
@@ -625,6 +626,7 @@ export const typeDefs = /* GraphQL */ `
 
   input PostCreateInput {
     published: Boolean
+    type: PostType
     title: String!
     content: String
     author: UserCreateOneWithoutPostsInput!
@@ -649,6 +651,7 @@ export const typeDefs = /* GraphQL */ `
 
   input PostCreateWithoutAuthorInput {
     published: Boolean
+    type: PostType
     title: String!
     content: String
     histories: HistoryCreateManyWithoutPostInput
@@ -657,6 +660,7 @@ export const typeDefs = /* GraphQL */ `
 
   input PostCreateWithoutHistoriesInput {
     published: Boolean
+    type: PostType
     title: String!
     content: String
     author: UserCreateOneWithoutPostsInput!
@@ -665,6 +669,7 @@ export const typeDefs = /* GraphQL */ `
 
   input PostCreateWithoutMessagesInput {
     published: Boolean
+    type: PostType
     title: String!
     content: String
     author: UserCreateOneWithoutPostsInput!
@@ -685,6 +690,8 @@ export const typeDefs = /* GraphQL */ `
     updatedAt_DESC
     published_ASC
     published_DESC
+    type_ASC
+    type_DESC
     title_ASC
     title_DESC
     content_ASC
@@ -696,6 +703,7 @@ export const typeDefs = /* GraphQL */ `
     createdAt: DateTime!
     updatedAt: DateTime!
     published: Boolean!
+    type: PostType!
     title: String!
     content: String
   }
@@ -733,6 +741,10 @@ export const typeDefs = /* GraphQL */ `
     updatedAt_gte: DateTime
     published: Boolean
     published_not: Boolean
+    type: PostType
+    type_not: PostType
+    type_in: [PostType!]
+    type_not_in: [PostType!]
     title: String
     title_not: String
     title_in: [String!]
@@ -784,8 +796,14 @@ export const typeDefs = /* GraphQL */ `
     NOT: [PostSubscriptionWhereInput!]
   }
 
+  enum PostType {
+    MEDICAL_RECORD
+    FORUM_POST
+  }
+
   input PostUpdateInput {
     published: Boolean
+    type: PostType
     title: String
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
@@ -795,12 +813,14 @@ export const typeDefs = /* GraphQL */ `
 
   input PostUpdateManyDataInput {
     published: Boolean
+    type: PostType
     title: String
     content: String
   }
 
   input PostUpdateManyMutationInput {
     published: Boolean
+    type: PostType
     title: String
     content: String
   }
@@ -838,6 +858,7 @@ export const typeDefs = /* GraphQL */ `
 
   input PostUpdateWithoutAuthorDataInput {
     published: Boolean
+    type: PostType
     title: String
     content: String
     histories: HistoryUpdateManyWithoutPostInput
@@ -846,6 +867,7 @@ export const typeDefs = /* GraphQL */ `
 
   input PostUpdateWithoutHistoriesDataInput {
     published: Boolean
+    type: PostType
     title: String
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
@@ -854,6 +876,7 @@ export const typeDefs = /* GraphQL */ `
 
   input PostUpdateWithoutMessagesDataInput {
     published: Boolean
+    type: PostType
     title: String
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
@@ -914,6 +937,10 @@ export const typeDefs = /* GraphQL */ `
     updatedAt_gte: DateTime
     published: Boolean
     published_not: Boolean
+    type: PostType
+    type_not: PostType
+    type_in: [PostType!]
+    type_not_in: [PostType!]
     title: String
     title_not: String
     title_in: [String!]

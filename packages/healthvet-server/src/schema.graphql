@@ -1,5 +1,10 @@
 scalar DateTime
 
+enum PostType {
+  MEDICAL_RECORD
+  FORUM_POST
+}
+
 type Query {
   me: User
   feed: [Post!]!
@@ -28,6 +33,7 @@ type Post {
   createdAt: DateTime!
   updatedAt: DateTime!
   published: Boolean!
+  type: PostType!
   title: String!
   content: String
   author: User!

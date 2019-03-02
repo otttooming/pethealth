@@ -1,8 +1,14 @@
+enum PostType {
+  MEDICAL_RECORD
+  FORUM_POST
+}
+
 type Post {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
   published: Boolean! @default(value: "false")
+  type: PostType! @default(value: MEDICAL_RECORD)
   title: String!
   content: String
   author: User!
