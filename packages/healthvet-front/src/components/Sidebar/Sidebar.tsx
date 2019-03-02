@@ -61,14 +61,14 @@ export default class Sidebar extends React.Component<SidebarProps, any> {
         <Menu>
           <Link
             to={{
-              pathname: `/dashboard`,
+              pathname: `/patients`,
             }}
           >
             <MenuItem>Patients</MenuItem>
           </Link>
           <Link
             to={{
-              pathname: `/dashboard`,
+              pathname: `/browse`,
             }}
           >
             <MenuItem>Browse</MenuItem>

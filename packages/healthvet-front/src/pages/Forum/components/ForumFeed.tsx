@@ -72,7 +72,7 @@ export default class FeedSection extends React.Component<
       <GetDashboardListComponent>
         {({ data }) => (
           <Wrapper>
-            <FilterSection title="Discussion" />
+            <FilterSection title="Browse" />
 
             <UnsortedList>{this.renderCardItems(data)}</UnsortedList>
           </Wrapper>
