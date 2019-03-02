@@ -13,9 +13,6 @@ import {
 import FilterSection from '../../../components/FilterSection';
 
 export interface FeedSectionProps {}
-export interface FeedSectionState {
-  patients: CardProps[];
-}
 
 export interface FeedSectionState {}
 
@@ -59,7 +56,7 @@ export default class FeedSection extends React.Component<
         <ListItem key={id}>
           <Link
             to={{
-              pathname: `detail/${id}`,
+              pathname: `/detail/${id}`,
               state: { id },
             }}
           >
@@ -68,6 +65,7 @@ export default class FeedSection extends React.Component<
               date={date}
               doctor={doctor || ''}
               description={description || ''}
+              hasIcons={true}
             />
           </Link>
         </ListItem>
@@ -80,7 +78,7 @@ export default class FeedSection extends React.Component<
       <GetDashboardListComponent>
         {({ data }) => (
           <Wrapper>
-            <FilterSection />
+            <FilterSection title="Patient history" />
 
             <UnsortedList>{this.renderCardItems(data)}</UnsortedList>
           </Wrapper>
