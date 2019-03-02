@@ -15,23 +15,29 @@ export interface DetailProps extends RouteComponentProps<Params> {}
 export default class Detail extends React.Component<DetailProps, any> {
   public render() {
     const {
-      match: { params },
+      match: {
+        params: { id },
+        path,
+      },
     } = this.props;
 
-    const { id } = params;
+    const isAlternativeLayout: boolean = path.includes('post');
 
     return (
       <Grid columns={24} gap="0px">
         <Cell width={1}>
           <Sidebar isCollapsed={true} />
         </Cell>
-        <Cell width={6}>
-          <PatientSection />
-        </Cell>
+        {!isAlternativeLayout && (
+          <Cell width={6}>
+            <PatientSection />
+          </Cell>
+        )}
+
         <Cell width={9}>
           <TimelineSection postId={id} />
         </Cell>
-        <Cell width={8}>
+        <Cell width={isAlternativeLayout ? 14 : 8}>
           <MessageSection postId={id} />
         </Cell>
       </Grid>
