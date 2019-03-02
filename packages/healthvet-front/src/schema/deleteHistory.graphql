@@ -1,0 +1,5 @@
+mutation deleteHistory($id: ID!) {
+  deleteHistory(id: $id) {
+    id
+  }
+}

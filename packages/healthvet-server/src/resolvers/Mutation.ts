@@ -66,4 +66,7 @@ export const Mutation: MutationResolvers.Type = {
       author: { connect: { id: userId } },
     });
   },
+  deleteHistory: async (parent, { id }, context) => {
+    return context.prisma.deleteHistory({ id });
+  },
 };
