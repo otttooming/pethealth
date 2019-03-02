@@ -5,10 +5,12 @@ import Icon, { IconName } from '../../../components/Icon/Icon';
 import {
   GetHistoriesByPostComponent,
   GetHistoriesByPostQuery,
+  CreateHistoryComponent,
 } from '../../../generated-models';
 import CardEntry, {
   CardEntryProps,
 } from '../../../components/CardEntry/CardEntry';
+import EditCard from './EditCard';
 
 export interface TimelineSectionProps {
   postId: string;
@@ -103,7 +105,7 @@ export default class TimelineSection extends React.Component<
 
               {hasEditCard && (
                 <ListItem>
-                  <CardEntry title={''} date={''} icon="" personId={1} />
+                  <EditCard />
                 </ListItem>
               )}
 
