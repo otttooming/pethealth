@@ -12,6 +12,7 @@ import {
   CreateDraftMutation,
   CreateDraftHOC,
   CreateDraftVariables,
+  DeletePostMutation,
 } from '../../../generated-models';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { MutateProps } from 'react-apollo';
@@ -256,6 +257,16 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
     }
   };
 
+  private deletePost = async () => {
+    const {
+      match: { params },
+      mutate,
+    } = this.props;
+
+    const { id: postId } = params;
+    console.log(postId);
+  };
+
   private renderPostModify = () => {
     const {
       match: { params },
@@ -269,7 +280,7 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
       return <Button onClick={this.createDraft}>Create</Button>;
     }
 
-    return <Button>Delete</Button>;
+    return <Button onClick={this.deletePost}>Delete</Button>;
   };
 }
 

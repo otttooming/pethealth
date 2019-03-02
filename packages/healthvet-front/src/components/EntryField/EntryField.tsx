@@ -17,7 +17,7 @@ export interface EntryFieldState {
   value: string;
 }
 
-const Wrapper = styled.td`
+const Wrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
