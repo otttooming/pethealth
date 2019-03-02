@@ -5,11 +5,17 @@ import styled from 'styled-components';
 import Content from './components/Content';
 import TextField from '../TextField/TextField';
 
+export interface CardEntrySubmitValues {
+  title: string;
+  content: string;
+}
+
 export interface CardEntryProps {
   title: string;
   icon: string;
   date: string;
   personId: number;
+  onSubmit: (values: CardEntrySubmitValues) => void;
 }
 
 const Wrapper = styled.section`
@@ -51,6 +57,10 @@ const EditableTitle = styled.textarea`
 `;
 
 export default class CardEntry extends React.Component<CardEntryProps, any> {
+  static defaultProps = {
+    onSubmit: () => null,
+  };
+
   state = {
     title: '',
     date: '',
@@ -64,13 +74,23 @@ export default class CardEntry extends React.Component<CardEntryProps, any> {
     var month = newDate.getMonth();
     var year = newDate.getFullYear();
 
-    this.setState({
-      text: value,
-      isEditable: false,
-      date: `${day < 10 ? `0${day}` : `${day}`}:${
-        month < 10 ? `0${month}` : `${month}`
-      }:${year} `,
-    });
+    this.setState(
+      {
+        text: value,
+        isEditable: false,
+        date: `${day < 10 ? `0${day}` : `${day}`}:${
+          month < 10 ? `0${month}` : `${month}`
+        }:${year} `,
+      },
+      this.onSubmit,
+    );
+  };
+
+  onSubmit = () => {
+    const { onSubmit } = this.props;
+    const { text: content, title } = this.state;
+
+    onSubmit({ content, title });
   };
 
   handleTitleUpdate = (event: any) => {
