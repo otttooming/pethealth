@@ -7,7 +7,9 @@ import Squareblocks from '../../components/Icon/components/Squareblocks';
 import Select from '../../components/Select/Select';
 import { Link } from 'react-router-dom';
 
-export interface FilterSectionProps {}
+export interface FilterSectionProps {
+  title: string | null;
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -47,7 +49,14 @@ const RightBottom = styled.div`
 `;
 
 export default class FilterSection extends React.Component<FilterSectionProps> {
+  static defaultProps = {
+    title: null,
+  };
   public render() {
+    const { title } = this.props;
+
+    const hasTitle: boolean = Boolean(title);
+
     return (
       <Wrapper>
         <Left>
@@ -55,7 +64,8 @@ export default class FilterSection extends React.Component<FilterSectionProps> {
             <Search />
           </RightTop>
           <RightBottom>
-            <Questions>Forum questions</Questions>
+            {hasTitle && <Questions>{title}</Questions>}
+
             <Select>Filter</Select>
           </RightBottom>
         </Left>
