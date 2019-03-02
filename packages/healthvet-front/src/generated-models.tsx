@@ -1,5 +1,10 @@
 export type Maybe<T> = T | null;
 
+export enum PostType {
+  MedicalRecord = 'MEDICAL_RECORD',
+  ForumPost = 'FORUM_POST',
+}
+
 export type DateTime = any;
 
 // ====================================================
