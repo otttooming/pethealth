@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import Icon, { IconName } from '../Icon/Icon';
 
 export interface TextFieldProps {
+  defaultValue: string;
   placeholder: string;
   onSubmit: (value: string) => void;
+  onInputChange: (event: React.SyntheticEvent<HTMLTextAreaElement>) => void;
 }
 
 export interface TextFieldState {
@@ -63,8 +65,10 @@ export default class TextField extends React.Component<
   TextFieldState
 > {
   static defaultProps = {
+    defaultValue: '',
     placeholder: '',
     onSubmit: () => {},
+    onInputChange: () => {},
   };
 
   state = {
@@ -72,10 +76,9 @@ export default class TextField extends React.Component<
   };
 
   handleSubmit = () => {
-    const { onSubmit } = this.props;
+    const { onSubmit, defaultValue } = this.props;
     const { value } = this.state;
-
-    onSubmit(value);
+    value === '' ? onSubmit(defaultValue) : onSubmit(value);
   };
 
   onInputChange = (event: React.SyntheticEvent<HTMLTextAreaElement>) => {
@@ -93,7 +96,11 @@ export default class TextField extends React.Component<
 
     return (
       <Wrapper>
-        <Input placeholder={placeholder} onChange={this.onInputChange} />
+        <Input
+          placeholder={placeholder}
+          onChange={this.onInputChange}
+          defaultValue={this.props.defaultValue}
+        />
         <IconWrapper>
           <Button onClick={this.handleSubmit}>
             <Icon name={IconName.MAIL} />
