@@ -23,6 +23,24 @@ export type AuthLoginLogin = {
   token: string;
 };
 
+export type CreateDraftVariables = {
+  title: string;
+};
+
+export type CreateDraftMutation = {
+  __typename?: 'Mutation';
+
+  createDraft: CreateDraftCreateDraft;
+};
+
+export type CreateDraftCreateDraft = {
+  __typename?: 'Post';
+
+  id: string;
+
+  title: string;
+};
+
 export type CreateMessageVariables = {
   id: string;
   content: string;
@@ -235,6 +253,51 @@ export function AuthLoginHOC<TProps, TChildProps = any>(
     AuthLoginVariables,
     AuthLoginProps<TChildProps>
   >(AuthLoginDocument, operationOptions);
+}
+export const CreateDraftDocument = gql`
+  mutation createDraft($title: String!) {
+    createDraft(title: $title) {
+      id
+      title
+    }
+  }
+`;
+export class CreateDraftComponent extends React.Component<
+  Partial<ReactApollo.MutationProps<CreateDraftMutation, CreateDraftVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<CreateDraftMutation, CreateDraftVariables>
+        mutation={CreateDraftDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type CreateDraftProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<CreateDraftMutation, CreateDraftVariables>
+> &
+  TChildProps;
+export type CreateDraftMutationFn = ReactApollo.MutationFn<
+  CreateDraftMutation,
+  CreateDraftVariables
+>;
+export function CreateDraftHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        CreateDraftMutation,
+        CreateDraftVariables,
+        CreateDraftProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    CreateDraftMutation,
+    CreateDraftVariables,
+    CreateDraftProps<TChildProps>
+  >(CreateDraftDocument, operationOptions);
 }
 export const CreateMessageDocument = gql`
   mutation createMessage($id: ID!, $content: String!) {

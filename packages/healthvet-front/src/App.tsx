@@ -85,6 +85,7 @@ class App extends Component {
               <Route path="/topics" component={Topics} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/login" component={Login} />
+              <Route path="/detail/:id" component={Detail} />
               <Route path="/detail" component={Detail} />
               <Route component={Exception} />
             </Switch>

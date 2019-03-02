@@ -36,6 +36,7 @@ export const Mutation: MutationResolvers.Type = {
     return context.prisma.createPost({
       title,
       content,
+      published: true,
       author: { connect: { id: userId } },
     });
   },

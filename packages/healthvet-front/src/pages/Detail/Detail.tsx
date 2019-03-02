@@ -6,15 +6,19 @@ import PatientSection from './components/PatientSection';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { RouteComponentProps } from 'react-router';
 
-export interface DetailProps extends RouteComponentProps {}
+interface Params {
+  id: string;
+}
+
+export interface DetailProps extends RouteComponentProps<Params> {}
 
 export default class Detail extends React.Component<DetailProps, any> {
   public render() {
     const {
-      location: {
-        state: { id },
-      },
+      match: { params },
     } = this.props;
+
+    const { id } = params;
 
     return (
       <Grid columns={24} gap="0px">
