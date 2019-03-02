@@ -15,7 +15,7 @@ export interface TimelineSectionProps {
 }
 
 export interface TimelineSectionState {
-  cardItems: CardEntryProps[];
+  hasEditCard: boolean;
 }
 
 const Wrapper = styled.div`
@@ -59,52 +59,18 @@ export default class TimelineSection extends React.Component<
   TimelineSectionProps,
   TimelineSectionState
 > {
-  cardItems: CardEntryProps[] = [
-    {
-      title: '',
-      icon: '',
-      date: '',
-      personId: 1,
-    },
-    {
-      title: '',
-      icon: '',
-      date: '',
-      personId: 1,
-    },
-    {
-      title: '',
-      icon: '',
-      date: '',
-      personId: 1,
-    },
-    {
-      title: '',
-      icon: '',
-      date: '',
-      personId: 1,
-    },
-  ];
+  constructor(props: TimelineSectionProps) {
+    super(props);
 
-  state = {
-    cardItems: this.cardItems,
-  };
+    this.state = {
+      hasEditCard: false,
+    };
+  }
 
   addItem = (event: React.SyntheticEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
-    const { cardItems } = this.state;
-
-    const card = {
-      title: '',
-      icon: '',
-      date: '',
-      personId: 1,
-    };
-
-    this.setState({
-      cardItems: [...cardItems, card],
-    });
+    this.setState({ hasEditCard: true });
   };
 
   renderCardItems = (data: GetHistoriesByPostQuery | undefined) => {
@@ -123,6 +89,7 @@ export default class TimelineSection extends React.Component<
 
   public render() {
     const { postId: id } = this.props;
+    const { hasEditCard } = this.state;
 
     return (
       <GetHistoriesByPostComponent variables={{ id }}>
@@ -133,6 +100,12 @@ export default class TimelineSection extends React.Component<
             </TitleWrapper>
             <UnsortedList>
               {this.renderCardItems(data)}
+
+              {hasEditCard && (
+                <ListItem>
+                  <CardEntry title={''} date={''} icon="" personId={1} />
+                </ListItem>
+              )}
 
               <ListItem>
                 <a href="#" onClick={this.addItem}>
