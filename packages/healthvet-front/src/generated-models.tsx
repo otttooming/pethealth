@@ -84,6 +84,22 @@ export type DashboardListAuthor = {
   name: Maybe<string>;
 };
 
+export type DeletePostVariables = {
+  id: string;
+};
+
+export type DeletePostMutation = {
+  __typename?: 'Mutation';
+
+  deletePost: Maybe<DeletePostDeletePost>;
+};
+
+export type DeletePostDeletePost = {
+  __typename?: 'Post';
+
+  id: string;
+};
+
 export type GetDashboardListVariables = {};
 
 export type GetDashboardListQuery = {
@@ -389,6 +405,50 @@ export function DashboardListHOC<TProps, TChildProps = any>(
     DashboardListVariables,
     DashboardListProps<TChildProps>
   >(DashboardListDocument, operationOptions);
+}
+export const DeletePostDocument = gql`
+  mutation deletePost($id: ID!) {
+    deletePost(id: $id) {
+      id
+    }
+  }
+`;
+export class DeletePostComponent extends React.Component<
+  Partial<ReactApollo.MutationProps<DeletePostMutation, DeletePostVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<DeletePostMutation, DeletePostVariables>
+        mutation={DeletePostDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type DeletePostProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<DeletePostMutation, DeletePostVariables>
+> &
+  TChildProps;
+export type DeletePostMutationFn = ReactApollo.MutationFn<
+  DeletePostMutation,
+  DeletePostVariables
+>;
+export function DeletePostHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        DeletePostMutation,
+        DeletePostVariables,
+        DeletePostProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    DeletePostMutation,
+    DeletePostVariables,
+    DeletePostProps<TChildProps>
+  >(DeletePostDocument, operationOptions);
 }
 export const GetDashboardListDocument = gql`
   query getDashboardList {

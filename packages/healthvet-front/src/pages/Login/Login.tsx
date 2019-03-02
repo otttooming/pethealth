@@ -239,7 +239,7 @@ class Form extends React.Component<any, State> {
                   <LoginLabel>Username</LoginLabel>
                   <InputField type="text" onChange={this.setEmail} />
                   <LoginLabel>Password</LoginLabel>
-                  <InputField type="text" onChange={this.setPassword} />
+                  <InputField type="password" onChange={this.setPassword} />
                   <div>
                     {isLoginSuccessful && (
                       <Link to="/dashboard">

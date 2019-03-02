@@ -6,6 +6,7 @@ import Landing from './pages/Landing/Landing';
 import Exception from './pages/Exception/Exception';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
+import Categories from './pages/Categories/Categories';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import client from './utils/apollo';
 
@@ -87,6 +88,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/detail/:id" component={Detail} />
               <Route path="/detail" component={Detail} />
+              <Route path="/categories" component={Categories} />
               <Route component={Exception} />
             </Switch>
           </div>
