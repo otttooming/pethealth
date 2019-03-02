@@ -5,11 +5,27 @@ import styled from 'styled-components';
 import Content from './components/Content';
 import TextField from '../TextField/TextField';
 
+export interface CardEntrySubmitValues {
+  title: string;
+  content: string;
+}
+
 export interface CardEntryProps {
   title: string;
   icon: string;
   date: string;
   personId: number;
+  content: string;
+  onSubmit: (values: CardEntrySubmitValues) => void;
+  isEditable: boolean;
+}
+
+interface State {
+  title: string;
+  icon: string;
+  date: string;
+  content: string;
+  isEditable: boolean;
 }
 
 const Wrapper = styled.section`
@@ -50,13 +66,21 @@ const EditableTitle = styled.textarea`
   }
 `;
 
-export default class CardEntry extends React.Component<CardEntryProps, any> {
-  state = {
-    title: '',
-    date: '',
-    text: '',
-    isEditable: true,
+export default class CardEntry extends React.Component<CardEntryProps, State> {
+  static defaultProps = {
+    onSubmit: () => null,
+    isEditable: false,
   };
+
+  constructor(props: CardEntryProps) {
+    super(props);
+
+    const { onSubmit, ...restProps } = props;
+
+    this.state = {
+      ...restProps,
+    };
+  }
 
   changeMessageText = (value: string) => {
     var newDate = new Date();
@@ -64,13 +88,23 @@ export default class CardEntry extends React.Component<CardEntryProps, any> {
     var month = newDate.getMonth();
     var year = newDate.getFullYear();
 
-    this.setState({
-      text: value,
-      isEditable: false,
-      date: `${day < 10 ? `0${day}` : `${day}`}:${
-        month < 10 ? `0${month}` : `${month}`
-      }:${year} `,
-    });
+    this.setState(
+      {
+        content: value,
+        isEditable: false,
+        date: `${day < 10 ? `0${day}` : `${day}`}:${
+          month < 10 ? `0${month}` : `${month}`
+        }:${year} `,
+      },
+      this.onSubmit,
+    );
+  };
+
+  onSubmit = () => {
+    const { onSubmit } = this.props;
+    const { content, title } = this.state;
+
+    onSubmit({ content, title });
   };
 
   handleTitleUpdate = (event: any) => {
@@ -108,12 +142,12 @@ export default class CardEntry extends React.Component<CardEntryProps, any> {
 
         {this.state.isEditable ? (
           <TextField
-            defaultValue={this.state.text}
+            defaultValue={this.state.content}
             placeholder="Write your text here"
             onSubmit={this.changeMessageText}
           />
         ) : (
-          <Content onClick={this.changeEditable} value={this.state.text} />
+          <Content onClick={this.changeEditable} value={this.state.content} />
         )}
 
         <Footer />

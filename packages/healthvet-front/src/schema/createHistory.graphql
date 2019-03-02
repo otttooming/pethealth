@@ -1,0 +1,5 @@
+mutation createHistory($id: ID!, $title: String!, $content: String!) {
+  createHistory(postId: $id, title: $title, content: $content) {
+    id
+  }
+}
