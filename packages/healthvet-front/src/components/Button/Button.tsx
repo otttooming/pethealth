@@ -19,6 +19,7 @@ const Wrapper = styled.button`
   color: #ffffff;
   padding: 8px 40px;
   border-radius: 90px;
+  margin-bottom: 5px;
 
   border: 0;
 
