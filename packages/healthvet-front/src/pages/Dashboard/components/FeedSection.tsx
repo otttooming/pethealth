@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Card, { CardProps } from '../../../components/Card/Card';
 import { Link } from 'react-router-dom';
-import FilterSection from './FilterSection';
 import Avatar1 from './Avatar1.png';
 import Avatar2 from './Avatar2.png';
 import Avatar3 from './Avatar3.png';
@@ -11,6 +10,7 @@ import {
   GetDashboardListComponent,
   GetDashboardListQuery,
 } from '../../../generated-models';
+import FilterSection from '../../../components/FilterSection';
 
 export interface FeedSectionProps {}
 export interface FeedSectionState {
