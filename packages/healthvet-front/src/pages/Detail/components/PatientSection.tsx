@@ -7,6 +7,7 @@ import gallery1 from './gallery1.png';
 import gallery2 from './gallery2.png';
 import gallery3 from './gallery3.png';
 import gallery4 from './gallery4.png';
+import EntryField from '../../../components/EntryField/EntryField';
 
 export interface PatientSectionProps {}
 
@@ -80,7 +81,34 @@ export default class PatientSection extends React.Component<
   PatientSectionProps,
   any
 > {
+  state = {
+    species: '',
+    breed: '',
+    sex: '',
+    age: '',
+    weight: '',
+    isEditable: true,
+  };
+
+  handleInputChange = (event: any, type: string) => {
+    const {
+      currentTarget: { value },
+    } = event;
+
+    this.setState({
+      [type]: value,
+    });
+  };
+
+  changeEditable = () => {
+    this.setState({
+      isEditable: !this.state.isEditable,
+    });
+  };
+
   public render() {
+    const { species, breed, sex, age, weight, isEditable } = this.state;
+
     return (
       <Wrapper>
         <NavWrapper>
@@ -94,24 +122,59 @@ export default class PatientSection extends React.Component<
         <Table>
           <tbody>
             <tr>
-              <Td isKey={true}>Species</Td>
-              <Td>Dog</Td>
+              <Td isKey={true}>Species: </Td>
+              <EntryField
+                isEditable={this.state.isEditable}
+                value={species}
+                type={'species'}
+                defaultValue={species}
+                placeholder={'species'}
+                onChange={this.handleInputChange}
+              />
             </tr>
             <tr>
-              <Td isKey={true}>Breed</Td>
-              <Td>Yorki</Td>
+              <Td isKey={true}>Breed: </Td>
+              <EntryField
+                isEditable={this.state.isEditable}
+                value={breed}
+                type={'breed'}
+                defaultValue={breed}
+                placeholder={'breed'}
+                onChange={this.handleInputChange}
+              />
             </tr>
             <tr>
-              <Td isKey={true}>Sex</Td>
-              <Td>Male</Td>
+              <Td isKey={true}>Sex: </Td>
+              <EntryField
+                isEditable={this.state.isEditable}
+                value={sex}
+                type={'sex'}
+                defaultValue={sex}
+                placeholder={'sex'}
+                onChange={this.handleInputChange}
+              />
             </tr>
             <tr>
-              <Td isKey={true}>Age</Td>
-              <Td>5y</Td>
+              <Td isKey={true}>Age: </Td>
+              <EntryField
+                isEditable={this.state.isEditable}
+                value={age}
+                type={'age'}
+                defaultValue={age}
+                placeholder={'age'}
+                onChange={this.handleInputChange}
+              />
             </tr>
             <tr>
-              <Td isKey={true}>Weight</Td>
-              <Td>5 kg</Td>
+              <Td isKey={true}>Weight: </Td>
+              <EntryField
+                isEditable={this.state.isEditable}
+                value={weight}
+                type={'weight'}
+                defaultValue={weight}
+                placeholder={'weight'}
+                onChange={this.handleInputChange}
+              />
             </tr>
           </tbody>
         </Table>
@@ -136,7 +199,11 @@ export default class PatientSection extends React.Component<
             <Image src={gallery1} />
           </ListItem>
         </Bottom>
-
+        {isEditable ? (
+          <Button onClick={this.changeEditable}> Save </Button>
+        ) : (
+          <Button onClick={this.changeEditable}> Edit </Button>
+        )}
         <Button>Delete</Button>
       </Wrapper>
     );
