@@ -14,7 +14,7 @@
     "build": "NODE_ENV=production webpack && npm run build:types",
     "build:types": "tsc -p tsconfig.dist.json",
     "build:watch": "nodemon",
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist",
     "dist": "npm run clean && npm run build",
     "lint": "npm run tslint && echo 'tslint check: OK'",
     "tslint": "tslint --project ./tsconfig.json",

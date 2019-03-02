@@ -94,8 +94,8 @@ class App extends Component {
               <Route path="/detail" component={Detail} />
               <Route path="/categories" component={Categories} />
               <Route path="/categories/:id" component={Categories} />
-              <Route path="/patiens" component={Categories} />
-              <Route path="/browse" component={Categories} />
+              <Route path="/patients" component={Dashboard} />
+              <Route path="/browse" component={Forum} />
               <Route component={Exception} />
             </Switch>
           </div>

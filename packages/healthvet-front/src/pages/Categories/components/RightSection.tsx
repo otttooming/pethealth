@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import ControlBar from '../../../components/ControlBar/ControlBar';
-import kass from './Images/kass.svg';
+import snek from './Images/snek.svg';
 
 export interface RightSectionProps {}
 
@@ -17,8 +17,6 @@ const Wrapper = styled.div`
 
 const Image = styled.img`
   align-self: flex-end;
-  width: 150px;
-  height: 150px;
 `;
 
 export default class RightSection extends React.Component<
@@ -29,7 +27,7 @@ export default class RightSection extends React.Component<
     return (
       <Wrapper>
         <ControlBar />
-        <Image src={kass} alt="" />
+        <Image src={snek} alt="" />
       </Wrapper>
     );
   }

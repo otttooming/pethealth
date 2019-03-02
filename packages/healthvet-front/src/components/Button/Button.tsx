@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export interface ButtonProps {
   onClick: () => void;
+  className?: string;
 }
 
 const Wrapper = styled.button`
@@ -32,9 +33,13 @@ class Button extends React.Component<ButtonProps, any> {
   };
 
   public render() {
-    const { children } = this.props;
+    const { children, className } = this.props;
 
-    return <Wrapper onClick={this.onClick}>{children}</Wrapper>;
+    return (
+      <Wrapper className={className} onClick={this.onClick}>
+        {children}
+      </Wrapper>
+    );
   }
 
   private onClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {

@@ -74,7 +74,6 @@ export default class FilterSection extends React.Component<FilterSectionProps> {
             <Link to="/detail">
               <Button>Post</Button>
             </Link>
-            <Link to="/forum">Forum</Link>
           </LeftTop>
           <Icon name={IconName.SQUAREBLOCKS} />
         </Right>
