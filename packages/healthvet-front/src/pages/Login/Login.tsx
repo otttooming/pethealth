@@ -38,7 +38,7 @@ const InputField = styled.input`
   color: black;
   outline: none;
   width: 300px;
-  heigth: 40px;
+  height: 40px;
 `;
 
 const Logo = styled.img`
@@ -163,6 +163,11 @@ const LoginLabel = styled.label`
   }
 `;
 
+const StyledButton = styled(Button)`
+  width: 100%;
+  margin-top: 20px;
+`;
+
 const LoginText = styled.h1`
   color: white;
   text-align: center;
@@ -241,16 +246,12 @@ class Form extends React.Component<any, State> {
                   <LoginLabel>Password</LoginLabel>
                   <InputField type="password" onChange={this.setPassword} />
                   <div>
-                    {isLoginSuccessful && (
-                      <Link to="/dashboard">
-                        <InputField type="submit" color="#f4511e" />
-                      </Link>
-                    )}
+                    {isLoginSuccessful && <Redirect to="/dashboard" />}
 
                     {!isLoginSuccessful && (
-                      <Button onClick={this.submitLogin(request)}>
-                        <span>Submit</span>
-                      </Button>
+                      <StyledButton onClick={this.submitLogin(request)}>
+                        Submit
+                      </StyledButton>
                     )}
                   </div>
                 </FlexList>
