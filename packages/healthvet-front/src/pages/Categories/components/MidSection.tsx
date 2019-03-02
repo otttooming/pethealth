@@ -49,96 +49,100 @@ const UnsortedList = styled.ul`
   flex-wrap: wrap;
 `;
 
+const StyledLink = styled(Link)`
+  width: 100%;
+`;
+
 export default class MidSection extends React.Component<MidSectionProps, any> {
   state = {
     categories: [] = [
       {
-        id: 1,
+        id: 'behavior',
         icon: BehaviorIcon,
         text: 'Behavior',
       },
       {
-        id: 2,
+        id: 'pests',
         icon: PestsIcon,
         text: 'Pests',
       },
       {
-        id: 3,
+        id: 'circulatory',
         icon: CirculatoryIcon,
         text: 'Circulatory System',
       },
       {
-        id: 4,
+        id: 'integumentary',
         icon: IntergmentIcon,
         text: 'Integumentary System',
       },
       {
-        id: 5,
+        id: 'clinicalPathology',
         icon: ClinicalIcon,
         text: 'Clinical Pathology and Procedures',
       },
       {
-        id: 6,
+        id: 'managementAndNutrition',
         icon: ManagementIcon,
         text: 'Management and Nutrition',
       },
       {
-        id: 7,
+        id: 'digestive',
         icon: DigestiveIcon,
         text: 'Digestive System',
       },
       {
-        id: 8,
+        id: 'metabolistic',
         icon: MetabolicIcon,
         text: 'Metabolic Disorders',
       },
       {
-        id: 9,
+        id: 'emergency',
         icon: EmergencyIcon,
         text: 'Emergency Medicine and Critical Care',
       },
       {
-        id: 10,
+        id: 'musculoskeletal',
         icon: MusculoskeletalIcon,
         text: 'Musculoskeletal Systems',
       },
       {
-        id: 11,
+        id: 'endocrine',
         icon: EndocrineIcon,
         text: 'Endocrine System',
       },
       {
-        id: 12,
+        id: 'nervousSystem',
         icon: NervousIcon,
         text: 'Nervous System',
       },
       {
-        id: 13,
+        id: 'exotic',
         icon: ExoticIcon,
         text: 'Exotic and Laboratory Animals',
       },
       {
-        id: 14,
+        id: 'pharmacology',
         icon: PharmaIcon,
         text: 'Pharmacology',
       },
       {
-        id: 15,
+        id: 'eyeAndEar',
         icon: EyeIcon,
         text: 'Eye and Ear',
       },
       {
-        id: 16,
+        id: 'poultry',
         icon: PoultryIcon,
         text: 'Poultry',
       },
       {
-        id: 17,
+        id: 'general',
         icon: GeneralIcon,
         text: 'Generalized Conditions',
       },
       {
-        id: 18,
+        id: 'publicHealth',
         icon: PublicIcon,
         text: 'Public Health',
       },
@@ -149,7 +153,14 @@ export default class MidSection extends React.Component<MidSectionProps, any> {
     const { categories } = this.state;
     return categories.map(({ id, icon, text }) => (
       <ListItem key={id}>
-        <CategoryCard icon={icon} text={text} />
+        <StyledLink
+          to={{
+            pathname: `/categories/${id}`,
+            state: { id },
+          }}
+        >
+          <CategoryCard icon={icon} text={text} />
+        </StyledLink>
       </ListItem>
     ));
   };

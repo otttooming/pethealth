@@ -21,13 +21,14 @@ const Right = styled.div`
 `;
 
 const Title = styled.p`
+  margin-top: 16px;
   margin-bottom: 0;
   margin-right: 16px;
   font-family: Nunito;
   font-style: normal;
   font-weight: bold;
   line-height: 22px;
-  font-size: 24px;
+  font-size: 36px;
   color: rgba(0, 0, 0, 0.5);
 `;
 

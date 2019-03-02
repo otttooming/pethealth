@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import cat from './logo-valge.svg';
+import { Link } from 'react-router-dom';
 
 export interface SidebarProps {
   isCollapsed: boolean;
@@ -26,8 +27,21 @@ const MinimalWrapper = styled.aside`
 `;
 
 const Image = styled.img`
-  width: 70%;
-  margin-top: 30px;
+  width: 90%;
+  margin-top: 8px;
+`;
+
+const Menu = styled.ul`
+  list-style: none;
+  padding-left: 0;
+`;
+
+const MenuItem = styled.li`
+  margin-bottom: 10px;
+  font-family: Nunito;
+  font-weight: 800;
+  font-size: 24px;
+  color: white;
 `;
 
 export default class Sidebar extends React.Component<SidebarProps, any> {
@@ -44,6 +58,29 @@ export default class Sidebar extends React.Component<SidebarProps, any> {
     return (
       <Wrapper>
         <Image src={cat} />
+        <Menu>
+          <Link
+            to={{
+              pathname: `/dashboard`,
+            }}
+          >
+            <MenuItem>Patients</MenuItem>
+          </Link>
+          <Link
+            to={{
+              pathname: `/dashboard`,
+            }}
+          >
+            <MenuItem>Browse</MenuItem>
+          </Link>
+          <Link
+            to={{
+              pathname: `/categories`,
+            }}
+          >
+            <MenuItem>Categories</MenuItem>
+          </Link>
+        </Menu>
       </Wrapper>
     );
   }
