@@ -12,6 +12,7 @@ import client from './utils/apollo';
 import logo from './doggo1.png';
 import './App.css';
 import Detail from './pages/Detail/Detail';
+import Forum from './pages/Forum';
 
 const RedComponent = styled.div`
   background: blue;
@@ -84,6 +85,7 @@ class App extends Component {
               <Route path="/about" component={About} />
               <Route path="/topics" component={Topics} />
               <Route path="/dashboard" component={Dashboard} />
+              <Route path="/forum" component={Forum} />
               <Route path="/login" component={Login} />
               <Route path="/detail/:id" component={Detail} />
               <Route path="/detail" component={Detail} />
