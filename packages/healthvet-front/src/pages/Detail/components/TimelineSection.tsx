@@ -11,9 +11,11 @@ import CardEntry, {
   CardEntryProps,
 } from '../../../components/CardEntry/CardEntry';
 import EditCard from './EditCard';
+import NavigationBack from '../../../components/NavigationBack/NavigationBack';
 
 export interface TimelineSectionProps {
   postId: string;
+  isAlternativeLayout: boolean;
 }
 
 export interface TimelineSectionState {
@@ -53,14 +55,29 @@ const ListItem = styled.li`
   }
 `;
 
-const TitleWrapper = styled.div`
+interface TitleWrapperProps {
+  isAlternativeLayout: boolean;
+}
+
+const TitleWrapper = styled.div<TitleWrapperProps>`
+  display: flex;
+  align-items: center;
   margin-bottom: 32px;
+
+  h1 {
+    margin-left: ${({ isAlternativeLayout }) =>
+      isAlternativeLayout ? '24px' : '0px'};
+  }
 `;
 
 export default class TimelineSection extends React.Component<
   TimelineSectionProps,
   TimelineSectionState
 > {
+  static defaultProps = {
+    isAlternativeLayout: false,
+  };
+
   constructor(props: TimelineSectionProps) {
     super(props);
 
@@ -96,14 +113,16 @@ export default class TimelineSection extends React.Component<
   };
 
   public render() {
-    const { postId: id } = this.props;
+    const { postId: id, isAlternativeLayout } = this.props;
     const { hasEditCard } = this.state;
 
     return (
       <GetHistoriesByPostComponent variables={{ id }}>
         {({ data }) => (
           <Wrapper>
-            <TitleWrapper>
+            <TitleWrapper isAlternativeLayout={isAlternativeLayout}>
+              {isAlternativeLayout && <NavigationBack to="/dashboard" />}
+
               <Title>Patient medical history</Title>
             </TitleWrapper>
             <UnsortedList>
