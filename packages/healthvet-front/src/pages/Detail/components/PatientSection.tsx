@@ -7,8 +7,22 @@ import gallery1 from './gallery1.png';
 import gallery2 from './gallery2.png';
 import gallery3 from './gallery3.png';
 import gallery4 from './gallery4.png';
+import {
+  CreateDraftMutation,
+  CreateDraftHOC,
+  CreateDraftVariables,
+} from '../../../generated-models';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { MutateProps } from 'react-apollo';
 
-export interface PatientSectionProps {}
+interface Params {
+  id: string;
+}
+
+type HocExtends = RouteComponentProps<Params> &
+  MutateProps<CreateDraftMutation, CreateDraftVariables>;
+
+export interface PatientSectionProps extends HocExtends {}
 
 const Wrapper = styled.div`
   position: relative;
@@ -76,10 +90,7 @@ const Image = styled.img`
   width: 100%;
 `;
 
-export default class PatientSection extends React.Component<
-  PatientSectionProps,
-  any
-> {
+class PatientSection extends React.Component<PatientSectionProps, any> {
   public render() {
     return (
       <Wrapper>
@@ -137,8 +148,48 @@ export default class PatientSection extends React.Component<
           </ListItem>
         </Bottom>
 
-        <Button>Delete</Button>
+        {this.renderPostModify()}
       </Wrapper>
     );
   }
+
+  private createDraft = async () => {
+    const { mutate, history } = this.props;
+
+    const options = { variables: { title: 'ABC' } };
+
+    const response = await mutate(options);
+
+    if (response && response.data) {
+      const {
+        data: {
+          createDraft: { id },
+        },
+      } = response;
+
+      history.replace(`/detail/${id}`);
+    }
+  };
+
+  private renderPostModify = () => {
+    const {
+      match: { params },
+    } = this.props;
+
+    const { id: postId } = params;
+
+    const isNew = !Boolean(postId);
+
+    if (isNew) {
+      return <Button onClick={this.createDraft}>Create</Button>;
+    }
+
+    return <Button>Delete</Button>;
+  };
 }
+
+const withCreateDraftHOC = CreateDraftHOC({});
+
+export default withCreateDraftHOC(
+  withRouter<PatientSectionProps>(PatientSection),
+);
