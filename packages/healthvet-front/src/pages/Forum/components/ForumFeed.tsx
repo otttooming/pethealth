@@ -52,8 +52,7 @@ export default class FeedSection extends React.Component<
         <ListItem key={id}>
           <Link
             to={{
-              pathname: `detail/${id}`,
-              state: { id },
+              pathname: `/post/${id}`,
             }}
           >
             <Card
@@ -73,7 +72,7 @@ export default class FeedSection extends React.Component<
       <GetDashboardListComponent>
         {({ data }) => (
           <Wrapper>
-            <FilterSection />
+            <FilterSection title="Discussion" />
 
             <UnsortedList>{this.renderCardItems(data)}</UnsortedList>
           </Wrapper>
