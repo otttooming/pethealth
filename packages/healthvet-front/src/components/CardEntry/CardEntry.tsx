@@ -16,6 +16,7 @@ export interface CardEntryProps {
   date: string;
   personId: number;
   onSubmit: (values: CardEntrySubmitValues) => void;
+  isEditable: boolean;
 }
 
 const Wrapper = styled.section`
@@ -59,14 +60,18 @@ const EditableTitle = styled.textarea`
 export default class CardEntry extends React.Component<CardEntryProps, any> {
   static defaultProps = {
     onSubmit: () => null,
+    isEditable: false,
   };
 
-  state = {
-    title: '',
-    date: '',
-    text: '',
-    isEditable: true,
-  };
+  constructor(props: CardEntryProps) {
+    super(props);
+
+    const { onSubmit, ...restProps } = props;
+
+    this.state = {
+      ...restProps,
+    };
+  }
 
   changeMessageText = (value: string) => {
     var newDate = new Date();
