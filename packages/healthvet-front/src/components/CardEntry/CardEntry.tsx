@@ -85,7 +85,7 @@ export default class CardEntry extends React.Component<CardEntryProps, State> {
   changeMessageText = (value: string) => {
     var newDate = new Date();
     var day = newDate.getDate();
-    var month = newDate.getMonth();
+    var month = newDate.getMonth() + 1;
     var year = newDate.getFullYear();
 
     this.setState(
