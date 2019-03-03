@@ -1,7 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+export enum ButtonType {
+  BUTTON = 'button',
+  SPAN = 'span',
+}
+
 export interface ButtonProps {
+  as: ButtonType;
   onClick: () => void;
   className?: string;
 }
@@ -29,25 +35,28 @@ const Wrapper = styled.button`
 
 class Button extends React.Component<ButtonProps, any> {
   static defaultProps = {
+    as: ButtonType.BUTTON,
     onClick: () => null,
   };
 
   public render() {
-    const { children, className } = this.props;
+    const { children, className, as } = this.props;
 
     return (
-      <Wrapper className={className} onClick={this.onClick}>
+      <Wrapper as={as} className={className} onClick={this.onClick}>
         {children}
       </Wrapper>
     );
   }
 
   private onClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
-    const { onClick } = this.props;
+    const { onClick, as } = this.props;
 
-    event.preventDefault();
+    if (as !== ButtonType.SPAN) {
+      event.preventDefault();
 
-    onClick();
+      onClick();
+    }
   };
 }
 

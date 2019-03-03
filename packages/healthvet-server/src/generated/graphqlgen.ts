@@ -1207,6 +1207,7 @@ export namespace MutationResolvers {
   export interface ArgsCreateDraft {
     title: string;
     content?: string | null;
+    type?: PostType | null;
   }
 
   export interface ArgsDeletePost {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Search from '../../components/Search/Search';
-import Button from '../../components/Button/Button';
+import Button, { ButtonType } from '../../components/Button/Button';
 import styled from 'styled-components';
 import Icon, { IconName } from '../../components/Icon/Icon';
 import Squareblocks from '../../components/Icon/components/Squareblocks';
@@ -72,7 +72,7 @@ export default class FilterSection extends React.Component<FilterSectionProps> {
         <Right>
           <LeftTop>
             <Link to="/detail">
-              <Button>Post</Button>
+              <Button as={ButtonType.SPAN}>Post</Button>
             </Link>
           </LeftTop>
           <Icon name={IconName.SQUAREBLOCKS} />

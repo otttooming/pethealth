@@ -80,6 +80,10 @@ export default class MessageSection extends React.Component<
   renderMessages = () => {
     const { postId: id } = this.props;
 
+    if (!id) {
+      return null;
+    }
+
     return (
       <GetMessagesByPostComponent variables={{ id }}>
         {({ data, refetch }) => {

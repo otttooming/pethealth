@@ -42,8 +42,8 @@ class EditCard extends React.Component<EditCardProps, any> {
   private handleSubmit = async (values: CardEntrySubmitValues) => {
     const {
       mutate,
-      location: {
-        state: { id },
+      match: {
+        params: { id },
       },
     } = this.props;
 

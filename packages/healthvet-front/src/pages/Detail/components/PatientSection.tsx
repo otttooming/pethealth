@@ -13,6 +13,7 @@ import {
   CreateDraftHOC,
   CreateDraftVariables,
   DeletePostMutation,
+  PostType,
 } from '../../../generated-models';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { MutateProps } from 'react-apollo';
@@ -228,12 +229,6 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
           </ListItem>
         </Bottom>
 
-        {isEditable ? (
-          <Button onClick={this.changeEditable}> Save </Button>
-        ) : (
-          <Button onClick={this.changeEditable}> Edit </Button>
-        )}
-
         {this.renderPostModify()}
       </Wrapper>
     );
@@ -242,7 +237,7 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
   private createDraft = async () => {
     const { mutate, history } = this.props;
 
-    const options = { variables: { title: 'ABC' } };
+    const options = { variables: { title: 'ABC', type: PostType.ForumPost } };
 
     const response = await mutate(options);
 
@@ -271,14 +266,25 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
     const {
       match: { params },
     } = this.props;
+    const { isEditable } = this.state;
 
     const { id: postId } = params;
 
     const isNew = !Boolean(postId);
 
     if (isNew) {
-      return <Button onClick={this.createDraft}>Create</Button>;
+      return <Button onClick={this.createDraft}>Create new record</Button>;
     }
+
+    return (
+      <>
+        {isEditable ? (
+          <Button onClick={this.changeEditable}> Save </Button>
+        ) : (
+          <Button onClick={this.changeEditable}> Edit </Button>
+        )}
+      </>
+    );
 
     return <Button onClick={this.deletePost}>Delete</Button>;
   };

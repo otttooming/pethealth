@@ -30,6 +30,7 @@ export type AuthLoginLogin = {
 
 export type CreateDraftVariables = {
   title: string;
+  type?: Maybe<PostType>;
 };
 
 export type CreateDraftMutation = {
@@ -59,22 +60,6 @@ export type CreateHistoryMutation = {
 };
 
 export type CreateHistoryCreateHistory = {
-  __typename?: 'History';
-
-  id: string;
-};
-
-export type DeleteHistoryVariables = {
-  id: string;
-};
-
-export type DeleteHistoryMutation = {
-  __typename?: 'Mutation';
-
-  deleteHistory: DeleteHistoryDeleteHistory;
-};
-
-export type DeleteHistoryDeleteHistory = {
   __typename?: 'History';
 
   id: string;
@@ -121,6 +106,22 @@ export type DashboardListAuthor = {
   __typename?: 'User';
 
   name: Maybe<string>;
+};
+
+export type DeleteHistoryVariables = {
+  id: string;
+};
+
+export type DeleteHistoryMutation = {
+  __typename?: 'Mutation';
+
+  deleteHistory: DeleteHistoryDeleteHistory;
+};
+
+export type DeleteHistoryDeleteHistory = {
+  __typename?: 'History';
+
+  id: string;
 };
 
 export type DeletePostVariables = {
@@ -310,8 +311,8 @@ export function AuthLoginHOC<TProps, TChildProps = any>(
   >(AuthLoginDocument, operationOptions);
 }
 export const CreateDraftDocument = gql`
-  mutation createDraft($title: String!) {
-    createDraft(title: $title) {
+  mutation createDraft($title: String!, $type: PostType) {
+    createDraft(title: $title, type: $type) {
       id
       title
     }
@@ -399,52 +400,6 @@ export function CreateHistoryHOC<TProps, TChildProps = any>(
     CreateHistoryVariables,
     CreateHistoryProps<TChildProps>
   >(CreateHistoryDocument, operationOptions);
-}
-export const DeleteHistoryDocument = gql`
-  mutation deleteHistory($id: ID!) {
-    deleteHistory(id: $id) {
-      id
-    }
-  }
-`;
-export class DeleteHistoryComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<DeleteHistoryMutation, DeleteHistoryVariables>
-  >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<DeleteHistoryMutation, DeleteHistoryVariables>
-        mutation={DeleteHistoryDocument}
-        {...(this as any)['props'] as any}
-      />
-    );
-  }
-}
-export type DeleteHistoryProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<DeleteHistoryMutation, DeleteHistoryVariables>
-> &
-  TChildProps;
-export type DeleteHistoryMutationFn = ReactApollo.MutationFn<
-  DeleteHistoryMutation,
-  DeleteHistoryVariables
->;
-export function DeleteHistoryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        DeleteHistoryMutation,
-        DeleteHistoryVariables,
-        DeleteHistoryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
-    TProps,
-    DeleteHistoryMutation,
-    DeleteHistoryVariables,
-    DeleteHistoryProps<TChildProps>
-  >(DeleteHistoryDocument, operationOptions);
 }
 export const CreateMessageDocument = gql`
   mutation createMessage($id: ID!, $content: String!) {
@@ -536,6 +491,52 @@ export function DashboardListHOC<TProps, TChildProps = any>(
     DashboardListVariables,
     DashboardListProps<TChildProps>
   >(DashboardListDocument, operationOptions);
+}
+export const DeleteHistoryDocument = gql`
+  mutation deleteHistory($id: ID!) {
+    deleteHistory(id: $id) {
+      id
+    }
+  }
+`;
+export class DeleteHistoryComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<DeleteHistoryMutation, DeleteHistoryVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<DeleteHistoryMutation, DeleteHistoryVariables>
+        mutation={DeleteHistoryDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type DeleteHistoryProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<DeleteHistoryMutation, DeleteHistoryVariables>
+> &
+  TChildProps;
+export type DeleteHistoryMutationFn = ReactApollo.MutationFn<
+  DeleteHistoryMutation,
+  DeleteHistoryVariables
+>;
+export function DeleteHistoryHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        DeleteHistoryMutation,
+        DeleteHistoryVariables,
+        DeleteHistoryProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    DeleteHistoryMutation,
+    DeleteHistoryVariables,
+    DeleteHistoryProps<TChildProps>
+  >(DeleteHistoryDocument, operationOptions);
 }
 export const DeletePostDocument = gql`
   mutation deletePost($id: ID!) {

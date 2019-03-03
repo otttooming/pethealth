@@ -35,7 +35,10 @@ export default class Detail extends React.Component<DetailProps, any> {
         )}
 
         <Cell width={9}>
-          <TimelineSection postId={id} />
+          <TimelineSection
+            postId={id}
+            isAlternativeLayout={isAlternativeLayout}
+          />
         </Cell>
         <Cell width={isAlternativeLayout ? 14 : 8}>
           <MessageSection postId={id} />
