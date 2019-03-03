@@ -69,7 +69,7 @@ export const Mutation: MutationResolvers.Type = {
   },
   createPatient: async (
     parent,
-    { postId, weight, dob, sex, breed },
+    { postId, weight, dob, sex, breed, species },
     context,
   ) => {
     return context.prisma.createPatient({
@@ -77,6 +77,7 @@ export const Mutation: MutationResolvers.Type = {
       dob,
       sex,
       breed,
+      species,
       post: { connect: { id: postId } },
     });
   },
