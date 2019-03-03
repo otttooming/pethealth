@@ -1,6 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Card, { CardProps } from '../../../components/Card/Card';
+import PatientCard, {
+  PatientCardProps,
+} from '../../../components/PatientCard/PatientCard';
 import { Link } from 'react-router-dom';
 import Avatar1 from './Avatar1.png';
 import Avatar2 from './Avatar2.png';
@@ -25,13 +27,18 @@ const Wrapper = styled.div`
 
 const ListItem = styled.li`
   list-style: none;
-  display: block;
-  margin-bottom: 32px;
+  display: flex;
+  margin-bottom: 24px;
+  width: 33.3%;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 const UnsortedList = styled.ul`
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export default class FeedSection extends React.Component<
@@ -45,32 +52,19 @@ export default class FeedSection extends React.Component<
 
     const { feed = [] } = data;
 
-    return feed.map(
-      ({
-        id,
-        title,
-        author: { name: doctor },
-        content: description,
-        createdAt: date,
-      }) => (
-        <ListItem key={id}>
-          <Link
-            to={{
-              pathname: `/detail/${id}`,
-              state: { id },
-            }}
-          >
-            <Card
-              title={title}
-              date={date}
-              doctor={doctor || ''}
-              description={description || ''}
-              hasIcons={true}
-            />
-          </Link>
-        </ListItem>
-      ),
-    );
+    return feed.map(({ id, title, author: { name: doctor } }) => (
+      <ListItem key={id}>
+        <Link
+          to={{
+            pathname: `/detail/${id}`,
+            state: { id },
+          }}
+          style={{ width: '100%' }}
+        >
+          <PatientCard title={title} doctor={doctor || ''} />
+        </Link>
+      </ListItem>
+    ));
   };
 
   public render() {
