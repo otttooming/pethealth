@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import Icon, { IconName } from '../../components/Icon/Icon';
 import Squareblocks from '../../components/Icon/components/Squareblocks';
 import Select from '../../components/Select/Select';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
-export interface FilterSectionProps {
+export interface FilterSectionProps extends RouteComponentProps {
   title: string | null;
 }
 
@@ -48,14 +48,19 @@ const RightBottom = styled.div`
   align-items: center;
 `;
 
-export default class FilterSection extends React.Component<FilterSectionProps> {
+class FilterSection extends React.Component<FilterSectionProps> {
   static defaultProps = {
     title: null,
   };
   public render() {
-    const { title } = this.props;
+    const {
+      title,
+      location: { pathname },
+    } = this.props;
 
     const hasTitle: boolean = Boolean(title);
+    const isForum: boolean = pathname.includes('forum');
+    const to: string = isForum ? '/post' : '/detail';
 
     return (
       <Wrapper>
@@ -71,7 +76,7 @@ export default class FilterSection extends React.Component<FilterSectionProps> {
         </Left>
         <Right>
           <LeftTop>
-            <Link to="/detail">
+            <Link to={to}>
               <Button as={ButtonType.SPAN}>Post</Button>
             </Link>
           </LeftTop>
@@ -81,3 +86,5 @@ export default class FilterSection extends React.Component<FilterSectionProps> {
     );
   }
 }
+
+export default withRouter<FilterSectionProps>(FilterSection);
