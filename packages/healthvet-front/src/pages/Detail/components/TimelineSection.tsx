@@ -121,7 +121,7 @@ export default class TimelineSection extends React.Component<
         {({ data }) => (
           <Wrapper>
             <TitleWrapper isAlternativeLayout={isAlternativeLayout}>
-              {isAlternativeLayout && <NavigationBack to="/forum" />}
+              {isAlternativeLayout && <NavigationBack to="/browse" />}
 
               <Title>Patient medical history</Title>
             </TitleWrapper>

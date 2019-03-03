@@ -246,7 +246,7 @@ class Form extends React.Component<any, State> {
                   <LoginLabel>Password</LoginLabel>
                   <InputField type="password" onChange={this.setPassword} />
                   <div>
-                    {isLoginSuccessful && <Redirect to="/dashboard" />}
+                    {isLoginSuccessful && <Redirect to="/patients" />}
 
                     {!isLoginSuccessful && (
                       <StyledButton onClick={this.submitLogin(request)}>

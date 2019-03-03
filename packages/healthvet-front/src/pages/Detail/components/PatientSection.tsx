@@ -141,7 +141,7 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
     return (
       <Wrapper>
         <NavWrapper>
-          <NavigationBack to="/dashboard" />
+          <NavigationBack to="/patients" />
         </NavWrapper>
         <Top>
           <Icon name={IconName.PAW} size={IconSize.HUGE} />

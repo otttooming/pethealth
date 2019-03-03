@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import cat from './logo-valge.svg';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export interface SidebarProps {
   isCollapsed: boolean;
@@ -13,7 +13,7 @@ const Wrapper = styled.aside`
 
   background: #ff6d6d;
 
-  padding: 32px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,21 +27,39 @@ const MinimalWrapper = styled.aside`
 `;
 
 const Image = styled.img`
-  width: 90%;
-  margin-top: 8px;
+  width: 80%;
+  margin-top: 24px;
 `;
 
 const Menu = styled.ul`
+  margin-top: 72px;
   list-style: none;
   padding-left: 0;
+  width: 100%;
 `;
 
 const MenuItem = styled.li`
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+  width: 100%;
+  text-align: left;
+  line-height: 54px;
+  text-indent: 67px;
+`;
+
+const StyledNavLink = styled(NavLink)`
+  margin-bottom: 16px;
   font-family: Nunito;
   font-weight: 800;
-  font-size: 24px;
+  font-size: 26px;
   color: white;
+  width: 100%;
+  text-align: left;
+  line-height: 54px;
+  text-indent: 67px;
+  display: block;
+  :hover {
+    color: #d9d9d9;
+  }
 `;
 
 export default class Sidebar extends React.Component<SidebarProps, any> {
@@ -59,27 +77,51 @@ export default class Sidebar extends React.Component<SidebarProps, any> {
       <Wrapper>
         <Image src={cat} />
         <Menu>
-          <Link
-            to={{
-              pathname: `/patients`,
-            }}
-          >
-            <MenuItem>Patients</MenuItem>
-          </Link>
-          <Link
-            to={{
-              pathname: `/browse`,
-            }}
-          >
-            <MenuItem>Browse</MenuItem>
-          </Link>
-          <Link
-            to={{
-              pathname: `/categories`,
-            }}
-          >
-            <MenuItem>Categories</MenuItem>
-          </Link>
+          <MenuItem className="menuItem">
+            <StyledNavLink
+              to={{
+                pathname: `/patients`,
+              }}
+              activeStyle={{
+                background: '#E75A5A',
+                borderLeftStyle: 'solid',
+                borderLeftWidth: '8px',
+                borderLeftColor: 'white',
+              }}
+            >
+              Patients
+            </StyledNavLink>
+          </MenuItem>
+          <MenuItem className="menuItem">
+            <StyledNavLink
+              to={{
+                pathname: `/browse`,
+              }}
+              activeStyle={{
+                background: '#E75A5A',
+                borderLeftStyle: 'solid',
+                borderLeftWidth: '8px',
+                borderLeftColor: 'white',
+              }}
+            >
+              Browse
+            </StyledNavLink>
+          </MenuItem>
+          <MenuItem className="menuItem">
+            <StyledNavLink
+              to={{
+                pathname: `/categories`,
+              }}
+              activeStyle={{
+                background: '#E75A5A',
+                borderLeftStyle: 'solid',
+                borderLeftWidth: '8px',
+                borderLeftColor: 'white',
+              }}
+            >
+              Categories
+            </StyledNavLink>
+          </MenuItem>
         </Menu>
       </Wrapper>
     );

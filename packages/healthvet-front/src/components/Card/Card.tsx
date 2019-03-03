@@ -23,6 +23,7 @@ const Wrapper = styled.section`
   box-sizing: border-box;
   box-shadow: 0px 4px 16px rgba(254, 79, 21, 0.27);
   border-radius: 20px;
+  height: 180px;
 `;
 
 const Left = styled.div`

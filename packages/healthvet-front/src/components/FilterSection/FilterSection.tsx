@@ -29,7 +29,7 @@ const Questions = styled.p`
   font-style: normal;
   font-weight: bold;
   line-height: 22px;
-  font-size: 24px;
+  font-size: 32px;
   color: rgba(0, 0, 0, 0.5);
 `;
 const RightTop = styled.div`
@@ -65,8 +65,6 @@ export default class FilterSection extends React.Component<FilterSectionProps> {
           </RightTop>
           <RightBottom>
             {hasTitle && <Questions>{title}</Questions>}
-
-            <Select>Filter</Select>
           </RightBottom>
         </Left>
         <Right>
