@@ -17,6 +17,7 @@ import {
 } from '../../../generated-models';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import { MutateProps } from 'react-apollo';
+import EditButton from './EditButton';
 
 interface Params {
   id: string;
@@ -282,7 +283,7 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
     const {
       match: { params },
     } = this.props;
-    const { isEditable } = this.state;
+    const { isEditable, ...restProps } = this.state;
 
     const { id: postId } = params;
 
@@ -295,7 +296,13 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
     return (
       <>
         {isEditable ? (
-          <Button onClick={this.changeEditable}> Save </Button>
+          <EditButton
+            onChangeEditable={this.changeEditable}
+            options={restProps}
+          >
+            {' '}
+            Save{' '}
+          </EditButton>
         ) : (
           <Button onClick={this.changeEditable}> Edit </Button>
         )}
