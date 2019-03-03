@@ -6,6 +6,7 @@ import { Post } from './Post';
 import { History } from './History';
 import { Message } from './Message';
 import { Mutation } from './Mutation';
+import { Patient } from './Patient';
 import { AuthPayload } from './AuthPayload';
 
 export const resolvers: Resolvers = {
@@ -16,4 +17,5 @@ export const resolvers: Resolvers = {
   AuthPayload,
   History,
   Message,
+  Patient,
 };

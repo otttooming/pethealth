@@ -7,6 +7,10 @@ export const typeDefs = /* GraphQL */ `
     count: Int!
   }
 
+  type AggregatePatient {
+    count: Int!
+  }
+
   type AggregatePost {
     count: Int!
   }
@@ -544,6 +548,22 @@ export const typeDefs = /* GraphQL */ `
     ): Message!
     deleteMessage(where: MessageWhereUniqueInput!): Message
     deleteManyMessages(where: MessageWhereInput): BatchPayload!
+    createPatient(data: PatientCreateInput!): Patient!
+    updatePatient(
+      data: PatientUpdateInput!
+      where: PatientWhereUniqueInput!
+    ): Patient
+    updateManyPatients(
+      data: PatientUpdateManyMutationInput!
+      where: PatientWhereInput
+    ): BatchPayload!
+    upsertPatient(
+      where: PatientWhereUniqueInput!
+      create: PatientCreateInput!
+      update: PatientUpdateInput!
+    ): Patient!
+    deletePatient(where: PatientWhereUniqueInput!): Patient
+    deleteManyPatients(where: PatientWhereInput): BatchPayload!
     createPost(data: PostCreateInput!): Post!
     updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
     updateManyPosts(
@@ -589,6 +609,243 @@ export const typeDefs = /* GraphQL */ `
     endCursor: String
   }
 
+  type Patient {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    post: Post!
+    species: String
+    breed: String
+    sex: String
+    dob: String
+    weight: Float
+  }
+
+  type PatientConnection {
+    pageInfo: PageInfo!
+    edges: [PatientEdge]!
+    aggregate: AggregatePatient!
+  }
+
+  input PatientCreateInput {
+    post: PostCreateOneWithoutPatientInput!
+    species: String
+    breed: String
+    sex: String
+    dob: String
+    weight: Float
+  }
+
+  input PatientCreateOneWithoutPostInput {
+    create: PatientCreateWithoutPostInput
+    connect: PatientWhereUniqueInput
+  }
+
+  input PatientCreateWithoutPostInput {
+    species: String
+    breed: String
+    sex: String
+    dob: String
+    weight: Float
+  }
+
+  type PatientEdge {
+    node: Patient!
+    cursor: String!
+  }
+
+  enum PatientOrderByInput {
+    id_ASC
+    id_DESC
+    createdAt_ASC
+    createdAt_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    species_ASC
+    species_DESC
+    breed_ASC
+    breed_DESC
+    sex_ASC
+    sex_DESC
+    dob_ASC
+    dob_DESC
+    weight_ASC
+    weight_DESC
+  }
+
+  type PatientPreviousValues {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    species: String
+    breed: String
+    sex: String
+    dob: String
+    weight: Float
+  }
+
+  type PatientSubscriptionPayload {
+    mutation: MutationType!
+    node: Patient
+    updatedFields: [String!]
+    previousValues: PatientPreviousValues
+  }
+
+  input PatientSubscriptionWhereInput {
+    mutation_in: [MutationType!]
+    updatedFields_contains: String
+    updatedFields_contains_every: [String!]
+    updatedFields_contains_some: [String!]
+    node: PatientWhereInput
+    AND: [PatientSubscriptionWhereInput!]
+    OR: [PatientSubscriptionWhereInput!]
+    NOT: [PatientSubscriptionWhereInput!]
+  }
+
+  input PatientUpdateInput {
+    post: PostUpdateOneRequiredWithoutPatientInput
+    species: String
+    breed: String
+    sex: String
+    dob: String
+    weight: Float
+  }
+
+  input PatientUpdateManyMutationInput {
+    species: String
+    breed: String
+    sex: String
+    dob: String
+    weight: Float
+  }
+
+  input PatientUpdateOneWithoutPostInput {
+    create: PatientCreateWithoutPostInput
+    update: PatientUpdateWithoutPostDataInput
+    upsert: PatientUpsertWithoutPostInput
+    delete: Boolean
+    disconnect: Boolean
+    connect: PatientWhereUniqueInput
+  }
+
+  input PatientUpdateWithoutPostDataInput {
+    species: String
+    breed: String
+    sex: String
+    dob: String
+    weight: Float
+  }
+
+  input PatientUpsertWithoutPostInput {
+    update: PatientUpdateWithoutPostDataInput!
+    create: PatientCreateWithoutPostInput!
+  }
+
+  input PatientWhereInput {
+    id: ID
+    id_not: ID
+    id_in: [ID!]
+    id_not_in: [ID!]
+    id_lt: ID
+    id_lte: ID
+    id_gt: ID
+    id_gte: ID
+    id_contains: ID
+    id_not_contains: ID
+    id_starts_with: ID
+    id_not_starts_with: ID
+    id_ends_with: ID
+    id_not_ends_with: ID
+    createdAt: DateTime
+    createdAt_not: DateTime
+    createdAt_in: [DateTime!]
+    createdAt_not_in: [DateTime!]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    updatedAt: DateTime
+    updatedAt_not: DateTime
+    updatedAt_in: [DateTime!]
+    updatedAt_not_in: [DateTime!]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    post: PostWhereInput
+    species: String
+    species_not: String
+    species_in: [String!]
+    species_not_in: [String!]
+    species_lt: String
+    species_lte: String
+    species_gt: String
+    species_gte: String
+    species_contains: String
+    species_not_contains: String
+    species_starts_with: String
+    species_not_starts_with: String
+    species_ends_with: String
+    species_not_ends_with: String
+    breed: String
+    breed_not: String
+    breed_in: [String!]
+    breed_not_in: [String!]
+    breed_lt: String
+    breed_lte: String
+    breed_gt: String
+    breed_gte: String
+    breed_contains: String
+    breed_not_contains: String
+    breed_starts_with: String
+    breed_not_starts_with: String
+    breed_ends_with: String
+    breed_not_ends_with: String
+    sex: String
+    sex_not: String
+    sex_in: [String!]
+    sex_not_in: [String!]
+    sex_lt: String
+    sex_lte: String
+    sex_gt: String
+    sex_gte: String
+    sex_contains: String
+    sex_not_contains: String
+    sex_starts_with: String
+    sex_not_starts_with: String
+    sex_ends_with: String
+    sex_not_ends_with: String
+    dob: String
+    dob_not: String
+    dob_in: [String!]
+    dob_not_in: [String!]
+    dob_lt: String
+    dob_lte: String
+    dob_gt: String
+    dob_gte: String
+    dob_contains: String
+    dob_not_contains: String
+    dob_starts_with: String
+    dob_not_starts_with: String
+    dob_ends_with: String
+    dob_not_ends_with: String
+    weight: Float
+    weight_not: Float
+    weight_in: [Float!]
+    weight_not_in: [Float!]
+    weight_lt: Float
+    weight_lte: Float
+    weight_gt: Float
+    weight_gte: Float
+    AND: [PatientWhereInput!]
+    OR: [PatientWhereInput!]
+    NOT: [PatientWhereInput!]
+  }
+
+  input PatientWhereUniqueInput {
+    id: ID
+  }
+
   type Post {
     id: ID!
     createdAt: DateTime!
@@ -598,6 +855,7 @@ export const typeDefs = /* GraphQL */ `
     title: String!
     content: String
     author: User!
+    patient: Patient
     histories(
       where: HistoryWhereInput
       orderBy: HistoryOrderByInput
@@ -630,6 +888,7 @@ export const typeDefs = /* GraphQL */ `
     title: String!
     content: String
     author: UserCreateOneWithoutPostsInput!
+    patient: PatientCreateOneWithoutPostInput
     histories: HistoryCreateManyWithoutPostInput
     messages: MessageCreateManyWithoutPostInput
   }
@@ -649,11 +908,17 @@ export const typeDefs = /* GraphQL */ `
     connect: PostWhereUniqueInput
   }
 
+  input PostCreateOneWithoutPatientInput {
+    create: PostCreateWithoutPatientInput
+    connect: PostWhereUniqueInput
+  }
+
   input PostCreateWithoutAuthorInput {
     published: Boolean
     type: PostType
     title: String!
     content: String
+    patient: PatientCreateOneWithoutPostInput
     histories: HistoryCreateManyWithoutPostInput
     messages: MessageCreateManyWithoutPostInput
   }
@@ -664,6 +929,7 @@ export const typeDefs = /* GraphQL */ `
     title: String!
     content: String
     author: UserCreateOneWithoutPostsInput!
+    patient: PatientCreateOneWithoutPostInput
     messages: MessageCreateManyWithoutPostInput
   }
 
@@ -673,7 +939,18 @@ export const typeDefs = /* GraphQL */ `
     title: String!
     content: String
     author: UserCreateOneWithoutPostsInput!
+    patient: PatientCreateOneWithoutPostInput
     histories: HistoryCreateManyWithoutPostInput
+  }
+
+  input PostCreateWithoutPatientInput {
+    published: Boolean
+    type: PostType
+    title: String!
+    content: String
+    author: UserCreateOneWithoutPostsInput!
+    histories: HistoryCreateManyWithoutPostInput
+    messages: MessageCreateManyWithoutPostInput
   }
 
   type PostEdge {
@@ -807,6 +1084,7 @@ export const typeDefs = /* GraphQL */ `
     title: String
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
+    patient: PatientUpdateOneWithoutPostInput
     histories: HistoryUpdateManyWithoutPostInput
     messages: MessageUpdateManyWithoutPostInput
   }
@@ -856,11 +1134,19 @@ export const typeDefs = /* GraphQL */ `
     connect: PostWhereUniqueInput
   }
 
+  input PostUpdateOneRequiredWithoutPatientInput {
+    create: PostCreateWithoutPatientInput
+    update: PostUpdateWithoutPatientDataInput
+    upsert: PostUpsertWithoutPatientInput
+    connect: PostWhereUniqueInput
+  }
+
   input PostUpdateWithoutAuthorDataInput {
     published: Boolean
     type: PostType
     title: String
     content: String
+    patient: PatientUpdateOneWithoutPostInput
     histories: HistoryUpdateManyWithoutPostInput
     messages: MessageUpdateManyWithoutPostInput
   }
@@ -871,6 +1157,7 @@ export const typeDefs = /* GraphQL */ `
     title: String
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
+    patient: PatientUpdateOneWithoutPostInput
     messages: MessageUpdateManyWithoutPostInput
   }
 
@@ -880,7 +1167,18 @@ export const typeDefs = /* GraphQL */ `
     title: String
     content: String
     author: UserUpdateOneRequiredWithoutPostsInput
+    patient: PatientUpdateOneWithoutPostInput
     histories: HistoryUpdateManyWithoutPostInput
+  }
+
+  input PostUpdateWithoutPatientDataInput {
+    published: Boolean
+    type: PostType
+    title: String
+    content: String
+    author: UserUpdateOneRequiredWithoutPostsInput
+    histories: HistoryUpdateManyWithoutPostInput
+    messages: MessageUpdateManyWithoutPostInput
   }
 
   input PostUpdateWithWhereUniqueWithoutAuthorInput {
@@ -896,6 +1194,11 @@ export const typeDefs = /* GraphQL */ `
   input PostUpsertWithoutMessagesInput {
     update: PostUpdateWithoutMessagesDataInput!
     create: PostCreateWithoutMessagesInput!
+  }
+
+  input PostUpsertWithoutPatientInput {
+    update: PostUpdateWithoutPatientDataInput!
+    create: PostCreateWithoutPatientInput!
   }
 
   input PostUpsertWithWhereUniqueWithoutAuthorInput {
@@ -970,6 +1273,7 @@ export const typeDefs = /* GraphQL */ `
     content_ends_with: String
     content_not_ends_with: String
     author: UserWhereInput
+    patient: PatientWhereInput
     histories_every: HistoryWhereInput
     histories_some: HistoryWhereInput
     histories_none: HistoryWhereInput
@@ -1024,6 +1328,25 @@ export const typeDefs = /* GraphQL */ `
       first: Int
       last: Int
     ): MessageConnection!
+    patient(where: PatientWhereUniqueInput!): Patient
+    patients(
+      where: PatientWhereInput
+      orderBy: PatientOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): [Patient]!
+    patientsConnection(
+      where: PatientWhereInput
+      orderBy: PatientOrderByInput
+      skip: Int
+      after: String
+      before: String
+      first: Int
+      last: Int
+    ): PatientConnection!
     post(where: PostWhereUniqueInput!): Post
     posts(
       where: PostWhereInput
@@ -1068,6 +1391,7 @@ export const typeDefs = /* GraphQL */ `
   type Subscription {
     history(where: HistorySubscriptionWhereInput): HistorySubscriptionPayload
     message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+    patient(where: PatientSubscriptionWhereInput): PatientSubscriptionPayload
     post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
     user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   }

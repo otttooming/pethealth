@@ -22,6 +22,14 @@ type Mutation {
   login(email: String!, password: String!): AuthPayload!
   createMessage(postId: ID!, content: String!): Message!
   createHistory(postId: ID!, title: String!, content: String!): History!
+  createPatient(
+    postId: ID!
+    species: String
+    breed: String
+    sex: String
+    dob: String
+    weight: Float
+  ): Patient
   deleteHistory(id: ID!): History!
 }
 
@@ -39,8 +47,21 @@ type Post {
   title: String!
   content: String
   author: User!
+  patient: Patient
   histories: [History!]!
   messages: [Message!]!
+}
+
+type Patient {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  post: Post!
+  species: String
+  breed: String
+  sex: String
+  dob: String
+  weight: Float
 }
 
 type History {

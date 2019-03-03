@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export interface Exists {
   history: (where?: HistoryWhereInput) => Promise<boolean>;
   message: (where?: MessageWhereInput) => Promise<boolean>;
+  patient: (where?: PatientWhereInput) => Promise<boolean>;
   post: (where?: PostWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
@@ -77,6 +78,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => MessageConnectionPromise;
+  patient: (where: PatientWhereUniqueInput) => PatientPromise;
+  patients: (args?: {
+    where?: PatientWhereInput;
+    orderBy?: PatientOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Patient>;
+  patientsConnection: (args?: {
+    where?: PatientWhereInput;
+    orderBy?: PatientOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => PatientConnectionPromise;
   post: (where: PostWhereUniqueInput) => PostPromise;
   posts: (args?: {
     where?: PostWhereInput;
@@ -153,6 +173,22 @@ export interface Prisma {
   }) => MessagePromise;
   deleteMessage: (where: MessageWhereUniqueInput) => MessagePromise;
   deleteManyMessages: (where?: MessageWhereInput) => BatchPayloadPromise;
+  createPatient: (data: PatientCreateInput) => PatientPromise;
+  updatePatient: (args: {
+    data: PatientUpdateInput;
+    where: PatientWhereUniqueInput;
+  }) => PatientPromise;
+  updateManyPatients: (args: {
+    data: PatientUpdateManyMutationInput;
+    where?: PatientWhereInput;
+  }) => BatchPayloadPromise;
+  upsertPatient: (args: {
+    where: PatientWhereUniqueInput;
+    create: PatientCreateInput;
+    update: PatientUpdateInput;
+  }) => PatientPromise;
+  deletePatient: (where: PatientWhereUniqueInput) => PatientPromise;
+  deleteManyPatients: (where?: PatientWhereInput) => BatchPayloadPromise;
   createPost: (data: PostCreateInput) => PostPromise;
   updatePost: (args: {
     data: PostUpdateInput;
@@ -200,6 +236,9 @@ export interface Subscription {
   message: (
     where?: MessageSubscriptionWhereInput,
   ) => MessageSubscriptionPayloadSubscription;
+  patient: (
+    where?: PatientSubscriptionWhereInput,
+  ) => PatientSubscriptionPayloadSubscription;
   post: (
     where?: PostSubscriptionWhereInput,
   ) => PostSubscriptionPayloadSubscription;
@@ -256,6 +295,24 @@ export type MessageOrderByInput =
   | 'content_ASC'
   | 'content_DESC';
 
+export type PatientOrderByInput =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'species_ASC'
+  | 'species_DESC'
+  | 'breed_ASC'
+  | 'breed_DESC'
+  | 'sex_ASC'
+  | 'sex_DESC'
+  | 'dob_ASC'
+  | 'dob_DESC'
+  | 'weight_ASC'
+  | 'weight_DESC';
+
 export type UserOrderByInput =
   | 'id_ASC'
   | 'id_DESC'
@@ -272,349 +329,22 @@ export type UserOrderByInput =
 
 export type MutationType = 'CREATED' | 'UPDATED' | 'DELETED';
 
-export interface PostUpdateWithoutAuthorDataInput {
-  published?: Boolean;
-  type?: PostType;
-  title?: String;
-  content?: String;
-  histories?: HistoryUpdateManyWithoutPostInput;
-  messages?: MessageUpdateManyWithoutPostInput;
+export interface PatientUpdateWithoutPostDataInput {
+  species?: String;
+  breed?: String;
+  sex?: String;
+  dob?: String;
+  weight?: Float;
 }
 
 export type HistoryWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
-export interface MessageCreateManyWithoutPostInput {
-  create?: MessageCreateWithoutPostInput[] | MessageCreateWithoutPostInput;
-  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
-}
-
-export interface UserUpdateWithoutPostsDataInput {
-  email?: String;
-  password?: String;
-  name?: String;
-}
-
-export interface MessageCreateWithoutPostInput {
-  author: UserCreateOneInput;
-  content?: String;
-}
-
 export interface HistoryUpsertWithWhereUniqueWithoutPostInput {
   where: HistoryWhereUniqueInput;
   update: HistoryUpdateWithoutPostDataInput;
   create: HistoryCreateWithoutPostInput;
-}
-
-export interface PostCreateOneWithoutHistoriesInput {
-  create?: PostCreateWithoutHistoriesInput;
-  connect?: PostWhereUniqueInput;
-}
-
-export interface MessageWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  author?: UserWhereInput;
-  post?: PostWhereInput;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  content?: String;
-  content_not?: String;
-  content_in?: String[] | String;
-  content_not_in?: String[] | String;
-  content_lt?: String;
-  content_lte?: String;
-  content_gt?: String;
-  content_gte?: String;
-  content_contains?: String;
-  content_not_contains?: String;
-  content_starts_with?: String;
-  content_not_starts_with?: String;
-  content_ends_with?: String;
-  content_not_ends_with?: String;
-  AND?: MessageWhereInput[] | MessageWhereInput;
-  OR?: MessageWhereInput[] | MessageWhereInput;
-  NOT?: MessageWhereInput[] | MessageWhereInput;
-}
-
-export interface PostCreateWithoutHistoriesInput {
-  published?: Boolean;
-  type?: PostType;
-  title: String;
-  content?: String;
-  author: UserCreateOneWithoutPostsInput;
-  messages?: MessageCreateManyWithoutPostInput;
-}
-
-export interface PostSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: PostWhereInput;
-  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
-  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
-  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
-}
-
-export interface UserCreateOneWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface PostWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  published?: Boolean;
-  published_not?: Boolean;
-  type?: PostType;
-  type_not?: PostType;
-  type_in?: PostType[] | PostType;
-  type_not_in?: PostType[] | PostType;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  content?: String;
-  content_not?: String;
-  content_in?: String[] | String;
-  content_not_in?: String[] | String;
-  content_lt?: String;
-  content_lte?: String;
-  content_gt?: String;
-  content_gte?: String;
-  content_contains?: String;
-  content_not_contains?: String;
-  content_starts_with?: String;
-  content_not_starts_with?: String;
-  content_ends_with?: String;
-  content_not_ends_with?: String;
-  author?: UserWhereInput;
-  histories_every?: HistoryWhereInput;
-  histories_some?: HistoryWhereInput;
-  histories_none?: HistoryWhereInput;
-  messages_every?: MessageWhereInput;
-  messages_some?: MessageWhereInput;
-  messages_none?: MessageWhereInput;
-  AND?: PostWhereInput[] | PostWhereInput;
-  OR?: PostWhereInput[] | PostWhereInput;
-  NOT?: PostWhereInput[] | PostWhereInput;
-}
-
-export interface UserCreateWithoutPostsInput {
-  email: String;
-  password: String;
-  name?: String;
-}
-
-export interface UserUpdateManyMutationInput {
-  email?: String;
-  password?: String;
-  name?: String;
-}
-
-export interface HistoryUpdateInput {
-  author?: UserUpdateOneRequiredInput;
-  post?: PostUpdateOneRequiredWithoutHistoriesInput;
-  title?: String;
-  content?: String;
-}
-
-export interface PostUpdateManyMutationInput {
-  published?: Boolean;
-  type?: PostType;
-  title?: String;
-  content?: String;
-}
-
-export interface UserUpdateOneRequiredInput {
-  create?: UserCreateInput;
-  update?: UserUpdateDataInput;
-  upsert?: UserUpsertNestedInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface PostCreateInput {
-  published?: Boolean;
-  type?: PostType;
-  title: String;
-  content?: String;
-  author: UserCreateOneWithoutPostsInput;
-  histories?: HistoryCreateManyWithoutPostInput;
-  messages?: MessageCreateManyWithoutPostInput;
-}
-
-export interface UserUpdateDataInput {
-  email?: String;
-  password?: String;
-  name?: String;
-  posts?: PostUpdateManyWithoutAuthorInput;
-}
-
-export interface MessageUpdateManyMutationInput {
-  content?: String;
-}
-
-export interface PostUpdateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput;
-  delete?: PostWhereUniqueInput[] | PostWhereUniqueInput;
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
-  set?: PostWhereUniqueInput[] | PostWhereUniqueInput;
-  disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
-  update?:
-    | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    | PostUpdateWithWhereUniqueWithoutAuthorInput;
-  upsert?:
-    | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    | PostUpsertWithWhereUniqueWithoutAuthorInput;
-  deleteMany?: PostScalarWhereInput[] | PostScalarWhereInput;
-  updateMany?:
-    | PostUpdateManyWithWhereNestedInput[]
-    | PostUpdateManyWithWhereNestedInput;
-}
-
-export interface PostUpdateWithoutMessagesDataInput {
-  published?: Boolean;
-  type?: PostType;
-  title?: String;
-  content?: String;
-  author?: UserUpdateOneRequiredWithoutPostsInput;
-  histories?: HistoryUpdateManyWithoutPostInput;
-}
-
-export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput;
-  data: PostUpdateWithoutAuthorDataInput;
-}
-
-export interface PostUpdateOneRequiredWithoutMessagesInput {
-  create?: PostCreateWithoutMessagesInput;
-  update?: PostUpdateWithoutMessagesDataInput;
-  upsert?: PostUpsertWithoutMessagesInput;
-  connect?: PostWhereUniqueInput;
-}
-
-export interface UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput;
-  create: UserCreateWithoutPostsInput;
-}
-
-export interface PostCreateWithoutMessagesInput {
-  published?: Boolean;
-  type?: PostType;
-  title: String;
-  content?: String;
-  author: UserCreateOneWithoutPostsInput;
-  histories?: HistoryCreateManyWithoutPostInput;
-}
-
-export interface HistoryUpdateManyWithoutPostInput {
-  create?: HistoryCreateWithoutPostInput[] | HistoryCreateWithoutPostInput;
-  delete?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
-  connect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
-  set?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
-  disconnect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
-  update?:
-    | HistoryUpdateWithWhereUniqueWithoutPostInput[]
-    | HistoryUpdateWithWhereUniqueWithoutPostInput;
-  upsert?:
-    | HistoryUpsertWithWhereUniqueWithoutPostInput[]
-    | HistoryUpsertWithWhereUniqueWithoutPostInput;
-  deleteMany?: HistoryScalarWhereInput[] | HistoryScalarWhereInput;
-  updateMany?:
-    | HistoryUpdateManyWithWhereNestedInput[]
-    | HistoryUpdateManyWithWhereNestedInput;
-}
-
-export interface PostCreateOneWithoutMessagesInput {
-  create?: PostCreateWithoutMessagesInput;
-  connect?: PostWhereUniqueInput;
-}
-
-export interface HistoryUpdateWithWhereUniqueWithoutPostInput {
-  where: HistoryWhereUniqueInput;
-  data: HistoryUpdateWithoutPostDataInput;
-}
-
-export interface HistoryUpdateManyMutationInput {
-  title?: String;
-  content?: String;
-}
-
-export interface HistoryUpdateWithoutPostDataInput {
-  author?: UserUpdateOneRequiredInput;
-  title?: String;
-  content?: String;
-}
-
-export interface UserCreateOneInput {
-  create?: UserCreateInput;
-  connect?: UserWhereUniqueInput;
 }
 
 export interface UserWhereInput {
@@ -682,9 +412,20 @@ export interface UserWhereInput {
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface PostCreateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput;
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
+export interface MessageCreateManyWithoutPostInput {
+  create?: MessageCreateWithoutPostInput[] | MessageCreateWithoutPostInput;
+  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
+}
+
+export interface MessageCreateInput {
+  author: UserCreateOneInput;
+  post: PostCreateOneWithoutMessagesInput;
+  content?: String;
+}
+
+export interface MessageCreateWithoutPostInput {
+  author: UserCreateOneInput;
+  content?: String;
 }
 
 export interface HistoryScalarWhereInput {
@@ -751,14 +492,369 @@ export interface HistoryScalarWhereInput {
   NOT?: HistoryScalarWhereInput[] | HistoryScalarWhereInput;
 }
 
-export interface HistoryCreateManyWithoutPostInput {
-  create?: HistoryCreateWithoutPostInput[] | HistoryCreateWithoutPostInput;
-  connect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
+export interface PostCreateOneWithoutHistoriesInput {
+  create?: PostCreateWithoutHistoriesInput;
+  connect?: PostWhereUniqueInput;
 }
 
-export interface HistoryUpdateManyWithWhereNestedInput {
-  where: HistoryScalarWhereInput;
-  data: HistoryUpdateManyDataInput;
+export interface UserSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: UserWhereInput;
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+}
+
+export interface PostCreateWithoutHistoriesInput {
+  published?: Boolean;
+  type?: PostType;
+  title: String;
+  content?: String;
+  author: UserCreateOneWithoutPostsInput;
+  patient?: PatientCreateOneWithoutPostInput;
+  messages?: MessageCreateManyWithoutPostInput;
+}
+
+export interface PatientSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: PatientWhereInput;
+  AND?: PatientSubscriptionWhereInput[] | PatientSubscriptionWhereInput;
+  OR?: PatientSubscriptionWhereInput[] | PatientSubscriptionWhereInput;
+  NOT?: PatientSubscriptionWhereInput[] | PatientSubscriptionWhereInput;
+}
+
+export interface UserCreateOneWithoutPostsInput {
+  create?: UserCreateWithoutPostsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface HistorySubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: HistoryWhereInput;
+  AND?: HistorySubscriptionWhereInput[] | HistorySubscriptionWhereInput;
+  OR?: HistorySubscriptionWhereInput[] | HistorySubscriptionWhereInput;
+  NOT?: HistorySubscriptionWhereInput[] | HistorySubscriptionWhereInput;
+}
+
+export interface UserCreateWithoutPostsInput {
+  email: String;
+  password: String;
+  name?: String;
+}
+
+export interface UserUpdateManyMutationInput {
+  email?: String;
+  password?: String;
+  name?: String;
+}
+
+export interface HistoryUpdateInput {
+  author?: UserUpdateOneRequiredInput;
+  post?: PostUpdateOneRequiredWithoutHistoriesInput;
+  title?: String;
+  content?: String;
+}
+
+export interface PostUpdateManyMutationInput {
+  published?: Boolean;
+  type?: PostType;
+  title?: String;
+  content?: String;
+}
+
+export interface UserUpdateOneRequiredInput {
+  create?: UserCreateInput;
+  update?: UserUpdateDataInput;
+  upsert?: UserUpsertNestedInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface PostCreateInput {
+  published?: Boolean;
+  type?: PostType;
+  title: String;
+  content?: String;
+  author: UserCreateOneWithoutPostsInput;
+  patient?: PatientCreateOneWithoutPostInput;
+  histories?: HistoryCreateManyWithoutPostInput;
+  messages?: MessageCreateManyWithoutPostInput;
+}
+
+export interface UserUpdateDataInput {
+  email?: String;
+  password?: String;
+  name?: String;
+  posts?: PostUpdateManyWithoutAuthorInput;
+}
+
+export interface PatientUpdateManyMutationInput {
+  species?: String;
+  breed?: String;
+  sex?: String;
+  dob?: String;
+  weight?: Float;
+}
+
+export interface PostUpdateManyWithoutAuthorInput {
+  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput;
+  delete?: PostWhereUniqueInput[] | PostWhereUniqueInput;
+  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
+  set?: PostWhereUniqueInput[] | PostWhereUniqueInput;
+  disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
+  update?:
+    | PostUpdateWithWhereUniqueWithoutAuthorInput[]
+    | PostUpdateWithWhereUniqueWithoutAuthorInput;
+  upsert?:
+    | PostUpsertWithWhereUniqueWithoutAuthorInput[]
+    | PostUpsertWithWhereUniqueWithoutAuthorInput;
+  deleteMany?: PostScalarWhereInput[] | PostScalarWhereInput;
+  updateMany?:
+    | PostUpdateManyWithWhereNestedInput[]
+    | PostUpdateManyWithWhereNestedInput;
+}
+
+export interface PostUpdateWithoutPatientDataInput {
+  published?: Boolean;
+  type?: PostType;
+  title?: String;
+  content?: String;
+  author?: UserUpdateOneRequiredWithoutPostsInput;
+  histories?: HistoryUpdateManyWithoutPostInput;
+  messages?: MessageUpdateManyWithoutPostInput;
+}
+
+export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput;
+  data: PostUpdateWithoutAuthorDataInput;
+}
+
+export interface PostUpdateOneRequiredWithoutPatientInput {
+  create?: PostCreateWithoutPatientInput;
+  update?: PostUpdateWithoutPatientDataInput;
+  upsert?: PostUpsertWithoutPatientInput;
+  connect?: PostWhereUniqueInput;
+}
+
+export interface PostUpdateWithoutAuthorDataInput {
+  published?: Boolean;
+  type?: PostType;
+  title?: String;
+  content?: String;
+  patient?: PatientUpdateOneWithoutPostInput;
+  histories?: HistoryUpdateManyWithoutPostInput;
+  messages?: MessageUpdateManyWithoutPostInput;
+}
+
+export interface PostCreateWithoutPatientInput {
+  published?: Boolean;
+  type?: PostType;
+  title: String;
+  content?: String;
+  author: UserCreateOneWithoutPostsInput;
+  histories?: HistoryCreateManyWithoutPostInput;
+  messages?: MessageCreateManyWithoutPostInput;
+}
+
+export interface PatientUpdateOneWithoutPostInput {
+  create?: PatientCreateWithoutPostInput;
+  update?: PatientUpdateWithoutPostDataInput;
+  upsert?: PatientUpsertWithoutPostInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: PatientWhereUniqueInput;
+}
+
+export type PostWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface PostCreateOneWithoutMessagesInput {
+  create?: PostCreateWithoutMessagesInput;
+  connect?: PostWhereUniqueInput;
+}
+
+export interface MessageUpdateManyMutationInput {
+  content?: String;
+}
+
+export interface PatientUpsertWithoutPostInput {
+  update: PatientUpdateWithoutPostDataInput;
+  create: PatientCreateWithoutPostInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
+
+export interface HistoryUpdateManyWithoutPostInput {
+  create?: HistoryCreateWithoutPostInput[] | HistoryCreateWithoutPostInput;
+  delete?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
+  connect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
+  set?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
+  disconnect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
+  update?:
+    | HistoryUpdateWithWhereUniqueWithoutPostInput[]
+    | HistoryUpdateWithWhereUniqueWithoutPostInput;
+  upsert?:
+    | HistoryUpsertWithWhereUniqueWithoutPostInput[]
+    | HistoryUpsertWithWhereUniqueWithoutPostInput;
+  deleteMany?: HistoryScalarWhereInput[] | HistoryScalarWhereInput;
+  updateMany?:
+    | HistoryUpdateManyWithWhereNestedInput[]
+    | HistoryUpdateManyWithWhereNestedInput;
+}
+
+export interface PostUpdateOneRequiredWithoutMessagesInput {
+  create?: PostCreateWithoutMessagesInput;
+  update?: PostUpdateWithoutMessagesDataInput;
+  upsert?: PostUpsertWithoutMessagesInput;
+  connect?: PostWhereUniqueInput;
+}
+
+export interface HistoryUpdateWithWhereUniqueWithoutPostInput {
+  where: HistoryWhereUniqueInput;
+  data: HistoryUpdateWithoutPostDataInput;
+}
+
+export interface PostCreateWithoutMessagesInput {
+  published?: Boolean;
+  type?: PostType;
+  title: String;
+  content?: String;
+  author: UserCreateOneWithoutPostsInput;
+  patient?: PatientCreateOneWithoutPostInput;
+  histories?: HistoryCreateManyWithoutPostInput;
+}
+
+export interface HistoryUpdateWithoutPostDataInput {
+  author?: UserUpdateOneRequiredInput;
+  title?: String;
+  content?: String;
+}
+
+export interface HistoryCreateInput {
+  author: UserCreateOneInput;
+  post: PostCreateOneWithoutHistoriesInput;
+  title?: String;
+  content?: String;
+}
+
+export interface PatientWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  post?: PostWhereInput;
+  species?: String;
+  species_not?: String;
+  species_in?: String[] | String;
+  species_not_in?: String[] | String;
+  species_lt?: String;
+  species_lte?: String;
+  species_gt?: String;
+  species_gte?: String;
+  species_contains?: String;
+  species_not_contains?: String;
+  species_starts_with?: String;
+  species_not_starts_with?: String;
+  species_ends_with?: String;
+  species_not_ends_with?: String;
+  breed?: String;
+  breed_not?: String;
+  breed_in?: String[] | String;
+  breed_not_in?: String[] | String;
+  breed_lt?: String;
+  breed_lte?: String;
+  breed_gt?: String;
+  breed_gte?: String;
+  breed_contains?: String;
+  breed_not_contains?: String;
+  breed_starts_with?: String;
+  breed_not_starts_with?: String;
+  breed_ends_with?: String;
+  breed_not_ends_with?: String;
+  sex?: String;
+  sex_not?: String;
+  sex_in?: String[] | String;
+  sex_not_in?: String[] | String;
+  sex_lt?: String;
+  sex_lte?: String;
+  sex_gt?: String;
+  sex_gte?: String;
+  sex_contains?: String;
+  sex_not_contains?: String;
+  sex_starts_with?: String;
+  sex_not_starts_with?: String;
+  sex_ends_with?: String;
+  sex_not_ends_with?: String;
+  dob?: String;
+  dob_not?: String;
+  dob_in?: String[] | String;
+  dob_not_in?: String[] | String;
+  dob_lt?: String;
+  dob_lte?: String;
+  dob_gt?: String;
+  dob_gte?: String;
+  dob_contains?: String;
+  dob_not_contains?: String;
+  dob_starts_with?: String;
+  dob_not_starts_with?: String;
+  dob_ends_with?: String;
+  dob_not_ends_with?: String;
+  weight?: Float;
+  weight_not?: Float;
+  weight_in?: Float[] | Float;
+  weight_not_in?: Float[] | Float;
+  weight_lt?: Float;
+  weight_lte?: Float;
+  weight_gt?: Float;
+  weight_gte?: Float;
+  AND?: PatientWhereInput[] | PatientWhereInput;
+  OR?: PatientWhereInput[] | PatientWhereInput;
+  NOT?: PatientWhereInput[] | PatientWhereInput;
+}
+
+export interface UserCreateInput {
+  email: String;
+  password: String;
+  name?: String;
+  posts?: PostCreateManyWithoutAuthorInput;
 }
 
 export interface HistoryWhereInput {
@@ -827,20 +923,38 @@ export interface HistoryWhereInput {
   NOT?: HistoryWhereInput[] | HistoryWhereInput;
 }
 
+export interface PostCreateWithoutAuthorInput {
+  published?: Boolean;
+  type?: PostType;
+  title: String;
+  content?: String;
+  patient?: PatientCreateOneWithoutPostInput;
+  histories?: HistoryCreateManyWithoutPostInput;
+  messages?: MessageCreateManyWithoutPostInput;
+}
+
+export interface HistoryUpdateManyWithWhereNestedInput {
+  where: HistoryScalarWhereInput;
+  data: HistoryUpdateManyDataInput;
+}
+
+export interface PatientCreateWithoutPostInput {
+  species?: String;
+  breed?: String;
+  sex?: String;
+  dob?: String;
+  weight?: Float;
+}
+
 export interface HistoryUpdateManyDataInput {
   title?: String;
   content?: String;
 }
 
-export interface MessageSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: MessageWhereInput;
-  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
-  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
-  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
+export interface HistoryCreateWithoutPostInput {
+  author: UserCreateOneInput;
+  title?: String;
+  content?: String;
 }
 
 export interface MessageUpdateManyWithoutPostInput {
@@ -861,11 +975,15 @@ export interface MessageUpdateManyWithoutPostInput {
     | MessageUpdateManyWithWhereNestedInput;
 }
 
-export interface UserUpdateInput {
-  email?: String;
-  password?: String;
-  name?: String;
-  posts?: PostUpdateManyWithoutAuthorInput;
+export interface PostSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: PostWhereInput;
+  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
+  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
+  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
 }
 
 export interface MessageUpdateWithWhereUniqueWithoutPostInput {
@@ -873,18 +991,99 @@ export interface MessageUpdateWithWhereUniqueWithoutPostInput {
   data: MessageUpdateWithoutPostDataInput;
 }
 
-export type MessageWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
+export interface PostWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  published?: Boolean;
+  published_not?: Boolean;
+  type?: PostType;
+  type_not?: PostType;
+  type_in?: PostType[] | PostType;
+  type_not_in?: PostType[] | PostType;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  content?: String;
+  content_not?: String;
+  content_in?: String[] | String;
+  content_not_in?: String[] | String;
+  content_lt?: String;
+  content_lte?: String;
+  content_gt?: String;
+  content_gte?: String;
+  content_contains?: String;
+  content_not_contains?: String;
+  content_starts_with?: String;
+  content_not_starts_with?: String;
+  content_ends_with?: String;
+  content_not_ends_with?: String;
+  author?: UserWhereInput;
+  patient?: PatientWhereInput;
+  histories_every?: HistoryWhereInput;
+  histories_some?: HistoryWhereInput;
+  histories_none?: HistoryWhereInput;
+  messages_every?: MessageWhereInput;
+  messages_some?: MessageWhereInput;
+  messages_none?: MessageWhereInput;
+  AND?: PostWhereInput[] | PostWhereInput;
+  OR?: PostWhereInput[] | PostWhereInput;
+  NOT?: PostWhereInput[] | PostWhereInput;
+}
 
 export interface MessageUpdateWithoutPostDataInput {
   author?: UserUpdateOneRequiredInput;
   content?: String;
 }
 
-export type PostWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
+export interface PostUpdateInput {
+  published?: Boolean;
+  type?: PostType;
+  title?: String;
+  content?: String;
+  author?: UserUpdateOneRequiredWithoutPostsInput;
+  patient?: PatientUpdateOneWithoutPostInput;
+  histories?: HistoryUpdateManyWithoutPostInput;
+  messages?: MessageUpdateManyWithoutPostInput;
+}
 
 export interface MessageUpsertWithWhereUniqueWithoutPostInput {
   where: MessageWhereUniqueInput;
@@ -892,10 +1091,10 @@ export interface MessageUpsertWithWhereUniqueWithoutPostInput {
   create: MessageCreateWithoutPostInput;
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  email?: String;
-}>;
+export interface PostUpsertWithoutPatientInput {
+  update: PostUpdateWithoutPatientDataInput;
+  create: PostCreateWithoutPatientInput;
+}
 
 export interface MessageScalarWhereInput {
   id?: ID_Input;
@@ -947,9 +1146,13 @@ export interface MessageScalarWhereInput {
   NOT?: MessageScalarWhereInput[] | MessageScalarWhereInput;
 }
 
-export interface PostUpsertWithoutHistoriesInput {
-  update: PostUpdateWithoutHistoriesDataInput;
-  create: PostCreateWithoutHistoriesInput;
+export interface PatientUpdateInput {
+  post?: PostUpdateOneRequiredWithoutPatientInput;
+  species?: String;
+  breed?: String;
+  sex?: String;
+  dob?: String;
+  weight?: Float;
 }
 
 export interface MessageUpdateManyWithWhereNestedInput {
@@ -957,21 +1160,27 @@ export interface MessageUpdateManyWithWhereNestedInput {
   data: MessageUpdateManyDataInput;
 }
 
-export interface UserCreateInput {
-  email: String;
-  password: String;
-  name?: String;
-  posts?: PostCreateManyWithoutAuthorInput;
+export interface PatientCreateInput {
+  post: PostCreateOneWithoutPatientInput;
+  species?: String;
+  breed?: String;
+  sex?: String;
+  dob?: String;
+  weight?: Float;
 }
 
 export interface MessageUpdateManyDataInput {
   content?: String;
 }
 
-export interface HistoryCreateWithoutPostInput {
-  author: UserCreateOneInput;
+export interface PostUpdateWithoutMessagesDataInput {
+  published?: Boolean;
+  type?: PostType;
   title?: String;
   content?: String;
+  author?: UserUpdateOneRequiredWithoutPostsInput;
+  patient?: PatientUpdateOneWithoutPostInput;
+  histories?: HistoryUpdateManyWithoutPostInput;
 }
 
 export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
@@ -980,15 +1189,9 @@ export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
   create: PostCreateWithoutAuthorInput;
 }
 
-export interface HistorySubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: HistoryWhereInput;
-  AND?: HistorySubscriptionWhereInput[] | HistorySubscriptionWhereInput;
-  OR?: HistorySubscriptionWhereInput[] | HistorySubscriptionWhereInput;
-  NOT?: HistorySubscriptionWhereInput[] | HistorySubscriptionWhereInput;
+export interface PostCreateManyWithoutAuthorInput {
+  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput;
+  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
 }
 
 export interface PostScalarWhereInput {
@@ -1061,9 +1264,9 @@ export interface PostScalarWhereInput {
   NOT?: PostScalarWhereInput[] | PostScalarWhereInput;
 }
 
-export interface PostUpsertWithoutMessagesInput {
-  update: PostUpdateWithoutMessagesDataInput;
-  create: PostCreateWithoutMessagesInput;
+export interface HistoryCreateManyWithoutPostInput {
+  create?: HistoryCreateWithoutPostInput[] | HistoryCreateWithoutPostInput;
+  connect?: HistoryWhereUniqueInput[] | HistoryWhereUniqueInput;
 }
 
 export interface PostUpdateManyWithWhereNestedInput {
@@ -1071,10 +1274,15 @@ export interface PostUpdateManyWithWhereNestedInput {
   data: PostUpdateManyDataInput;
 }
 
-export interface MessageCreateInput {
-  author: UserCreateOneInput;
-  post: PostCreateOneWithoutMessagesInput;
-  content?: String;
+export interface MessageSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: MessageWhereInput;
+  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
+  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
+  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
 }
 
 export interface PostUpdateManyDataInput {
@@ -1084,29 +1292,18 @@ export interface PostUpdateManyDataInput {
   content?: String;
 }
 
-export interface PostCreateWithoutAuthorInput {
-  published?: Boolean;
-  type?: PostType;
-  title: String;
-  content?: String;
-  histories?: HistoryCreateManyWithoutPostInput;
-  messages?: MessageCreateManyWithoutPostInput;
+export type MessageWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
 }
 
-export interface UserUpdateOneRequiredWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput;
-  update?: UserUpdateWithoutPostsDataInput;
-  upsert?: UserUpsertWithoutPostsInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface PostUpdateWithoutHistoriesDataInput {
-  published?: Boolean;
-  type?: PostType;
-  title?: String;
-  content?: String;
-  author?: UserUpdateOneRequiredWithoutPostsInput;
-  messages?: MessageUpdateManyWithoutPostInput;
+export interface PostCreateOneWithoutPatientInput {
+  create?: PostCreateWithoutPatientInput;
+  connect?: PostWhereUniqueInput;
 }
 
 export interface PostUpdateOneRequiredWithoutHistoriesInput {
@@ -1116,43 +1313,126 @@ export interface PostUpdateOneRequiredWithoutHistoriesInput {
   connect?: PostWhereUniqueInput;
 }
 
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: UserWhereInput;
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-}
-
-export interface HistoryCreateInput {
-  author: UserCreateOneInput;
-  post: PostCreateOneWithoutHistoriesInput;
-  title?: String;
-  content?: String;
-}
-
 export interface MessageUpdateInput {
   author?: UserUpdateOneRequiredInput;
   post?: PostUpdateOneRequiredWithoutMessagesInput;
   content?: String;
 }
 
-export interface PostUpdateInput {
+export interface PostUpdateWithoutHistoriesDataInput {
   published?: Boolean;
   type?: PostType;
   title?: String;
   content?: String;
   author?: UserUpdateOneRequiredWithoutPostsInput;
-  histories?: HistoryUpdateManyWithoutPostInput;
+  patient?: PatientUpdateOneWithoutPostInput;
   messages?: MessageUpdateManyWithoutPostInput;
+}
+
+export interface PatientCreateOneWithoutPostInput {
+  create?: PatientCreateWithoutPostInput;
+  connect?: PatientWhereUniqueInput;
+}
+
+export interface UserUpdateOneRequiredWithoutPostsInput {
+  create?: UserCreateWithoutPostsInput;
+  update?: UserUpdateWithoutPostsDataInput;
+  upsert?: UserUpsertWithoutPostsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateInput {
+  email?: String;
+  password?: String;
+  name?: String;
+  posts?: PostUpdateManyWithoutAuthorInput;
+}
+
+export interface HistoryUpdateManyMutationInput {
+  title?: String;
+  content?: String;
+}
+
+export interface PostUpsertWithoutHistoriesInput {
+  update: PostUpdateWithoutHistoriesDataInput;
+  create: PostCreateWithoutHistoriesInput;
+}
+
+export interface UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsDataInput;
+  create: UserCreateWithoutPostsInput;
+}
+
+export interface UserUpdateWithoutPostsDataInput {
+  email?: String;
+  password?: String;
+  name?: String;
+}
+
+export type PatientWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface MessageWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  author?: UserWhereInput;
+  post?: PostWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  content?: String;
+  content_not?: String;
+  content_in?: String[] | String;
+  content_not_in?: String[] | String;
+  content_lt?: String;
+  content_lte?: String;
+  content_gt?: String;
+  content_gte?: String;
+  content_contains?: String;
+  content_not_contains?: String;
+  content_starts_with?: String;
+  content_not_starts_with?: String;
+  content_ends_with?: String;
+  content_not_ends_with?: String;
+  AND?: MessageWhereInput[] | MessageWhereInput;
+  OR?: MessageWhereInput[] | MessageWhereInput;
+  NOT?: MessageWhereInput[] | MessageWhereInput;
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface PostUpsertWithoutMessagesInput {
+  update: PostUpdateWithoutMessagesDataInput;
+  create: PostCreateWithoutMessagesInput;
 }
 
 export interface NodeNode {
@@ -1184,6 +1464,64 @@ export interface UserPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
 }
 
+export interface MessageConnection {
+  pageInfo: PageInfo;
+  edges: MessageEdge[];
+}
+
+export interface MessageConnectionPromise
+  extends Promise<MessageConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MessageEdge>>() => T;
+  aggregate: <T = AggregateMessagePromise>() => T;
+}
+
+export interface MessageConnectionSubscription
+  extends Promise<AsyncIterator<MessageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMessageSubscription>() => T;
+}
+
+export interface PatientPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  species?: String;
+  breed?: String;
+  sex?: String;
+  dob?: String;
+  weight?: Float;
+}
+
+export interface PatientPreviousValuesPromise
+  extends Promise<PatientPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  species: () => Promise<String>;
+  breed: () => Promise<String>;
+  sex: () => Promise<String>;
+  dob: () => Promise<String>;
+  weight: () => Promise<Float>;
+}
+
+export interface PatientPreviousValuesSubscription
+  extends Promise<AsyncIterator<PatientPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  species: () => Promise<AsyncIterator<String>>;
+  breed: () => Promise<AsyncIterator<String>>;
+  sex: () => Promise<AsyncIterator<String>>;
+  dob: () => Promise<AsyncIterator<String>>;
+  weight: () => Promise<AsyncIterator<Float>>;
+}
+
 export interface AggregateHistory {
   count: Int;
 }
@@ -1198,48 +1536,6 @@ export interface AggregateHistorySubscription
   extends Promise<AsyncIterator<AggregateHistory>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PostSubscriptionPayload {
-  mutation: MutationType;
-  node: Post;
-  updatedFields: String[];
-  previousValues: PostPreviousValues;
-}
-
-export interface PostSubscriptionPayloadPromise
-  extends Promise<PostSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = PostPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = PostPreviousValuesPromise>() => T;
-}
-
-export interface PostSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PostSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PostSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PostPreviousValuesSubscription>() => T;
-}
-
-export interface HistoryEdge {
-  node: History;
-  cursor: String;
-}
-
-export interface HistoryEdgePromise extends Promise<HistoryEdge>, Fragmentable {
-  node: <T = HistoryPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface HistoryEdgeSubscription
-  extends Promise<AsyncIterator<HistoryEdge>>,
-    Fragmentable {
-  node: <T = HistorySubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PageInfo {
@@ -1263,6 +1559,23 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface HistoryEdge {
+  node: History;
+  cursor: String;
+}
+
+export interface HistoryEdgePromise extends Promise<HistoryEdge>, Fragmentable {
+  node: <T = HistoryPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface HistoryEdgeSubscription
+  extends Promise<AsyncIterator<HistoryEdge>>,
+    Fragmentable {
+  node: <T = HistorySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface AggregateUser {
@@ -1297,6 +1610,27 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
 export interface HistoryConnection {
   pageInfo: PageInfo;
   edges: HistoryEdge[];
@@ -1318,25 +1652,20 @@ export interface HistoryConnectionSubscription
   aggregate: <T = AggregateHistorySubscription>() => T;
 }
 
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
+export interface AggregatePost {
+  count: Int;
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface AggregatePostPromise
+  extends Promise<AggregatePost>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface AggregatePostSubscription
+  extends Promise<AsyncIterator<AggregatePost>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Message {
@@ -1366,20 +1695,97 @@ export interface MessageSubscription
   content: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregatePost {
-  count: Int;
+export interface PostConnection {
+  pageInfo: PageInfo;
+  edges: PostEdge[];
 }
 
-export interface AggregatePostPromise
-  extends Promise<AggregatePost>,
+export interface PostConnectionPromise
+  extends Promise<PostConnection>,
     Fragmentable {
-  count: () => Promise<Int>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PostEdge>>() => T;
+  aggregate: <T = AggregatePostPromise>() => T;
 }
 
-export interface AggregatePostSubscription
-  extends Promise<AsyncIterator<AggregatePost>>,
+export interface PostConnectionSubscription
+  extends Promise<AsyncIterator<PostConnection>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PostEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePostSubscription>() => T;
+}
+
+export interface PostSubscriptionPayload {
+  mutation: MutationType;
+  node: Post;
+  updatedFields: String[];
+  previousValues: PostPreviousValues;
+}
+
+export interface PostSubscriptionPayloadPromise
+  extends Promise<PostSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PostPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PostPreviousValuesPromise>() => T;
+}
+
+export interface PostSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PostSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PostSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PostPreviousValuesSubscription>() => T;
+}
+
+export interface PatientEdge {
+  node: Patient;
+  cursor: String;
+}
+
+export interface PatientEdgePromise extends Promise<PatientEdge>, Fragmentable {
+  node: <T = PatientPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PatientEdgeSubscription
+  extends Promise<AsyncIterator<PatientEdge>>,
+    Fragmentable {
+  node: <T = PatientSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface History {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  title?: String;
+  content?: String;
+}
+
+export interface HistoryPromise extends Promise<History>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  author: <T = UserPromise>() => T;
+  post: <T = PostPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  title: () => Promise<String>;
+  content: () => Promise<String>;
+}
+
+export interface HistorySubscription
+  extends Promise<AsyncIterator<History>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  author: <T = UserSubscription>() => T;
+  post: <T = PostSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  title: () => Promise<AsyncIterator<String>>;
+  content: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PostPreviousValues {
@@ -1416,74 +1822,6 @@ export interface PostPreviousValuesSubscription
   content: () => Promise<AsyncIterator<String>>;
 }
 
-export interface PostConnection {
-  pageInfo: PageInfo;
-  edges: PostEdge[];
-}
-
-export interface PostConnectionPromise
-  extends Promise<PostConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PostEdge>>() => T;
-  aggregate: <T = AggregatePostPromise>() => T;
-}
-
-export interface PostConnectionSubscription
-  extends Promise<AsyncIterator<PostConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PostEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePostSubscription>() => T;
-}
-
-export interface History {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  title?: String;
-  content?: String;
-}
-
-export interface HistoryPromise extends Promise<History>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  author: <T = UserPromise>() => T;
-  post: <T = PostPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  title: () => Promise<String>;
-  content: () => Promise<String>;
-}
-
-export interface HistorySubscription
-  extends Promise<AsyncIterator<History>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  author: <T = UserSubscription>() => T;
-  post: <T = PostSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  title: () => Promise<AsyncIterator<String>>;
-  content: () => Promise<AsyncIterator<String>>;
-}
-
-export interface MessageEdge {
-  node: Message;
-  cursor: String;
-}
-
-export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
-  node: <T = MessagePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface MessageEdgeSubscription
-  extends Promise<AsyncIterator<MessageEdge>>,
-    Fragmentable {
-  node: <T = MessageSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface HistorySubscriptionPayload {
   mutation: MutationType;
   node: History;
@@ -1509,6 +1847,51 @@ export interface HistorySubscriptionPayloadSubscription
   previousValues: <T = HistoryPreviousValuesSubscription>() => T;
 }
 
+export interface MessageEdge {
+  node: Message;
+  cursor: String;
+}
+
+export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
+  node: <T = MessagePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MessageEdgeSubscription
+  extends Promise<AsyncIterator<MessageEdge>>,
+    Fragmentable {
+  node: <T = MessageSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface HistoryPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  title?: String;
+  content?: String;
+}
+
+export interface HistoryPreviousValuesPromise
+  extends Promise<HistoryPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  title: () => Promise<String>;
+  content: () => Promise<String>;
+}
+
+export interface HistoryPreviousValuesSubscription
+  extends Promise<AsyncIterator<HistoryPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  title: () => Promise<AsyncIterator<String>>;
+  content: () => Promise<AsyncIterator<String>>;
+}
+
 export interface UserEdge {
   node: User;
   cursor: String;
@@ -1526,21 +1909,138 @@ export interface UserEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface User {
+export interface Patient {
   id: ID_Output;
-  email: String;
-  password: String;
-  name?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  species?: String;
+  breed?: String;
+  sex?: String;
+  dob?: String;
+  weight?: Float;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
+export interface PatientPromise extends Promise<Patient>, Fragmentable {
   id: () => Promise<ID_Output>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-  name: () => Promise<String>;
-  posts: <T = FragmentableArray<Post>>(args?: {
-    where?: PostWhereInput;
-    orderBy?: PostOrderByInput;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  post: <T = PostPromise>() => T;
+  species: () => Promise<String>;
+  breed: () => Promise<String>;
+  sex: () => Promise<String>;
+  dob: () => Promise<String>;
+  weight: () => Promise<Float>;
+}
+
+export interface PatientSubscription
+  extends Promise<AsyncIterator<Patient>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  post: <T = PostSubscription>() => T;
+  species: () => Promise<AsyncIterator<String>>;
+  breed: () => Promise<AsyncIterator<String>>;
+  sex: () => Promise<AsyncIterator<String>>;
+  dob: () => Promise<AsyncIterator<String>>;
+  weight: () => Promise<AsyncIterator<Float>>;
+}
+
+export interface PostEdge {
+  node: Post;
+  cursor: String;
+}
+
+export interface PostEdgePromise extends Promise<PostEdge>, Fragmentable {
+  node: <T = PostPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PostEdgeSubscription
+  extends Promise<AsyncIterator<PostEdge>>,
+    Fragmentable {
+  node: <T = PostSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PatientConnection {
+  pageInfo: PageInfo;
+  edges: PatientEdge[];
+}
+
+export interface PatientConnectionPromise
+  extends Promise<PatientConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PatientEdge>>() => T;
+  aggregate: <T = AggregatePatientPromise>() => T;
+}
+
+export interface PatientConnectionSubscription
+  extends Promise<AsyncIterator<PatientConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PatientEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePatientSubscription>() => T;
+}
+
+export interface PatientSubscriptionPayload {
+  mutation: MutationType;
+  node: Patient;
+  updatedFields: String[];
+  previousValues: PatientPreviousValues;
+}
+
+export interface PatientSubscriptionPayloadPromise
+  extends Promise<PatientSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PatientPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PatientPreviousValuesPromise>() => T;
+}
+
+export interface PatientSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PatientSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PatientSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PatientPreviousValuesSubscription>() => T;
+}
+
+export interface Post {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  published: Boolean;
+  type: PostType;
+  title: String;
+  content?: String;
+}
+
+export interface PostPromise extends Promise<Post>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  published: () => Promise<Boolean>;
+  type: () => Promise<PostType>;
+  title: () => Promise<String>;
+  content: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  patient: <T = PatientPromise>() => T;
+  histories: <T = FragmentableArray<History>>(args?: {
+    where?: HistoryWhereInput;
+    orderBy?: HistoryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  messages: <T = FragmentableArray<Message>>(args?: {
+    where?: MessageWhereInput;
+    orderBy?: MessageOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1549,16 +2049,30 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   }) => T;
 }
 
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface PostSubscription
+  extends Promise<AsyncIterator<Post>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  posts: <T = Promise<AsyncIterator<PostSubscription>>>(args?: {
-    where?: PostWhereInput;
-    orderBy?: PostOrderByInput;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  published: () => Promise<AsyncIterator<Boolean>>;
+  type: () => Promise<AsyncIterator<PostType>>;
+  title: () => Promise<AsyncIterator<String>>;
+  content: () => Promise<AsyncIterator<String>>;
+  author: <T = UserSubscription>() => T;
+  patient: <T = PatientSubscription>() => T;
+  histories: <T = Promise<AsyncIterator<HistorySubscription>>>(args?: {
+    where?: HistoryWhereInput;
+    orderBy?: HistoryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  messages: <T = Promise<AsyncIterator<MessageSubscription>>>(args?: {
+    where?: MessageWhereInput;
+    orderBy?: MessageOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1617,37 +2131,53 @@ export interface MessageSubscriptionPayloadSubscription
   previousValues: <T = MessagePreviousValuesSubscription>() => T;
 }
 
-export interface Post {
+export interface AggregateMessage {
+  count: Int;
+}
+
+export interface AggregateMessagePromise
+  extends Promise<AggregateMessage>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMessageSubscription
+  extends Promise<AsyncIterator<AggregateMessage>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregatePatient {
+  count: Int;
+}
+
+export interface AggregatePatientPromise
+  extends Promise<AggregatePatient>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePatientSubscription
+  extends Promise<AsyncIterator<AggregatePatient>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface User {
   id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  published: Boolean;
-  type: PostType;
-  title: String;
-  content?: String;
+  email: String;
+  password: String;
+  name?: String;
 }
 
-export interface PostPromise extends Promise<Post>, Fragmentable {
+export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  published: () => Promise<Boolean>;
-  type: () => Promise<PostType>;
-  title: () => Promise<String>;
-  content: () => Promise<String>;
-  author: <T = UserPromise>() => T;
-  histories: <T = FragmentableArray<History>>(args?: {
-    where?: HistoryWhereInput;
-    orderBy?: HistoryOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  messages: <T = FragmentableArray<Message>>(args?: {
-    where?: MessageWhereInput;
-    orderBy?: MessageOrderByInput;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  name: () => Promise<String>;
+  posts: <T = FragmentableArray<Post>>(args?: {
+    where?: PostWhereInput;
+    orderBy?: PostOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1656,80 +2186,22 @@ export interface PostPromise extends Promise<Post>, Fragmentable {
   }) => T;
 }
 
-export interface PostSubscription
-  extends Promise<AsyncIterator<Post>>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  published: () => Promise<AsyncIterator<Boolean>>;
-  type: () => Promise<AsyncIterator<PostType>>;
-  title: () => Promise<AsyncIterator<String>>;
-  content: () => Promise<AsyncIterator<String>>;
-  author: <T = UserSubscription>() => T;
-  histories: <T = Promise<AsyncIterator<HistorySubscription>>>(args?: {
-    where?: HistoryWhereInput;
-    orderBy?: HistoryOrderByInput;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  posts: <T = Promise<AsyncIterator<PostSubscription>>>(args?: {
+    where?: PostWhereInput;
+    orderBy?: PostOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
   }) => T;
-  messages: <T = Promise<AsyncIterator<MessageSubscription>>>(args?: {
-    where?: MessageWhereInput;
-    orderBy?: MessageOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface HistoryPreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  title?: String;
-  content?: String;
-}
-
-export interface HistoryPreviousValuesPromise
-  extends Promise<HistoryPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  title: () => Promise<String>;
-  content: () => Promise<String>;
-}
-
-export interface HistoryPreviousValuesSubscription
-  extends Promise<AsyncIterator<HistoryPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  title: () => Promise<AsyncIterator<String>>;
-  content: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PostEdge {
-  node: Post;
-  cursor: String;
-}
-
-export interface PostEdgePromise extends Promise<PostEdge>, Fragmentable {
-  node: <T = PostPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface PostEdgeSubscription
-  extends Promise<AsyncIterator<PostEdge>>,
-    Fragmentable {
-  node: <T = PostSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -1757,47 +2229,12 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface MessageConnection {
-  pageInfo: PageInfo;
-  edges: MessageEdge[];
-}
-
-export interface MessageConnectionPromise
-  extends Promise<MessageConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MessageEdge>>() => T;
-  aggregate: <T = AggregateMessagePromise>() => T;
-}
-
-export interface MessageConnectionSubscription
-  extends Promise<AsyncIterator<MessageConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMessageSubscription>() => T;
-}
-
-export interface AggregateMessage {
-  count: Int;
-}
-
-export interface AggregateMessagePromise
-  extends Promise<AggregateMessage>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateMessageSubscription
-  extends Promise<AsyncIterator<AggregateMessage>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
 */
-export type Boolean = boolean;
+export type Float = number;
+
+export type Long = string;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -1805,7 +2242,15 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 export type ID_Input = string | number;
 export type ID_Output = string;
 
-export type Long = string;
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 DateTime scalar input type, allowing Date
@@ -1816,11 +2261,6 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
@@ -1838,6 +2278,10 @@ export const models: Model[] = [
   },
   {
     name: 'Message',
+    embedded: false,
+  },
+  {
+    name: 'Patient',
     embedded: false,
   },
   {

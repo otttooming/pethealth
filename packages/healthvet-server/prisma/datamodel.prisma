@@ -12,8 +12,21 @@ type Post {
   title: String!
   content: String
   author: User!
+  patient: Patient
   histories: [History!]!
   messages: [Message!]!
+}
+
+type Patient {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  post: Post!
+  species: String
+  breed: String
+  sex: String
+  dob: String
+  weight: Float
 }
 
 type User {
