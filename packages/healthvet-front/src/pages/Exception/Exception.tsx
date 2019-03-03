@@ -11,6 +11,7 @@ const Logo = styled.img`
   top: 0;
   padding: 56px;
   position: absolute;
+  width: 20%;
 `;
 
 const Image = styled.img`
