@@ -7,7 +7,7 @@
   "files": [
     "dist"
   ],
-  "scripts": {
+  "scripts_disabled": {
     "start": "npm-run-all storybook build:watch --parallel",
     "docs": "NODE_ENV=production webpack -p",
     "storybook": "start-storybook --ci --quiet -p 9001 -c .storybook",
