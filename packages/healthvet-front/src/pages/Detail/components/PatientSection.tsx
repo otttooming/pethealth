@@ -151,7 +151,7 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
         <Top>
           <Icon name={IconName.PAW} size={IconSize.HUGE} />
         </Top>
-        <Title>Berry Dog II</Title>
+        <Title />
 
         <Table>
           <tbody>
