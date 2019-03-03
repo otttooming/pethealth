@@ -123,7 +123,7 @@ export default class TimelineSection extends React.Component<
             <TitleWrapper isAlternativeLayout={isAlternativeLayout}>
               {isAlternativeLayout && <NavigationBack to="/browse" />}
 
-              <Title>Patient medical history</Title>
+              <Title>Medical history</Title>
             </TitleWrapper>
             <UnsortedList>
               {this.renderCardItems(data)}
