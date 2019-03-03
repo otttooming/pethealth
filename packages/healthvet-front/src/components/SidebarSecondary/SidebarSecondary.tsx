@@ -2,8 +2,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 import ControlBar from '../../components/ControlBar/ControlBar';
 import cat from './kass.svg';
+import bird from './bird.svg';
 
-export interface RightSectionProps {}
+export interface RightSectionProps {
+  type: string;
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,8 +20,7 @@ const Wrapper = styled.div`
 
 const Image = styled.img`
   align-self: flex-end;
-  width: 150px;
-  height: 150px;
+  width: 80%;
 `;
 
 export default class RightSection extends React.Component<
@@ -26,10 +28,11 @@ export default class RightSection extends React.Component<
   any
 > {
   public render() {
+    const img = this.props.type === 'cat' ? cat : bird;
     return (
       <Wrapper>
         <ControlBar />
-        <Image src={cat} alt="" />
+        <Image src={img} alt="" />
       </Wrapper>
     );
   }

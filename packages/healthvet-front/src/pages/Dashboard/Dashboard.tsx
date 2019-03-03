@@ -18,7 +18,7 @@ export default class Detail extends React.Component<DetailProps, any> {
           <FeedSection />
         </Cell>
         <Cell width={4}>
-          <SidebarSecondary />
+          <SidebarSecondary type="cat" />
         </Cell>
       </Grid>
     );
