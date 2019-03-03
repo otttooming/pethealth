@@ -92,8 +92,8 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/detail/:id" component={Detail} />
               <Route path="/detail" component={Detail} />
-              <Route path="/categories" component={Categories} />
-              <Route path="/categories/:id" component={Categories} />
+              <Route exact={true} path="/categories" component={Categories} />
+              <Route path="/categories/:id" component={Forum} />
               <Route path="/patients" component={Dashboard} />
               <Route path="/browse" component={Forum} />
               <Route component={Exception} />
