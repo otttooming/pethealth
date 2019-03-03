@@ -30,7 +30,7 @@ const Footer: React.FC<FooterProps> = props => (
     <Left>
       <Avatar size={AvatarSize.SMALL} src={avatar} />
     </Left>
-    <Name>Dr. Mari Mumm</Name>
+    <Name>Dr. Alice</Name>
   </Wrapper>
 );
 
