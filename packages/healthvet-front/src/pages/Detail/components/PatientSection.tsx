@@ -100,14 +100,18 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
     onChangeEditable: () => null,
   };
 
-  state = {
-    species: '',
-    breed: '',
-    sex: '',
-    age: '',
-    weight: '',
-    isEditable: true,
-  };
+  constructor(props: PatientSectionProps) {
+    super(props);
+
+    this.state = {
+      species: '',
+      breed: '',
+      sex: '',
+      age: '',
+      weight: '',
+      isEditable: this.getIsNew(props),
+    };
+  }
 
   handleInputChange = (event: any, type: string) => {
     const {
@@ -233,6 +237,18 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
       </Wrapper>
     );
   }
+
+  private getIsNew = (props: PatientSectionProps) => {
+    const {
+      match: { params },
+    } = props;
+
+    const { id: postId } = params;
+
+    const isNew = !Boolean(postId);
+
+    return isNew;
+  };
 
   private createDraft = async () => {
     const { mutate, history } = this.props;
