@@ -59,8 +59,8 @@ class FilterSection extends React.Component<FilterSectionProps> {
     } = this.props;
 
     const hasTitle: boolean = Boolean(title);
-    const isForum: boolean = pathname.includes('forum');
-    const to: string = isForum ? '/post' : '/detail';
+    const isPatients: boolean = pathname.includes('patients');
+    const to: string = isPatients ? '/detail' : '/post';
 
     return (
       <Wrapper>
