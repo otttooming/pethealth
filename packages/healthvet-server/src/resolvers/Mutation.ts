@@ -67,6 +67,20 @@ export const Mutation: MutationResolvers.Type = {
       author: { connect: { id: userId } },
     });
   },
+  createPatient: async (
+    parent,
+    { postId, weight, dob, sex, breed, species },
+    context,
+  ) => {
+    return context.prisma.createPatient({
+      weight,
+      dob,
+      sex,
+      breed,
+      species,
+      post: { connect: { id: postId } },
+    });
+  },
   deleteHistory: async (parent, { id }, context) => {
     return context.prisma.deleteHistory({ id });
   },

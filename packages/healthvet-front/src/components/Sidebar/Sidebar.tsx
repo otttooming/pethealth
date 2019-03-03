@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import cat from './logo-valge.svg';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export interface SidebarProps {
   isCollapsed: boolean;
@@ -27,7 +27,7 @@ const MinimalWrapper = styled.aside`
 `;
 
 const Image = styled.img`
-  width: 80%;
+  width: 100%;
   margin-top: 24px;
 `;
 
@@ -62,6 +62,11 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+const HomeLink = styled(Link)`
+  margin: 0;
+  width: 80%;
+`;
+
 export default class Sidebar extends React.Component<SidebarProps, any> {
   static defaultProps = {
     isCollapsed: false,
@@ -75,7 +80,14 @@ export default class Sidebar extends React.Component<SidebarProps, any> {
     }
     return (
       <Wrapper>
-        <Image src={cat} />
+        <HomeLink
+          to={{
+            pathname: '/',
+          }}
+        >
+          <Image src={cat} />
+        </HomeLink>
+
         <Menu>
           <MenuItem className="menuItem">
             <StyledNavLink

@@ -82,6 +82,27 @@ export type CreateMessageCreateMessage = {
   content: Maybe<string>;
 };
 
+export type CreatePatientVariables = {
+  id: string;
+  weight?: Maybe<number>;
+  sex?: Maybe<string>;
+  dob?: Maybe<string>;
+  species?: Maybe<string>;
+  breed?: Maybe<string>;
+};
+
+export type CreatePatientMutation = {
+  __typename?: 'Mutation';
+
+  createPatient: Maybe<CreatePatientCreatePatient>;
+};
+
+export type CreatePatientCreatePatient = {
+  __typename?: 'Patient';
+
+  id: string;
+};
+
 export type DashboardListVariables = {};
 
 export type DashboardListQuery = {
@@ -446,6 +467,66 @@ export function CreateMessageHOC<TProps, TChildProps = any>(
     CreateMessageVariables,
     CreateMessageProps<TChildProps>
   >(CreateMessageDocument, operationOptions);
+}
+export const CreatePatientDocument = gql`
+  mutation createPatient(
+    $id: ID!
+    $weight: Float
+    $sex: String
+    $dob: String
+    $species: String
+    $breed: String
+  ) {
+    createPatient(
+      postId: $id
+      weight: $weight
+      sex: $sex
+      dob: $dob
+      species: $species
+      breed: $breed
+    ) {
+      id
+    }
+  }
+`;
+export class CreatePatientComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<CreatePatientMutation, CreatePatientVariables>
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<CreatePatientMutation, CreatePatientVariables>
+        mutation={CreatePatientDocument}
+        {...(this as any)['props'] as any}
+      />
+    );
+  }
+}
+export type CreatePatientProps<TChildProps = any> = Partial<
+  ReactApollo.MutateProps<CreatePatientMutation, CreatePatientVariables>
+> &
+  TChildProps;
+export type CreatePatientMutationFn = ReactApollo.MutationFn<
+  CreatePatientMutation,
+  CreatePatientVariables
+>;
+export function CreatePatientHOC<TProps, TChildProps = any>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        CreatePatientMutation,
+        CreatePatientVariables,
+        CreatePatientProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.graphql<
+    TProps,
+    CreatePatientMutation,
+    CreatePatientVariables,
+    CreatePatientProps<TChildProps>
+  >(CreatePatientDocument, operationOptions);
 }
 export const DashboardListDocument = gql`
   query dashboardList {
