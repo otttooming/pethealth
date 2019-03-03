@@ -15,7 +15,7 @@ const authLink = setContext(async (_, { headers }) => {
 });
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/',
+  uri: 'http://157.230.127.21:4000/',
   credentials: 'same-origin',
 });
 
