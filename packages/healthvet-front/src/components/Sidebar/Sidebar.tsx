@@ -27,8 +27,8 @@ const MinimalWrapper = styled.aside`
 `;
 
 const Image = styled.img`
-  width: 90%;
-  margin-top: 8px;
+  width: 100%;
+  margin-top: 0;
 `;
 
 const Menu = styled.ul`
@@ -44,6 +44,10 @@ const MenuItem = styled.li`
   color: white;
 `;
 
+const HomeLink = styled(Link)`
+  margin: 0;
+`;
+
 export default class Sidebar extends React.Component<SidebarProps, any> {
   static defaultProps = {
     isCollapsed: false,
@@ -57,7 +61,14 @@ export default class Sidebar extends React.Component<SidebarProps, any> {
     }
     return (
       <Wrapper>
-        <Image src={cat} />
+        <HomeLink
+          to={{
+            pathname: '/',
+          }}
+        >
+          <Image src={cat} />
+        </HomeLink>
+
         <Menu>
           <Link
             to={{
