@@ -1,0 +1,19 @@
+mutation createPatient(
+  $id: ID!
+  $weight: Float
+  $sex: String
+  $dob: String
+  $species: String
+  $breed: String
+) {
+  createPatient(
+    postId: $id
+    weight: $weight
+    sex: $sex
+    dob: $dob
+    species: $species
+    breed: $breed
+  ) {
+    id
+  }
+}
