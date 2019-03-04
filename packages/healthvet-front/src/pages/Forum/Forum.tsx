@@ -18,7 +18,7 @@ export default class Forum extends React.Component<ForumProps, any> {
           <FeedSection />
         </Cell>
         <Cell width={4}>
-          <SidebarSecondary />
+          <SidebarSecondary type="bird" />
         </Cell>
       </Grid>
     );

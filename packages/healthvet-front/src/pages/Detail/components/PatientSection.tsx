@@ -151,7 +151,7 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
         <Top>
           <Icon name={IconName.PAW} size={IconSize.HUGE} />
         </Top>
-        <Title>Berry Dog II</Title>
+        <Title />
 
         <Table>
           <tbody>
@@ -254,7 +254,9 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
   private createDraft = async () => {
     const { mutate, history } = this.props;
 
-    const options = { variables: { title: 'ABC', type: PostType.ForumPost } };
+    const options = {
+      variables: { title: 'Patient', type: PostType.ForumPost },
+    };
 
     const response = await mutate(options);
 

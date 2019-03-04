@@ -26,7 +26,7 @@ const Title = styled.h1`
   font-weight: bold;
   line-height: 22px;
   font-size: 24px;
-  margin-bottom: 30px;
+  margin-bottom: 26px;
 
   color: rgba(0, 0, 0, 0.6);
 `;
@@ -38,7 +38,7 @@ const Name = styled.p`
   color: rgb(0, 0, 0, 0.2);
   text-align: center;
   margin-top: 10px;
-  margin-bottom: 0;
+  margin-bottom: 5px;
   font-weight: bold;
 `;
 

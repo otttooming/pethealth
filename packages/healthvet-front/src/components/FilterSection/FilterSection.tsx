@@ -73,12 +73,15 @@ class FilterSection extends React.Component<FilterSectionProps> {
           </RightBottom>
         </Left>
         <Right>
-          <LeftTop>
-            <Link to={to}>
-              <Button as={ButtonType.SPAN}>Post</Button>
-            </Link>
-          </LeftTop>
-          <Icon name={IconName.SQUAREBLOCKS} />
+          <Link
+            to={to}
+            style={{
+              marginTop: '36px',
+              marginRight: '12px',
+            }}
+          >
+            <Button as={ButtonType.SPAN}>Post</Button>
+          </Link>
         </Right>
       </Wrapper>
     );

@@ -226,8 +226,8 @@ interface State {
 
 class Form extends React.Component<any, State> {
   state = {
-    password: '',
-    email: '',
+    password: 'secret42',
+    email: 'alice@prisma.io',
   };
 
   render() {
@@ -242,9 +242,17 @@ class Form extends React.Component<any, State> {
                 <FlexList>
                   <LoginText>Log in</LoginText>
                   <LoginLabel>Username</LoginLabel>
-                  <InputField type="text" onChange={this.setEmail} />
+                  <InputField
+                    value="alice@prisma.io"
+                    type="text"
+                    onChange={this.setEmail}
+                  />
                   <LoginLabel>Password</LoginLabel>
-                  <InputField type="password" onChange={this.setPassword} />
+                  <InputField
+                    value="secret42"
+                    type="password"
+                    onChange={this.setPassword}
+                  />
                   <div>
                     {isLoginSuccessful && <Redirect to="/patients" />}
 
