@@ -4,7 +4,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile.node
+      dockerfile: Dockerfile
       args:
         PACKAGE_PATH: packages/healthvet-server
         WORKING_DIR: /usr/src/
@@ -23,7 +23,7 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: Dockerfile.node
+      dockerfile: Dockerfile
       args:
         PACKAGE_PATH: packages/healthvet-front
         WORKING_DIR: /usr/src/
