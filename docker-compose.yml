@@ -1,0 +1,45 @@
+version: '3.5'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        PACKAGE_PATH: packages/healthvet-server
+        WORKING_DIR: /usr/src/
+    expose:
+      - 4000
+    ports:
+      - 4000:4000
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - ./common.env
+    volumes:
+      - ./packages/healthvet-server:/usr/src
+    command: ['yarn', 'start:docker']
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        PACKAGE_PATH: packages/healthvet-front
+        WORKING_DIR: /usr/src/
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_ENV=development
+      - BACKEND=api:4000
+      - HTTPS=true
+      - NODE_PATH=/usr/src/
+    env_file:
+      - ./common.env
+    volumes:
+      - ./packages/healthvet-front:/usr/src
+    depends_on:
+      - api
+    command: ['yarn', 'start:docker']

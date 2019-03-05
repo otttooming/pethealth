@@ -23,6 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:docker": "yarn install && yarn run start",
     "build": "react-scripts build",
     "generate": "gql-gen",
     "test": "react-scripts test",

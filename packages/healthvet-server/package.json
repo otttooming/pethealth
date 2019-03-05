@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
+    "start:docker": "yarn install && yarn run start",
     "generate": "graphqlgen"
   },
   "dependencies": {
