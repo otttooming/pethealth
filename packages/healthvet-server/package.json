@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "node dist/src/index.js",
     "start:docker": "yarn install && yarn run start",
-    "generate": "graphqlgen"
+    "dist": "yarn run clean && tsc && yarn run copy-static-assets",
+    "generate": "graphqlgen",
+    "clean": "rimraf dist && rimraf build",
+    "copy-static-assets": "ts-node copyStaticAssets.ts",
+    "now-build": "yarn run dist"
   },
   "dependencies": {
     "bcrypt": "3.0.4",
@@ -19,8 +23,11 @@
     "@types/bcrypt": "3.0.0",
     "@types/graphql": "14.0.7",
     "@types/jsonwebtoken": "8.3.0",
+    "@types/shelljs": "^0.7.8",
     "@types/ws": "6.0.1",
     "graphqlgen": "0.6.0-rc9",
+    "rimraf": "^2.6.3",
+    "shelljs": "^0.8.1",
     "ts-node": "8.0.2",
     "typescript": "3.3.3333"
   }

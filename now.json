@@ -6,9 +6,17 @@
       "src": "packages/healthvet-front/package.json",
       "use": "@now/static-build",
       "config": { "distDir": "build" }
+    },
+    {
+      "src": "packages/healthvet-server/dist/src/index.js",
+      "use": "@now/node-server"
     }
   ],
   "routes": [
+    {
+      "src": "^/graphql",
+      "dest": "packages/healthvet-server/dist/src/index.js"
+    },
     {
       "src": "^/static/(.*)",
       "dest": "packages/healthvet-front/static/$1"
