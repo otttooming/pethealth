@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { default as AntException } from 'ant-design-pro/lib/Exception';
 import styled from 'styled-components';
 import img_404_duck from './duck.webp';
 import img_404_hamster from './hamster.webp';
