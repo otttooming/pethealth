@@ -10,7 +10,7 @@
 
 ### Frontend
 
-[@healthvet/front](./packages/healthvet-front)
+[@healthvet/front](./packages/client-fe)
 
 React frontend.
 
@@ -18,4 +18,4 @@ React frontend.
 
 Prisma GraphQL server
 
-[@healthvet/server](./packages/healthvet-server)
+[@healthvet/server](./packages/client-be)

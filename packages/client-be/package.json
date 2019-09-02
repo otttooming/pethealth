@@ -1,5 +1,5 @@
 {
-  "name": "graphql-auth",
+  "name": "@pethealth/client-be",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {

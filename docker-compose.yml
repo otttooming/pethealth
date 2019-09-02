@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        PACKAGE_PATH: packages/healthvet-server
+        PACKAGE_PATH: packages/client-be
         WORKING_DIR: /usr/src/
     expose:
       - 4000
@@ -17,7 +17,7 @@ services:
     env_file:
       - ./common.env
     volumes:
-      - ./packages/healthvet-server:/usr/src
+      - ./packages/client-be:/usr/src
     command: ['yarn', 'start:docker']
 
   frontend:
@@ -25,7 +25,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        PACKAGE_PATH: packages/healthvet-front
+        PACKAGE_PATH: packages/client-fe
         WORKING_DIR: /usr/src/
     expose:
       - 3000
@@ -39,7 +39,7 @@ services:
     env_file:
       - ./common.env
     volumes:
-      - ./packages/healthvet-front:/usr/src
+      - ./packages/client-fe:/usr/src
     depends_on:
       - api
     command: ['yarn', 'start:docker']
