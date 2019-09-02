@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
-import Button from 'antd/lib/button';
-import styled from 'styled-components';
 import Landing from './pages/Landing/Landing';
 import Exception from './pages/Exception/Exception';
 import Dashboard from './pages/Dashboard/Dashboard';
@@ -9,26 +7,9 @@ import Login from './pages/Login/Login';
 import Categories from './pages/Categories/Categories';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import client from './utils/apollo';
-
-import logo from './doggo1.png';
 import './App.css';
 import Detail from './pages/Detail/Detail';
 import Forum from './pages/Forum';
-
-const RedComponent = styled.div`
-  background: blue;
-  color: red;
-`;
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-      <Button type="primary">Button</Button>
-      <RedComponent>ABC</RedComponent>
-    </div>
-  );
-}
 
 function About() {
   return (
