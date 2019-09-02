@@ -2305,7 +2305,7 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `https://eu1.prisma.sh/healthvet/client-be/dev`,
+  endpoint: `https://eu1.prisma.sh/healthvet/healthvet-server/dev`,
   secret: `appsecret321`,
 });
 export const prisma = new Prisma();
