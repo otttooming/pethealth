@@ -10,6 +10,7 @@ import client from './utils/apollo';
 import './App.css';
 import Detail from './pages/Detail/Detail';
 import Forum from './pages/Forum';
+import { GlobalStyle } from '@coterminous/ui';
 
 function About() {
   return (
@@ -60,6 +61,8 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
+        <GlobalStyle />
+
         <Router>
           <div>
             <Switch>
