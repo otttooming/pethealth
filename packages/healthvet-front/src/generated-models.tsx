@@ -301,7 +301,7 @@ export class AuthLoginComponent extends React.Component<
     return (
       <ReactApollo.Mutation<AuthLoginMutation, AuthLoginVariables>
         mutation={AuthLoginDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -346,7 +346,7 @@ export class CreateDraftComponent extends React.Component<
     return (
       <ReactApollo.Mutation<CreateDraftMutation, CreateDraftVariables>
         mutation={CreateDraftDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -392,7 +392,7 @@ export class CreateHistoryComponent extends React.Component<
     return (
       <ReactApollo.Mutation<CreateHistoryMutation, CreateHistoryVariables>
         mutation={CreateHistoryDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -438,7 +438,7 @@ export class CreateMessageComponent extends React.Component<
     return (
       <ReactApollo.Mutation<CreateMessageMutation, CreateMessageVariables>
         mutation={CreateMessageDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -498,7 +498,7 @@ export class CreatePatientComponent extends React.Component<
     return (
       <ReactApollo.Mutation<CreatePatientMutation, CreatePatientVariables>
         mutation={CreatePatientDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -547,7 +547,7 @@ export class DashboardListComponent extends React.Component<
     return (
       <ReactApollo.Query<DashboardListQuery, DashboardListVariables>
         query={DashboardListDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -589,7 +589,7 @@ export class DeleteHistoryComponent extends React.Component<
     return (
       <ReactApollo.Mutation<DeleteHistoryMutation, DeleteHistoryVariables>
         mutation={DeleteHistoryDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -633,7 +633,7 @@ export class DeletePostComponent extends React.Component<
     return (
       <ReactApollo.Mutation<DeletePostMutation, DeletePostVariables>
         mutation={DeletePostDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -685,7 +685,7 @@ export class GetDashboardListComponent extends React.Component<
     return (
       <ReactApollo.Query<GetDashboardListQuery, GetDashboardListVariables>
         query={GetDashboardListDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -732,7 +732,7 @@ export class GetHistoriesByPostComponent extends React.Component<
     return (
       <ReactApollo.Query<GetHistoriesByPostQuery, GetHistoriesByPostVariables>
         query={GetHistoriesByPostDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -777,7 +777,7 @@ export class GetMessagesByPostComponent extends React.Component<
     return (
       <ReactApollo.Query<GetMessagesByPostQuery, GetMessagesByPostVariables>
         query={GetMessagesByPostDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
@@ -826,7 +826,7 @@ export class GetPostComponent extends React.Component<
     return (
       <ReactApollo.Query<GetPostQuery, GetPostVariables>
         query={GetPostDocument}
-        {...(this as any)['props'] as any}
+        {...((this as any)['props'] as any)}
       />
     );
   }
