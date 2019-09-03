@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-components';
 import Landing from './pages/Landing/Landing';
 import Exception from './pages/Exception/Exception';
 import Dashboard from './pages/Dashboard/Dashboard';
