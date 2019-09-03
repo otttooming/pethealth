@@ -8,7 +8,7 @@ import {
   CreateHistoryMutation,
   CreateHistoryMutationVariables,
 } from '../../../generated-models';
-import { MutateProps } from 'react-apollo';
+import { MutateProps } from '@apollo/react-hoc';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 interface Params {

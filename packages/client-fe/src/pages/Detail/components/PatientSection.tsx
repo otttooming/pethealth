@@ -16,7 +16,7 @@ import {
   PostType,
 } from '../../../generated-models';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
-import { MutateProps } from 'react-apollo';
+import { MutateProps } from '@apollo/react-hoc';
 import EditButton from './EditButton';
 
 interface Params {

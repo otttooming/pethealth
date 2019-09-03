@@ -8,7 +8,7 @@ import {
   CreatePatientMutation,
   CreatePatientMutationVariables,
 } from '../../../generated-models';
-import { MutateProps } from 'react-apollo';
+import { MutateProps } from '@apollo/react-hoc';
 import { withRouter, RouteComponentProps, Omit } from 'react-router';
 import Button from '../../../components/Button';
 
