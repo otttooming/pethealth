@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-components": "^3.0.1",
+    "@apollo/react-hoc": "^3.0.1",
     "@coterminous/ui": "github:otttooming/coterminous-ui#1643ad8",
     "@types/jest": "24.0.7",
     "@types/node": "11.9.5",
