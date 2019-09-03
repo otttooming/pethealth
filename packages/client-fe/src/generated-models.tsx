@@ -1,291 +1,304 @@
+import gql from 'graphql-tag';
+import * as ApolloReactCommon from '@apollo/react-common';
+import * as React from 'react';
+import * as ApolloReactComponents from '@apollo/react-components';
+import * as ApolloReactHoc from '@apollo/react-hoc';
 export type Maybe<T> = T | null;
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars = {
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  DateTime: any;
+};
+
+export type AuthPayload = {
+  __typename?: 'AuthPayload';
+  token: Scalars['String'];
+  user: User;
+};
+
+export type History = {
+  __typename?: 'History';
+  id: Scalars['ID'];
+  author: User;
+  post: Post;
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  title?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+};
+
+export type Message = {
+  __typename?: 'Message';
+  id: Scalars['ID'];
+  author: User;
+  post: Post;
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  content?: Maybe<Scalars['String']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createDraft: Post;
+  deletePost?: Maybe<Post>;
+  publish?: Maybe<Post>;
+  signup: AuthPayload;
+  login: AuthPayload;
+  createMessage: Message;
+  createHistory: History;
+  createPatient?: Maybe<Patient>;
+  deleteHistory: History;
+};
+
+export type MutationCreateDraftArgs = {
+  title: Scalars['String'];
+  content?: Maybe<Scalars['String']>;
+  type?: Maybe<PostType>;
+};
+
+export type MutationDeletePostArgs = {
+  id: Scalars['ID'];
+};
+
+export type MutationPublishArgs = {
+  id: Scalars['ID'];
+};
+
+export type MutationSignupArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+};
+
+export type MutationLoginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type MutationCreateMessageArgs = {
+  postId: Scalars['ID'];
+  content: Scalars['String'];
+};
+
+export type MutationCreateHistoryArgs = {
+  postId: Scalars['ID'];
+  title: Scalars['String'];
+  content: Scalars['String'];
+};
+
+export type MutationCreatePatientArgs = {
+  postId: Scalars['ID'];
+  species?: Maybe<Scalars['String']>;
+  breed?: Maybe<Scalars['String']>;
+  sex?: Maybe<Scalars['String']>;
+  dob?: Maybe<Scalars['String']>;
+  weight?: Maybe<Scalars['Float']>;
+};
+
+export type MutationDeleteHistoryArgs = {
+  id: Scalars['ID'];
+};
+
+export type Patient = {
+  __typename?: 'Patient';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  post: Post;
+  species?: Maybe<Scalars['String']>;
+  breed?: Maybe<Scalars['String']>;
+  sex?: Maybe<Scalars['String']>;
+  dob?: Maybe<Scalars['String']>;
+  weight?: Maybe<Scalars['Float']>;
+};
+
+export type Post = {
+  __typename?: 'Post';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  published: Scalars['Boolean'];
+  type: PostType;
+  title: Scalars['String'];
+  content?: Maybe<Scalars['String']>;
+  author: User;
+  patient?: Maybe<Patient>;
+  histories: Array<History>;
+  messages: Array<Message>;
+};
 
 export enum PostType {
   MedicalRecord = 'MEDICAL_RECORD',
   ForumPost = 'FORUM_POST',
 }
 
-export type DateTime = any;
-
-// ====================================================
-// Documents
-// ====================================================
-
-export type AuthLoginVariables = {
-  email: string;
-  password: string;
+export type Query = {
+  __typename?: 'Query';
+  me?: Maybe<User>;
+  feed: Array<Post>;
+  filterPosts: Array<Post>;
+  post?: Maybe<Post>;
+  listMessagesByPost: Array<Message>;
+  listHistoriesByPost: Array<History>;
 };
 
-export type AuthLoginMutation = {
-  __typename?: 'Mutation';
-
-  login: AuthLoginLogin;
+export type QueryFilterPostsArgs = {
+  searchString?: Maybe<Scalars['String']>;
 };
 
-export type AuthLoginLogin = {
-  __typename?: 'AuthPayload';
-
-  token: string;
+export type QueryPostArgs = {
+  id: Scalars['ID'];
 };
 
-export type CreateDraftVariables = {
-  title: string;
+export type QueryListMessagesByPostArgs = {
+  postId: Scalars['ID'];
+};
+
+export type QueryListHistoriesByPostArgs = {
+  postId: Scalars['ID'];
+};
+
+export type User = {
+  __typename?: 'User';
+  id: Scalars['ID'];
+  email: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  posts: Array<Post>;
+};
+export type AuthLoginMutationVariables = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type AuthLoginMutation = { __typename?: 'Mutation' } & {
+  login: { __typename?: 'AuthPayload' } & Pick<AuthPayload, 'token'>;
+};
+
+export type CreateDraftMutationVariables = {
+  title: Scalars['String'];
   type?: Maybe<PostType>;
 };
 
-export type CreateDraftMutation = {
-  __typename?: 'Mutation';
-
-  createDraft: CreateDraftCreateDraft;
+export type CreateDraftMutation = { __typename?: 'Mutation' } & {
+  createDraft: { __typename?: 'Post' } & Pick<Post, 'id' | 'title'>;
 };
 
-export type CreateDraftCreateDraft = {
-  __typename?: 'Post';
-
-  id: string;
-
-  title: string;
+export type CreateHistoryMutationVariables = {
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  content: Scalars['String'];
 };
 
-export type CreateHistoryVariables = {
-  id: string;
-  title: string;
-  content: string;
+export type CreateHistoryMutation = { __typename?: 'Mutation' } & {
+  createHistory: { __typename?: 'History' } & Pick<History, 'id'>;
 };
 
-export type CreateHistoryMutation = {
-  __typename?: 'Mutation';
-
-  createHistory: CreateHistoryCreateHistory;
+export type CreateMessageMutationVariables = {
+  id: Scalars['ID'];
+  content: Scalars['String'];
 };
 
-export type CreateHistoryCreateHistory = {
-  __typename?: 'History';
-
-  id: string;
+export type CreateMessageMutation = { __typename?: 'Mutation' } & {
+  createMessage: { __typename?: 'Message' } & Pick<Message, 'content'>;
 };
 
-export type CreateMessageVariables = {
-  id: string;
-  content: string;
+export type CreatePatientMutationVariables = {
+  id: Scalars['ID'];
+  weight?: Maybe<Scalars['Float']>;
+  sex?: Maybe<Scalars['String']>;
+  dob?: Maybe<Scalars['String']>;
+  species?: Maybe<Scalars['String']>;
+  breed?: Maybe<Scalars['String']>;
 };
 
-export type CreateMessageMutation = {
-  __typename?: 'Mutation';
-
-  createMessage: CreateMessageCreateMessage;
+export type CreatePatientMutation = { __typename?: 'Mutation' } & {
+  createPatient: Maybe<{ __typename?: 'Patient' } & Pick<Patient, 'id'>>;
 };
 
-export type CreateMessageCreateMessage = {
-  __typename?: 'Message';
+export type DashboardListQueryVariables = {};
 
-  content: Maybe<string>;
+export type DashboardListQuery = { __typename?: 'Query' } & {
+  feed: Array<
+    { __typename?: 'Post' } & Pick<Post, 'id' | 'content' | 'createdAt'> & {
+        author: { __typename?: 'User' } & Pick<User, 'name'>;
+      }
+  >;
 };
 
-export type CreatePatientVariables = {
-  id: string;
-  weight?: Maybe<number>;
-  sex?: Maybe<string>;
-  dob?: Maybe<string>;
-  species?: Maybe<string>;
-  breed?: Maybe<string>;
+export type DeleteHistoryMutationVariables = {
+  id: Scalars['ID'];
 };
 
-export type CreatePatientMutation = {
-  __typename?: 'Mutation';
-
-  createPatient: Maybe<CreatePatientCreatePatient>;
+export type DeleteHistoryMutation = { __typename?: 'Mutation' } & {
+  deleteHistory: { __typename?: 'History' } & Pick<History, 'id'>;
 };
 
-export type CreatePatientCreatePatient = {
-  __typename?: 'Patient';
-
-  id: string;
+export type DeletePostMutationVariables = {
+  id: Scalars['ID'];
 };
 
-export type DashboardListVariables = {};
-
-export type DashboardListQuery = {
-  __typename?: 'Query';
-
-  feed: DashboardListFeed[];
+export type DeletePostMutation = { __typename?: 'Mutation' } & {
+  deletePost: Maybe<{ __typename?: 'Post' } & Pick<Post, 'id'>>;
 };
 
-export type DashboardListFeed = {
-  __typename?: 'Post';
+export type GetDashboardListQueryVariables = {};
 
-  id: string;
-
-  content: Maybe<string>;
-
-  createdAt: DateTime;
-
-  author: DashboardListAuthor;
+export type GetDashboardListQuery = { __typename?: 'Query' } & {
+  feed: Array<
+    { __typename?: 'Post' } & Pick<
+      Post,
+      'id' | 'title' | 'content' | 'createdAt'
+    > & { author: { __typename?: 'User' } & Pick<User, 'name'> }
+  >;
 };
 
-export type DashboardListAuthor = {
-  __typename?: 'User';
-
-  name: Maybe<string>;
+export type GetHistoriesByPostQueryVariables = {
+  id: Scalars['ID'];
 };
 
-export type DeleteHistoryVariables = {
-  id: string;
+export type GetHistoriesByPostQuery = { __typename?: 'Query' } & {
+  listHistoriesByPost: Array<
+    { __typename?: 'History' } & Pick<
+      History,
+      'title' | 'content' | 'createdAt'
+    > & { author: { __typename?: 'User' } & Pick<User, 'name'> }
+  >;
 };
 
-export type DeleteHistoryMutation = {
-  __typename?: 'Mutation';
-
-  deleteHistory: DeleteHistoryDeleteHistory;
+export type GetMessagesByPostQueryVariables = {
+  id: Scalars['ID'];
 };
 
-export type DeleteHistoryDeleteHistory = {
-  __typename?: 'History';
-
-  id: string;
+export type GetMessagesByPostQuery = { __typename?: 'Query' } & {
+  listMessagesByPost: Array<
+    { __typename?: 'Message' } & Pick<Message, 'content'> & {
+        author: { __typename?: 'User' } & Pick<User, 'name'>;
+      }
+  >;
 };
 
-export type DeletePostVariables = {
-  id: string;
+export type GetPostQueryVariables = {
+  id: Scalars['ID'];
 };
 
-export type DeletePostMutation = {
-  __typename?: 'Mutation';
-
-  deletePost: Maybe<DeletePostDeletePost>;
+export type GetPostQuery = { __typename?: 'Query' } & {
+  post: Maybe<
+    { __typename?: 'Post' } & Pick<Post, 'id' | 'title'> & {
+        histories: Array<
+          { __typename?: 'History' } & Pick<
+            History,
+            'title' | 'content' | 'createdAt'
+          >
+        >;
+        messages: Array<{ __typename?: 'Message' } & Pick<Message, 'content'>>;
+      }
+  >;
 };
-
-export type DeletePostDeletePost = {
-  __typename?: 'Post';
-
-  id: string;
-};
-
-export type GetDashboardListVariables = {};
-
-export type GetDashboardListQuery = {
-  __typename?: 'Query';
-
-  feed: GetDashboardListFeed[];
-};
-
-export type GetDashboardListFeed = {
-  __typename?: 'Post';
-
-  id: string;
-
-  title: string;
-
-  content: Maybe<string>;
-
-  createdAt: DateTime;
-
-  author: GetDashboardListAuthor;
-};
-
-export type GetDashboardListAuthor = {
-  __typename?: 'User';
-
-  name: Maybe<string>;
-};
-
-export type GetHistoriesByPostVariables = {
-  id: string;
-};
-
-export type GetHistoriesByPostQuery = {
-  __typename?: 'Query';
-
-  listHistoriesByPost: GetHistoriesByPostListHistoriesByPost[];
-};
-
-export type GetHistoriesByPostListHistoriesByPost = {
-  __typename?: 'History';
-
-  title: Maybe<string>;
-
-  content: Maybe<string>;
-
-  createdAt: DateTime;
-
-  author: GetHistoriesByPostAuthor;
-};
-
-export type GetHistoriesByPostAuthor = {
-  __typename?: 'User';
-
-  name: Maybe<string>;
-};
-
-export type GetMessagesByPostVariables = {
-  id: string;
-};
-
-export type GetMessagesByPostQuery = {
-  __typename?: 'Query';
-
-  listMessagesByPost: GetMessagesByPostListMessagesByPost[];
-};
-
-export type GetMessagesByPostListMessagesByPost = {
-  __typename?: 'Message';
-
-  content: Maybe<string>;
-
-  author: GetMessagesByPostAuthor;
-};
-
-export type GetMessagesByPostAuthor = {
-  __typename?: 'User';
-
-  name: Maybe<string>;
-};
-
-export type GetPostVariables = {
-  id: string;
-};
-
-export type GetPostQuery = {
-  __typename?: 'Query';
-
-  post: Maybe<GetPostPost>;
-};
-
-export type GetPostPost = {
-  __typename?: 'Post';
-
-  id: string;
-
-  title: string;
-
-  histories: GetPostHistories[];
-
-  messages: GetPostMessages[];
-};
-
-export type GetPostHistories = {
-  __typename?: 'History';
-
-  title: Maybe<string>;
-
-  content: Maybe<string>;
-
-  createdAt: DateTime;
-};
-
-export type GetPostMessages = {
-  __typename?: 'Message';
-
-  content: Maybe<string>;
-};
-
-import * as ReactApollo from 'react-apollo';
-import * as React from 'react';
-import gql from 'graphql-tag';
-
-// ====================================================
-// Components
-// ====================================================
 
 export const AuthLoginDocument = gql`
   mutation authLogin($email: String!, $password: String!) {
@@ -294,43 +307,55 @@ export const AuthLoginDocument = gql`
     }
   }
 `;
-export class AuthLoginComponent extends React.Component<
-  Partial<ReactApollo.MutationProps<AuthLoginMutation, AuthLoginVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<AuthLoginMutation, AuthLoginVariables>
-        mutation={AuthLoginDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type AuthLoginProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<AuthLoginMutation, AuthLoginVariables>
+export type AuthLoginMutationFn = ApolloReactCommon.MutationFunction<
+  AuthLoginMutation,
+  AuthLoginMutationVariables
+>;
+export type AuthLoginComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    AuthLoginMutation,
+    AuthLoginMutationVariables
+  >,
+  'mutation'
+>;
+
+export const AuthLoginComponent = (props: AuthLoginComponentProps) => (
+  <ApolloReactComponents.Mutation<AuthLoginMutation, AuthLoginMutationVariables>
+    mutation={AuthLoginDocument}
+    {...props}
+  />
+);
+
+export type AuthLoginProps<TChildProps = {}> = ApolloReactHoc.MutateProps<
+  AuthLoginMutation,
+  AuthLoginMutationVariables
 > &
   TChildProps;
-export type AuthLoginMutationFn = ReactApollo.MutationFn<
-  AuthLoginMutation,
-  AuthLoginVariables
->;
-export function AuthLoginHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        AuthLoginMutation,
-        AuthLoginVariables,
-        AuthLoginProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withAuthLogin<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     AuthLoginMutation,
-    AuthLoginVariables,
+    AuthLoginMutationVariables,
     AuthLoginProps<TChildProps>
-  >(AuthLoginDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    AuthLoginMutation,
+    AuthLoginMutationVariables,
+    AuthLoginProps<TChildProps>
+  >(AuthLoginDocument, {
+    alias: 'authLogin',
+    ...operationOptions,
+  });
 }
+export type AuthLoginMutationResult = ApolloReactCommon.MutationResult<
+  AuthLoginMutation
+>;
+export type AuthLoginMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  AuthLoginMutation,
+  AuthLoginMutationVariables
+>;
 export const CreateDraftDocument = gql`
   mutation createDraft($title: String!, $type: PostType) {
     createDraft(title: $title, type: $type) {
@@ -339,43 +364,58 @@ export const CreateDraftDocument = gql`
     }
   }
 `;
-export class CreateDraftComponent extends React.Component<
-  Partial<ReactApollo.MutationProps<CreateDraftMutation, CreateDraftVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<CreateDraftMutation, CreateDraftVariables>
-        mutation={CreateDraftDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type CreateDraftProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<CreateDraftMutation, CreateDraftVariables>
+export type CreateDraftMutationFn = ApolloReactCommon.MutationFunction<
+  CreateDraftMutation,
+  CreateDraftMutationVariables
+>;
+export type CreateDraftComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    CreateDraftMutation,
+    CreateDraftMutationVariables
+  >,
+  'mutation'
+>;
+
+export const CreateDraftComponent = (props: CreateDraftComponentProps) => (
+  <ApolloReactComponents.Mutation<
+    CreateDraftMutation,
+    CreateDraftMutationVariables
+  >
+    mutation={CreateDraftDocument}
+    {...props}
+  />
+);
+
+export type CreateDraftProps<TChildProps = {}> = ApolloReactHoc.MutateProps<
+  CreateDraftMutation,
+  CreateDraftMutationVariables
 > &
   TChildProps;
-export type CreateDraftMutationFn = ReactApollo.MutationFn<
-  CreateDraftMutation,
-  CreateDraftVariables
->;
-export function CreateDraftHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        CreateDraftMutation,
-        CreateDraftVariables,
-        CreateDraftProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withCreateDraft<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     CreateDraftMutation,
-    CreateDraftVariables,
+    CreateDraftMutationVariables,
     CreateDraftProps<TChildProps>
-  >(CreateDraftDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    CreateDraftMutation,
+    CreateDraftMutationVariables,
+    CreateDraftProps<TChildProps>
+  >(CreateDraftDocument, {
+    alias: 'createDraft',
+    ...operationOptions,
+  });
 }
+export type CreateDraftMutationResult = ApolloReactCommon.MutationResult<
+  CreateDraftMutation
+>;
+export type CreateDraftMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreateDraftMutation,
+  CreateDraftMutationVariables
+>;
 export const CreateHistoryDocument = gql`
   mutation createHistory($id: ID!, $title: String!, $content: String!) {
     createHistory(postId: $id, title: $title, content: $content) {
@@ -383,45 +423,58 @@ export const CreateHistoryDocument = gql`
     }
   }
 `;
-export class CreateHistoryComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<CreateHistoryMutation, CreateHistoryVariables>
+export type CreateHistoryMutationFn = ApolloReactCommon.MutationFunction<
+  CreateHistoryMutation,
+  CreateHistoryMutationVariables
+>;
+export type CreateHistoryComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    CreateHistoryMutation,
+    CreateHistoryMutationVariables
+  >,
+  'mutation'
+>;
+
+export const CreateHistoryComponent = (props: CreateHistoryComponentProps) => (
+  <ApolloReactComponents.Mutation<
+    CreateHistoryMutation,
+    CreateHistoryMutationVariables
   >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<CreateHistoryMutation, CreateHistoryVariables>
-        mutation={CreateHistoryDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type CreateHistoryProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<CreateHistoryMutation, CreateHistoryVariables>
+    mutation={CreateHistoryDocument}
+    {...props}
+  />
+);
+
+export type CreateHistoryProps<TChildProps = {}> = ApolloReactHoc.MutateProps<
+  CreateHistoryMutation,
+  CreateHistoryMutationVariables
 > &
   TChildProps;
-export type CreateHistoryMutationFn = ReactApollo.MutationFn<
-  CreateHistoryMutation,
-  CreateHistoryVariables
->;
-export function CreateHistoryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        CreateHistoryMutation,
-        CreateHistoryVariables,
-        CreateHistoryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withCreateHistory<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     CreateHistoryMutation,
-    CreateHistoryVariables,
+    CreateHistoryMutationVariables,
     CreateHistoryProps<TChildProps>
-  >(CreateHistoryDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    CreateHistoryMutation,
+    CreateHistoryMutationVariables,
+    CreateHistoryProps<TChildProps>
+  >(CreateHistoryDocument, {
+    alias: 'createHistory',
+    ...operationOptions,
+  });
 }
+export type CreateHistoryMutationResult = ApolloReactCommon.MutationResult<
+  CreateHistoryMutation
+>;
+export type CreateHistoryMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreateHistoryMutation,
+  CreateHistoryMutationVariables
+>;
 export const CreateMessageDocument = gql`
   mutation createMessage($id: ID!, $content: String!) {
     createMessage(postId: $id, content: $content) {
@@ -429,45 +482,58 @@ export const CreateMessageDocument = gql`
     }
   }
 `;
-export class CreateMessageComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<CreateMessageMutation, CreateMessageVariables>
+export type CreateMessageMutationFn = ApolloReactCommon.MutationFunction<
+  CreateMessageMutation,
+  CreateMessageMutationVariables
+>;
+export type CreateMessageComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    CreateMessageMutation,
+    CreateMessageMutationVariables
+  >,
+  'mutation'
+>;
+
+export const CreateMessageComponent = (props: CreateMessageComponentProps) => (
+  <ApolloReactComponents.Mutation<
+    CreateMessageMutation,
+    CreateMessageMutationVariables
   >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<CreateMessageMutation, CreateMessageVariables>
-        mutation={CreateMessageDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type CreateMessageProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<CreateMessageMutation, CreateMessageVariables>
+    mutation={CreateMessageDocument}
+    {...props}
+  />
+);
+
+export type CreateMessageProps<TChildProps = {}> = ApolloReactHoc.MutateProps<
+  CreateMessageMutation,
+  CreateMessageMutationVariables
 > &
   TChildProps;
-export type CreateMessageMutationFn = ReactApollo.MutationFn<
-  CreateMessageMutation,
-  CreateMessageVariables
->;
-export function CreateMessageHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        CreateMessageMutation,
-        CreateMessageVariables,
-        CreateMessageProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withCreateMessage<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     CreateMessageMutation,
-    CreateMessageVariables,
+    CreateMessageMutationVariables,
     CreateMessageProps<TChildProps>
-  >(CreateMessageDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    CreateMessageMutation,
+    CreateMessageMutationVariables,
+    CreateMessageProps<TChildProps>
+  >(CreateMessageDocument, {
+    alias: 'createMessage',
+    ...operationOptions,
+  });
 }
+export type CreateMessageMutationResult = ApolloReactCommon.MutationResult<
+  CreateMessageMutation
+>;
+export type CreateMessageMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreateMessageMutation,
+  CreateMessageMutationVariables
+>;
 export const CreatePatientDocument = gql`
   mutation createPatient(
     $id: ID!
@@ -489,45 +555,58 @@ export const CreatePatientDocument = gql`
     }
   }
 `;
-export class CreatePatientComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<CreatePatientMutation, CreatePatientVariables>
+export type CreatePatientMutationFn = ApolloReactCommon.MutationFunction<
+  CreatePatientMutation,
+  CreatePatientMutationVariables
+>;
+export type CreatePatientComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    CreatePatientMutation,
+    CreatePatientMutationVariables
+  >,
+  'mutation'
+>;
+
+export const CreatePatientComponent = (props: CreatePatientComponentProps) => (
+  <ApolloReactComponents.Mutation<
+    CreatePatientMutation,
+    CreatePatientMutationVariables
   >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<CreatePatientMutation, CreatePatientVariables>
-        mutation={CreatePatientDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type CreatePatientProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<CreatePatientMutation, CreatePatientVariables>
+    mutation={CreatePatientDocument}
+    {...props}
+  />
+);
+
+export type CreatePatientProps<TChildProps = {}> = ApolloReactHoc.MutateProps<
+  CreatePatientMutation,
+  CreatePatientMutationVariables
 > &
   TChildProps;
-export type CreatePatientMutationFn = ReactApollo.MutationFn<
-  CreatePatientMutation,
-  CreatePatientVariables
->;
-export function CreatePatientHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        CreatePatientMutation,
-        CreatePatientVariables,
-        CreatePatientProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withCreatePatient<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     CreatePatientMutation,
-    CreatePatientVariables,
+    CreatePatientMutationVariables,
     CreatePatientProps<TChildProps>
-  >(CreatePatientDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    CreatePatientMutation,
+    CreatePatientMutationVariables,
+    CreatePatientProps<TChildProps>
+  >(CreatePatientDocument, {
+    alias: 'createPatient',
+    ...operationOptions,
+  });
 }
+export type CreatePatientMutationResult = ApolloReactCommon.MutationResult<
+  CreatePatientMutation
+>;
+export type CreatePatientMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CreatePatientMutation,
+  CreatePatientMutationVariables
+>;
 export const DashboardListDocument = gql`
   query dashboardList {
     feed {
@@ -540,39 +619,48 @@ export const DashboardListDocument = gql`
     }
   }
 `;
-export class DashboardListComponent extends React.Component<
-  Partial<ReactApollo.QueryProps<DashboardListQuery, DashboardListVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Query<DashboardListQuery, DashboardListVariables>
-        query={DashboardListDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type DashboardListProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<DashboardListQuery, DashboardListVariables>
+export type DashboardListComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    DashboardListQuery,
+    DashboardListQueryVariables
+  >,
+  'query'
+>;
+
+export const DashboardListComponent = (props: DashboardListComponentProps) => (
+  <ApolloReactComponents.Query<DashboardListQuery, DashboardListQueryVariables>
+    query={DashboardListDocument}
+    {...props}
+  />
+);
+
+export type DashboardListProps<TChildProps = {}> = ApolloReactHoc.DataProps<
+  DashboardListQuery,
+  DashboardListQueryVariables
 > &
   TChildProps;
-export function DashboardListHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        DashboardListQuery,
-        DashboardListVariables,
-        DashboardListProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withDashboardList<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     DashboardListQuery,
-    DashboardListVariables,
+    DashboardListQueryVariables,
     DashboardListProps<TChildProps>
-  >(DashboardListDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    DashboardListQuery,
+    DashboardListQueryVariables,
+    DashboardListProps<TChildProps>
+  >(DashboardListDocument, {
+    alias: 'dashboardList',
+    ...operationOptions,
+  });
 }
+export type DashboardListQueryResult = ApolloReactCommon.QueryResult<
+  DashboardListQuery,
+  DashboardListQueryVariables
+>;
 export const DeleteHistoryDocument = gql`
   mutation deleteHistory($id: ID!) {
     deleteHistory(id: $id) {
@@ -580,45 +668,58 @@ export const DeleteHistoryDocument = gql`
     }
   }
 `;
-export class DeleteHistoryComponent extends React.Component<
-  Partial<
-    ReactApollo.MutationProps<DeleteHistoryMutation, DeleteHistoryVariables>
+export type DeleteHistoryMutationFn = ApolloReactCommon.MutationFunction<
+  DeleteHistoryMutation,
+  DeleteHistoryMutationVariables
+>;
+export type DeleteHistoryComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    DeleteHistoryMutation,
+    DeleteHistoryMutationVariables
+  >,
+  'mutation'
+>;
+
+export const DeleteHistoryComponent = (props: DeleteHistoryComponentProps) => (
+  <ApolloReactComponents.Mutation<
+    DeleteHistoryMutation,
+    DeleteHistoryMutationVariables
   >
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<DeleteHistoryMutation, DeleteHistoryVariables>
-        mutation={DeleteHistoryDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type DeleteHistoryProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<DeleteHistoryMutation, DeleteHistoryVariables>
+    mutation={DeleteHistoryDocument}
+    {...props}
+  />
+);
+
+export type DeleteHistoryProps<TChildProps = {}> = ApolloReactHoc.MutateProps<
+  DeleteHistoryMutation,
+  DeleteHistoryMutationVariables
 > &
   TChildProps;
-export type DeleteHistoryMutationFn = ReactApollo.MutationFn<
-  DeleteHistoryMutation,
-  DeleteHistoryVariables
->;
-export function DeleteHistoryHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        DeleteHistoryMutation,
-        DeleteHistoryVariables,
-        DeleteHistoryProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withDeleteHistory<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     DeleteHistoryMutation,
-    DeleteHistoryVariables,
+    DeleteHistoryMutationVariables,
     DeleteHistoryProps<TChildProps>
-  >(DeleteHistoryDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    DeleteHistoryMutation,
+    DeleteHistoryMutationVariables,
+    DeleteHistoryProps<TChildProps>
+  >(DeleteHistoryDocument, {
+    alias: 'deleteHistory',
+    ...operationOptions,
+  });
 }
+export type DeleteHistoryMutationResult = ApolloReactCommon.MutationResult<
+  DeleteHistoryMutation
+>;
+export type DeleteHistoryMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  DeleteHistoryMutation,
+  DeleteHistoryMutationVariables
+>;
 export const DeletePostDocument = gql`
   mutation deletePost($id: ID!) {
     deletePost(id: $id) {
@@ -626,43 +727,58 @@ export const DeletePostDocument = gql`
     }
   }
 `;
-export class DeletePostComponent extends React.Component<
-  Partial<ReactApollo.MutationProps<DeletePostMutation, DeletePostVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<DeletePostMutation, DeletePostVariables>
-        mutation={DeletePostDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type DeletePostProps<TChildProps = any> = Partial<
-  ReactApollo.MutateProps<DeletePostMutation, DeletePostVariables>
+export type DeletePostMutationFn = ApolloReactCommon.MutationFunction<
+  DeletePostMutation,
+  DeletePostMutationVariables
+>;
+export type DeletePostComponentProps = Omit<
+  ApolloReactComponents.MutationComponentOptions<
+    DeletePostMutation,
+    DeletePostMutationVariables
+  >,
+  'mutation'
+>;
+
+export const DeletePostComponent = (props: DeletePostComponentProps) => (
+  <ApolloReactComponents.Mutation<
+    DeletePostMutation,
+    DeletePostMutationVariables
+  >
+    mutation={DeletePostDocument}
+    {...props}
+  />
+);
+
+export type DeletePostProps<TChildProps = {}> = ApolloReactHoc.MutateProps<
+  DeletePostMutation,
+  DeletePostMutationVariables
 > &
   TChildProps;
-export type DeletePostMutationFn = ReactApollo.MutationFn<
-  DeletePostMutation,
-  DeletePostVariables
->;
-export function DeletePostHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        DeletePostMutation,
-        DeletePostVariables,
-        DeletePostProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withDeletePost<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     DeletePostMutation,
-    DeletePostVariables,
+    DeletePostMutationVariables,
     DeletePostProps<TChildProps>
-  >(DeletePostDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    DeletePostMutation,
+    DeletePostMutationVariables,
+    DeletePostProps<TChildProps>
+  >(DeletePostDocument, {
+    alias: 'deletePost',
+    ...operationOptions,
+  });
 }
+export type DeletePostMutationResult = ApolloReactCommon.MutationResult<
+  DeletePostMutation
+>;
+export type DeletePostMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  DeletePostMutation,
+  DeletePostMutationVariables
+>;
 export const GetDashboardListDocument = gql`
   query getDashboardList {
     feed {
@@ -676,41 +792,53 @@ export const GetDashboardListDocument = gql`
     }
   }
 `;
-export class GetDashboardListComponent extends React.Component<
-  Partial<
-    ReactApollo.QueryProps<GetDashboardListQuery, GetDashboardListVariables>
+export type GetDashboardListComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    GetDashboardListQuery,
+    GetDashboardListQueryVariables
+  >,
+  'query'
+>;
+
+export const GetDashboardListComponent = (
+  props: GetDashboardListComponentProps,
+) => (
+  <ApolloReactComponents.Query<
+    GetDashboardListQuery,
+    GetDashboardListQueryVariables
   >
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetDashboardListQuery, GetDashboardListVariables>
-        query={GetDashboardListDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type GetDashboardListProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetDashboardListQuery, GetDashboardListVariables>
+    query={GetDashboardListDocument}
+    {...props}
+  />
+);
+
+export type GetDashboardListProps<TChildProps = {}> = ApolloReactHoc.DataProps<
+  GetDashboardListQuery,
+  GetDashboardListQueryVariables
 > &
   TChildProps;
-export function GetDashboardListHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetDashboardListQuery,
-        GetDashboardListVariables,
-        GetDashboardListProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withGetDashboardList<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     GetDashboardListQuery,
-    GetDashboardListVariables,
+    GetDashboardListQueryVariables,
     GetDashboardListProps<TChildProps>
-  >(GetDashboardListDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    GetDashboardListQuery,
+    GetDashboardListQueryVariables,
+    GetDashboardListProps<TChildProps>
+  >(GetDashboardListDocument, {
+    alias: 'getDashboardList',
+    ...operationOptions,
+  });
 }
+export type GetDashboardListQueryResult = ApolloReactCommon.QueryResult<
+  GetDashboardListQuery,
+  GetDashboardListQueryVariables
+>;
 export const GetHistoriesByPostDocument = gql`
   query getHistoriesByPost($id: ID!) {
     listHistoriesByPost(postId: $id) {
@@ -723,41 +851,58 @@ export const GetHistoriesByPostDocument = gql`
     }
   }
 `;
-export class GetHistoriesByPostComponent extends React.Component<
-  Partial<
-    ReactApollo.QueryProps<GetHistoriesByPostQuery, GetHistoriesByPostVariables>
+export type GetHistoriesByPostComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    GetHistoriesByPostQuery,
+    GetHistoriesByPostQueryVariables
+  >,
+  'query'
+> &
+  (
+    | { variables: GetHistoriesByPostQueryVariables; skip?: boolean }
+    | { skip: boolean });
+
+export const GetHistoriesByPostComponent = (
+  props: GetHistoriesByPostComponentProps,
+) => (
+  <ApolloReactComponents.Query<
+    GetHistoriesByPostQuery,
+    GetHistoriesByPostQueryVariables
   >
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetHistoriesByPostQuery, GetHistoriesByPostVariables>
-        query={GetHistoriesByPostDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type GetHistoriesByPostProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetHistoriesByPostQuery, GetHistoriesByPostVariables>
+    query={GetHistoriesByPostDocument}
+    {...props}
+  />
+);
+
+export type GetHistoriesByPostProps<
+  TChildProps = {}
+> = ApolloReactHoc.DataProps<
+  GetHistoriesByPostQuery,
+  GetHistoriesByPostQueryVariables
 > &
   TChildProps;
-export function GetHistoriesByPostHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetHistoriesByPostQuery,
-        GetHistoriesByPostVariables,
-        GetHistoriesByPostProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withGetHistoriesByPost<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     GetHistoriesByPostQuery,
-    GetHistoriesByPostVariables,
+    GetHistoriesByPostQueryVariables,
     GetHistoriesByPostProps<TChildProps>
-  >(GetHistoriesByPostDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    GetHistoriesByPostQuery,
+    GetHistoriesByPostQueryVariables,
+    GetHistoriesByPostProps<TChildProps>
+  >(GetHistoriesByPostDocument, {
+    alias: 'getHistoriesByPost',
+    ...operationOptions,
+  });
 }
+export type GetHistoriesByPostQueryResult = ApolloReactCommon.QueryResult<
+  GetHistoriesByPostQuery,
+  GetHistoriesByPostQueryVariables
+>;
 export const GetMessagesByPostDocument = gql`
   query getMessagesByPost($id: ID!) {
     listMessagesByPost(postId: $id) {
@@ -768,41 +913,56 @@ export const GetMessagesByPostDocument = gql`
     }
   }
 `;
-export class GetMessagesByPostComponent extends React.Component<
-  Partial<
-    ReactApollo.QueryProps<GetMessagesByPostQuery, GetMessagesByPostVariables>
+export type GetMessagesByPostComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    GetMessagesByPostQuery,
+    GetMessagesByPostQueryVariables
+  >,
+  'query'
+> &
+  (
+    | { variables: GetMessagesByPostQueryVariables; skip?: boolean }
+    | { skip: boolean });
+
+export const GetMessagesByPostComponent = (
+  props: GetMessagesByPostComponentProps,
+) => (
+  <ApolloReactComponents.Query<
+    GetMessagesByPostQuery,
+    GetMessagesByPostQueryVariables
   >
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetMessagesByPostQuery, GetMessagesByPostVariables>
-        query={GetMessagesByPostDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type GetMessagesByPostProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetMessagesByPostQuery, GetMessagesByPostVariables>
+    query={GetMessagesByPostDocument}
+    {...props}
+  />
+);
+
+export type GetMessagesByPostProps<TChildProps = {}> = ApolloReactHoc.DataProps<
+  GetMessagesByPostQuery,
+  GetMessagesByPostQueryVariables
 > &
   TChildProps;
-export function GetMessagesByPostHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetMessagesByPostQuery,
-        GetMessagesByPostVariables,
-        GetMessagesByPostProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withGetMessagesByPost<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     GetMessagesByPostQuery,
-    GetMessagesByPostVariables,
+    GetMessagesByPostQueryVariables,
     GetMessagesByPostProps<TChildProps>
-  >(GetMessagesByPostDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    GetMessagesByPostQuery,
+    GetMessagesByPostQueryVariables,
+    GetMessagesByPostProps<TChildProps>
+  >(GetMessagesByPostDocument, {
+    alias: 'getMessagesByPost',
+    ...operationOptions,
+  });
 }
+export type GetMessagesByPostQueryResult = ApolloReactCommon.QueryResult<
+  GetMessagesByPostQuery,
+  GetMessagesByPostQueryVariables
+>;
 export const GetPostDocument = gql`
   query getPost($id: ID!) {
     post(id: $id) {
@@ -819,36 +979,46 @@ export const GetPostDocument = gql`
     }
   }
 `;
-export class GetPostComponent extends React.Component<
-  Partial<ReactApollo.QueryProps<GetPostQuery, GetPostVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Query<GetPostQuery, GetPostVariables>
-        query={GetPostDocument}
-        {...((this as any)['props'] as any)}
-      />
-    );
-  }
-}
-export type GetPostProps<TChildProps = any> = Partial<
-  ReactApollo.DataProps<GetPostQuery, GetPostVariables>
+export type GetPostComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    GetPostQuery,
+    GetPostQueryVariables
+  >,
+  'query'
+> &
+  ({ variables: GetPostQueryVariables; skip?: boolean } | { skip: boolean });
+
+export const GetPostComponent = (props: GetPostComponentProps) => (
+  <ApolloReactComponents.Query<GetPostQuery, GetPostQueryVariables>
+    query={GetPostDocument}
+    {...props}
+  />
+);
+
+export type GetPostProps<TChildProps = {}> = ApolloReactHoc.DataProps<
+  GetPostQuery,
+  GetPostQueryVariables
 > &
   TChildProps;
-export function GetPostHOC<TProps, TChildProps = any>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        GetPostQuery,
-        GetPostVariables,
-        GetPostProps<TChildProps>
-      >
-    | undefined,
-) {
-  return ReactApollo.graphql<
+export function withGetPost<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
     TProps,
     GetPostQuery,
-    GetPostVariables,
+    GetPostQueryVariables,
     GetPostProps<TChildProps>
-  >(GetPostDocument, operationOptions);
+  >,
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    GetPostQuery,
+    GetPostQueryVariables,
+    GetPostProps<TChildProps>
+  >(GetPostDocument, {
+    alias: 'getPost',
+    ...operationOptions,
+  });
 }
+export type GetPostQueryResult = ApolloReactCommon.QueryResult<
+  GetPostQuery,
+  GetPostQueryVariables
+>;
