@@ -4,12 +4,9 @@ import CardEntry, {
   CardEntrySubmitValues,
 } from '../../../components/CardEntry/CardEntry';
 import {
-  CreateHistoryHOC,
-  CreateHistoryMutation,
-  CreateHistoryVariables,
-  CreatePatientHOC,
+  withCreatePatient,
   CreatePatientMutation,
-  CreatePatientVariables,
+  CreatePatientMutationVariables,
 } from '../../../generated-models';
 import { MutateProps } from 'react-apollo';
 import { withRouter, RouteComponentProps, Omit } from 'react-router';
@@ -19,7 +16,10 @@ interface Params {
   id: string;
 }
 
-type HocExtends = MutateProps<CreatePatientMutation, CreatePatientVariables>;
+type HocExtends = MutateProps<
+  CreatePatientMutation,
+  CreatePatientMutationVariables
+>;
 
 export interface EditButtonOptions {
   species: string;
@@ -52,7 +52,7 @@ class EditButton extends React.Component<EditButtonProps, any> {
     );
   }
 
-  private getVariables = (): CreatePatientVariables => {
+  private getVariables = (): CreatePatientMutationVariables => {
     const {
       options: { age: dob, weight, species, breed },
       match: {
@@ -60,7 +60,7 @@ class EditButton extends React.Component<EditButtonProps, any> {
       },
     } = this.props;
 
-    const variables: CreatePatientVariables = {
+    const variables: CreatePatientMutationVariables = {
       dob,
       weight: Number(weight),
       species,
@@ -83,12 +83,13 @@ class EditButton extends React.Component<EditButtonProps, any> {
 
     onChangeEditable();
 
-    const variables: CreatePatientVariables = this.getVariables();
+    const variables: CreatePatientMutationVariables = this.getVariables();
 
     await mutate({ variables: { ...variables } });
   };
 }
 
-const withCreatePatientHOC = CreatePatientHOC<OwnProps>({});
+const withCreatePatientHOC = withCreatePatient<OwnProps>({});
 
+// @ts-ignore
 export default withCreatePatientHOC(withRouter<EditButtonProps>(EditButton));

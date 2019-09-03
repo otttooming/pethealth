@@ -10,8 +10,8 @@ import gallery4 from './gallery4.png';
 import EntryField from '../../../components/EntryField/EntryField';
 import {
   CreateDraftMutation,
-  CreateDraftHOC,
-  CreateDraftVariables,
+  withCreateDraft,
+  CreateDraftMutationVariables,
   DeletePostMutation,
   PostType,
 } from '../../../generated-models';
@@ -24,7 +24,7 @@ interface Params {
 }
 
 type HocExtends = RouteComponentProps<Params> &
-  MutateProps<CreateDraftMutation, CreateDraftVariables>;
+  MutateProps<CreateDraftMutation, CreateDraftMutationVariables>;
 
 export interface PatientSectionProps extends HocExtends {
   onChangeEditable: (isEditmode: boolean) => void;
@@ -315,8 +315,9 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
   };
 }
 
-const withCreateDraftHOC = CreateDraftHOC({});
+const withwithCreateDraft = withCreateDraft({});
 
-export default withCreateDraftHOC(
+export default withwithCreateDraft(
+  // @ts-ignore
   withRouter<PatientSectionProps>(PatientSection),
 );

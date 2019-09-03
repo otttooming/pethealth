@@ -9,7 +9,6 @@ import {
   GetMessagesByPostComponent,
   CreateMessageComponent,
   CreateMessageMutationFn,
-  GetMessagesByPostHOC,
 } from '../../../generated-models';
 
 const ScroolAreaFixed: any = ScrollArea;

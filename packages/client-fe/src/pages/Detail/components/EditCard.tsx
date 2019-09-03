@@ -4,9 +4,9 @@ import CardEntry, {
   CardEntrySubmitValues,
 } from '../../../components/CardEntry/CardEntry';
 import {
-  CreateHistoryHOC,
+  withCreateHistory,
   CreateHistoryMutation,
-  CreateHistoryVariables,
+  CreateHistoryMutationVariables,
 } from '../../../generated-models';
 import { MutateProps } from 'react-apollo';
 import { withRouter, RouteComponentProps } from 'react-router';
@@ -15,7 +15,10 @@ interface Params {
   id: string;
 }
 
-type HocExtends = MutateProps<CreateHistoryMutation, CreateHistoryVariables> &
+type HocExtends = MutateProps<
+  CreateHistoryMutation,
+  CreateHistoryMutationVariables
+> &
   CardEntryProps;
 
 export interface EditCardProps
@@ -51,6 +54,7 @@ class EditCard extends React.Component<EditCardProps, any> {
   };
 }
 
-const withCreateHistoryHOC = CreateHistoryHOC({});
+const withwithCreateHistory = withCreateHistory({});
 
-export default withCreateHistoryHOC(withRouter<EditCardProps>(EditCard));
+// @ts-ignore
+export default withwithCreateHistory(withRouter<EditCardProps>(EditCard));
