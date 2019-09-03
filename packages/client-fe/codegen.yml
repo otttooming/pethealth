@@ -5,8 +5,9 @@ documents: ./src/**/*.graphql
 generates:
   src/generated-models.tsx:
     plugins:
-      - typescript-common
-      - typescript-client
+      - typescript
+      - typescript-operations
       - typescript-react-apollo
     config:
+      withHOC: true
       noNamespaces: true
