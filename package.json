@@ -1,14 +1,48 @@
 {
-  "name": "healthvet",
+  "name": "@pethealth/client",
+  "version": "1.0.0",
   "private": true,
+  "dependencies": {
+    "@apollo/react-components": "^3.0.1",
+    "@apollo/react-hoc": "^3.0.1",
+    "@coterminous/ui": "github:otttooming/coterminous-ui#1643ad8",
+    "@types/jest": "24.0.7",
+    "@types/node": "11.9.5",
+    "@types/styled-components": "^4.1.18",
+    "@types/styled-system": "^5.1.1",
+    "apollo-boost": "0.1.28",
+    "apollo-link-context": "1.0.14",
+    "graphql": "14.1.1",
+    "graphql-tag": "2.10.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "3.1.1",
+    "react-scroll-to": "^2.0.5",
+    "styled-components": "^4.3.2",
+    "styled-css-grid": "^1.2.1",
+    "styled-system": "^5.1.1"
+  },
   "devDependencies": {
+    "@graphql-codegen/add": "^1.7.0",
+    "@graphql-codegen/cli": "^1.2.1",
+    "@graphql-codegen/typescript": "^1.2.1",
+    "@graphql-codegen/typescript-operations": "^1.2.1",
+    "@graphql-codegen/typescript-react-apollo": "^1.7.0",
+    "@types/eslint-plugin-prettier": "^2.2.0",
+    "@types/graphql": "14.0.7",
     "@types/prettier": "1.18.2",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
+    "@types/react-router-dom": "^4.3.1",
     "@types/rimraf": "^2.0.2",
     "@types/styled-components": "4.1.18",
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
+    "eslint-config-prettier": "^6.2.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-prettier": "^3.1.0",
     "husky": "3.0.5",
-    "lerna": "3.16.4",
     "lint-staged": "9.2.5",
     "now": "^16.1.2",
     "npm-run-all": "4.1.5",
@@ -23,22 +57,31 @@
     "typescript": "3.6.2"
   },
   "scripts": {
-    "bootstrap": "yarn && yarn run dist",
-    "clean": "npm run clean:build && npm run clean:node",
+    "clean": "rimraf build",
     "clean:build": "lerna exec -- rimraf dist",
     "clean:node": "lerna exec -- rimraf node_modules",
     "clean:lerna": "rimraf node_modules",
     "dist": "lerna run dist && lerna run build",
-    "start": "lerna run start --parallel",
+    "start": "react-scripts start",
     "lint": "npm run lint:ts && echo 'tslint check: OK'",
     "lint:ts": "tslint --project ./tsconfig.json",
     "prettier": "prettier --write --config .prettierrc \"**/*.{js,jsx,ts,tsx,json,css,scss,md,yaml,yml}\"",
     "deploy": "now",
-    "now-build": "yarn run bootstrap && lerna run now-build",
-    "generate": "lerna run generate"
+    "start:docker": "yarn install && yarn run start",
+    "build": "react-scripts build",
+    "generate": "gql-gen",
+    "test": "react-scripts test",
+    "now-build": "yarn run clean && react-scripts build",
+    "now:deploy": "yarn run now-build && now"
   },
-  "workspaces": [
-    "packages/*"
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
   ],
   "husky": {
     "hooks": {
