@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { Button } from '@coterminous/ui';
 import Search from '../../components/Search/Search';
-import Button, { ButtonType } from '../../components/Button/Button';
 import styled from 'styled-components';
 import Icon, { IconName } from '../../components/Icon/Icon';
 import Squareblocks from '../../components/Icon/components/Squareblocks';
@@ -73,14 +73,8 @@ class FilterSection extends React.Component<FilterSectionProps> {
           </RightBottom>
         </Left>
         <Right>
-          <Link
-            to={to}
-            style={{
-              marginTop: '36px',
-              marginRight: '12px',
-            }}
-          >
-            <Button as={ButtonType.SPAN}>Post</Button>
+          <Link to={to}>
+            <Button as="span">Post</Button>
           </Link>
         </Right>
       </Wrapper>
