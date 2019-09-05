@@ -246,7 +246,7 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
 
     const { id: postId } = params;
 
-    const isNew = !Boolean(postId);
+    const isNew = !postId;
 
     return isNew;
   };
@@ -289,7 +289,7 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
 
     const { id: postId } = params;
 
-    const isNew = !Boolean(postId);
+    const isNew = !postId;
 
     if (isNew) {
       return <Button onClick={this.createDraft}>Create new record</Button>;
