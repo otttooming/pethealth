@@ -4,6 +4,7 @@ import Avatar from '../Avatar/Avatar';
 import catIcon from './cat.svg';
 import gutIcon from './Vector.svg';
 import plusIcon from './Group.svg';
+import { Heading } from '@coterminous/ui';
 
 export interface CardProps {
   title: string;
@@ -41,17 +42,6 @@ const Right = styled.div`
   padding-top: 35px;
   display: flex;
   flex-direction: column;
-`;
-
-const Title = styled.h1`
-  font-family: Nunito;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 22px;
-  font-size: 24px;
-  margin-bottom: 0;
-
-  color: rgba(0, 0, 0, 0.6);
 `;
 
 const Description = styled.p`
@@ -118,7 +108,7 @@ class Card extends React.Component<CardProps, any> {
           <Name>{doctor}</Name>
         </Left>
         <Center>
-          <Title>{title}</Title>
+          <Heading>{title}</Heading>
           <Date>{date}</Date>
           <Description>
             {this.getTrimmedValue(description, 100)}
