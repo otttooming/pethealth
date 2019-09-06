@@ -12,7 +12,6 @@ export interface CardProps {
   date: string;
   description: string;
   picture?: string;
-  hasIcons: boolean;
 }
 
 const Wrapper = styled.section`
@@ -75,10 +74,6 @@ const Name = styled.p`
   font-weight: bold;
 `;
 
-const Icon = styled.img`
-  margin-top: 10px;
-`;
-
 const ReadMore = styled.span`
   font-family: Roboto;
   font-style: normal;
@@ -90,16 +85,12 @@ const ReadMore = styled.span`
 `;
 
 class Card extends React.Component<CardProps, any> {
-  static defaultProps = {
-    hasIcons: false,
-  };
-
   getTrimmedValue = (value: string, length: number): string => {
     return value.substring(0, length);
   };
 
   public render() {
-    const { doctor, description, title, date, picture, hasIcons } = this.props;
+    const { doctor, description, title, date, picture } = this.props;
 
     return (
       <Wrapper>
@@ -116,13 +107,6 @@ class Card extends React.Component<CardProps, any> {
             <ReadMore>Read more</ReadMore>
           </Description>
         </Center>
-        {hasIcons && (
-          <Right>
-            <Icon src={catIcon} />
-            <Icon src={gutIcon} />
-            <Icon src={plusIcon} />
-          </Right>
-        )}
       </Wrapper>
     );
   }
