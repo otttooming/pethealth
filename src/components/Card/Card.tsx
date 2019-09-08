@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Avatar from '../Avatar/Avatar';
 import catIcon from './cat.svg';
 import gutIcon from './Vector.svg';
 import plusIcon from './Group.svg';
-import { Heading } from '@coterminous/ui';
+import { Heading, Avatar } from '@coterminous/ui';
+import { User } from 'react-feather';
 
 export interface CardProps {
   title: string;
@@ -90,12 +90,14 @@ class Card extends React.Component<CardProps, any> {
   };
 
   public render() {
-    const { doctor, description, title, date, picture } = this.props;
+    const { doctor, description, title, date } = this.props;
 
     return (
       <Wrapper>
         <Left>
-          <Avatar src={picture} />
+          <Avatar>
+            <User />
+          </Avatar>
           <Name>{doctor}</Name>
         </Left>
         <Center>
