@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Avatar, { AvatarSize } from '../Avatar/Avatar';
 import styled from 'styled-components';
 import avatar from './Avatar1.png';
+import { Avatar } from '@coterminous/ui';
 
 export interface MessageProps {
   title: string | null;
@@ -20,9 +20,7 @@ interface AvatarWrapperProps {
 }
 
 const AvatarWrapper = styled.div<AvatarWrapperProps>`
-  width: 91px;
-  margin-right: 32px;
-  padding-left: ${({ hasTitle }) => (hasTitle ? '0px' : '24px')};
+  margin-right: 16px;
 `;
 
 const Title = styled.h1`
@@ -58,11 +56,9 @@ export default class Message extends React.Component<MessageProps, any> {
     return (
       <Wrapper>
         <AvatarWrapper hasTitle={!!title}>
-          {!title ? (
-            <Avatar size={AvatarSize.LARGE} src={avatar} />
-          ) : (
-            <Avatar src={avatar} />
-          )}
+          <Avatar>
+            <img src={avatar} alt="" />
+          </Avatar>
         </AvatarWrapper>
         <div>
           {title && <Title>{title}</Title>}
