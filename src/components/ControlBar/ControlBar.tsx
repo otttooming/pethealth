@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Icon, { IconName, IconSize } from '../Icon/Icon';
 import { Link } from 'react-router-dom';
-import avatar from './Avatar1.png';
+import avatar from '../../assets/avatar.png';
 import { Avatar } from '@coterminous/ui';
 
 export interface ControlBarProps {}

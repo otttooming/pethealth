@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import avatar from './Avatar1.png';
+import avatar from '../../assets/avatar.png';
 import { Avatar } from '@coterminous/ui';
 
 export interface MessageProps {
