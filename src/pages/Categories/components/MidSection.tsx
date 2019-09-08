@@ -54,7 +54,7 @@ const StyledLink = styled(Link)`
 
 export default class MidSection extends React.Component<MidSectionProps, any> {
   state = {
-    categories: [] = [
+    categories: [
       {
         id: 'behavior',
         icon: BehaviorIcon,
