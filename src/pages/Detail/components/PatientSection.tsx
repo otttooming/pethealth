@@ -12,10 +12,9 @@ import {
   CreateDraftMutation,
   withCreateDraft,
   CreateDraftMutationVariables,
-  DeletePostMutation,
   PostType,
 } from '../../../generated-models';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MutateProps } from '@apollo/react-hoc';
 import EditButton from './EditButton';
 

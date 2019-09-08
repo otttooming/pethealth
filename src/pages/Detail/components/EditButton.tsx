@@ -1,15 +1,11 @@
 import * as React from 'react';
-import CardEntry, {
-  CardEntryProps,
-  CardEntrySubmitValues,
-} from '../../../components/CardEntry/CardEntry';
 import {
   withCreatePatient,
   CreatePatientMutation,
   CreatePatientMutationVariables,
 } from '../../../generated-models';
 import { MutateProps } from '@apollo/react-hoc';
-import { withRouter, RouteComponentProps, Omit } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router';
 import Button from '../../../components/Button';
 
 interface Params {

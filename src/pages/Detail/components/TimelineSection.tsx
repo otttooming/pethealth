@@ -5,11 +5,8 @@ import Icon, { IconName } from '../../../components/Icon/Icon';
 import {
   GetHistoriesByPostComponent,
   GetHistoriesByPostQuery,
-  CreateHistoryComponent,
 } from '../../../generated-models';
-import CardEntry, {
-  CardEntryProps,
-} from '../../../components/CardEntry/CardEntry';
+import CardEntry from '../../../components/CardEntry/CardEntry';
 import EditCard from './EditCard';
 import NavigationBack from '../../../components/NavigationBack/NavigationBack';
 

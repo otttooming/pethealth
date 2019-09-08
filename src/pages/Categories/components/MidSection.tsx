@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Card, { CardProps } from '../../../components/Card/Card';
 import { Link } from 'react-router-dom';
 import TopSection from './TopSection';
 import CategoryCard from './CategoryCard';

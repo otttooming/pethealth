@@ -2,9 +2,6 @@ import * as React from 'react';
 import { Button } from '@coterminous/ui';
 import Search from '../../components/Search/Search';
 import styled from 'styled-components';
-import Icon, { IconName } from '../../components/Icon/Icon';
-import Squareblocks from '../../components/Icon/components/Squareblocks';
-import Select from '../../components/Select/Select';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
 export interface FilterSectionProps extends RouteComponentProps {

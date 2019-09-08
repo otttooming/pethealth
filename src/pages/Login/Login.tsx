@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from './logo-valge.svg';
 import cat_img from './cat.webp';

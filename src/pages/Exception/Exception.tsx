@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import img_404_duck from './duck.webp';
-import img_404_hamster from './hamster.webp';
 import logo from './logo-valge.svg';
 import { Link } from 'react-router-dom';
 

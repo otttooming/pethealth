@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import landing_img from './doctor.webp';
 import logo from './logo-valge.svg';
-import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const Flex = styled.div`
