@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Title from '../../../components/Title/Title';
-import Icon, { IconName } from '../../../components/Icon/Icon';
 import {
   GetHistoriesByPostComponent,
   GetHistoriesByPostQuery,
@@ -9,6 +8,8 @@ import {
 import CardEntry from '../../../components/CardEntry/CardEntry';
 import EditCard from './EditCard';
 import NavigationBack from '../../../components/NavigationBack/NavigationBack';
+import { Button } from '@coterminous/ui';
+import { Plus } from 'react-feather';
 
 export interface TimelineSectionProps {
   postId: string;
@@ -83,7 +84,7 @@ export default class TimelineSection extends React.Component<
     };
   }
 
-  addItem = (event: React.SyntheticEvent<HTMLAnchorElement>) => {
+  addItem = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     this.setState({ hasEditCard: true });
@@ -132,9 +133,7 @@ export default class TimelineSection extends React.Component<
               )}
 
               <ListItem>
-                <a href="#" onClick={this.addItem}>
-                  <Icon name={IconName.PLUS} />
-                </a>
+                <Button onClick={this.addItem} icon={<Plus />} />
               </ListItem>
             </UnsortedList>
           </Wrapper>
