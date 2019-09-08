@@ -32,9 +32,6 @@ const Questions = styled.p`
 const RightTop = styled.div`
   margin-bottom: 32px;
 `;
-const LeftTop = styled.div`
-  margin-bottom: 32px;
-`;
 
 const Left = styled.div`
   margin-bottom: 32px;

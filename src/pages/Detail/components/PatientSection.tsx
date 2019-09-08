@@ -140,7 +140,7 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
   };
 
   public render() {
-    const { species, breed, sex, age, weight, isEditable } = this.state;
+    const { species, breed, sex, age, weight } = this.state;
 
     return (
       <Wrapper>
@@ -273,7 +273,6 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
   private deletePost = async () => {
     const {
       match: { params },
-      mutate,
     } = this.props;
 
     const { id: postId } = params;
@@ -309,8 +308,6 @@ class PatientSection extends React.Component<PatientSectionProps, any> {
         )}
       </>
     );
-
-    return <Button onClick={this.deletePost}>Delete</Button>;
   };
 }
 

@@ -18,20 +18,6 @@ const Wrapper = styled.div`
   height: 72px;
 `;
 
-const Left = styled.div`
-  margin-right: 16px;
-`;
-
-const Name = styled.p`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  font-size: 12px;
-  color: #ff6d6d;
-  margin-bottom: 0;
-`;
-
 const Icon = styled.img`
   margin: 20px;
 `;

@@ -68,14 +68,7 @@ class EditButton extends React.Component<EditButtonProps, any> {
   };
 
   private handleSubmit = async () => {
-    const {
-      onChangeEditable,
-      mutate,
-      match: {
-        params: { id },
-      },
-      options,
-    } = this.props;
+    const { onChangeEditable, mutate } = this.props;
 
     onChangeEditable();
 
@@ -87,5 +80,4 @@ class EditButton extends React.Component<EditButtonProps, any> {
 
 const withCreatePatientHOC = withCreatePatient<OwnProps>({});
 
-// @ts-ignore
 export default withCreatePatientHOC(withRouter<EditButtonProps>(EditButton));

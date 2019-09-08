@@ -31,11 +31,6 @@ const Left = styled.div`
   margin-bottom: 32px;
 `;
 
-const RightBottom = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 export default class FilterSection extends React.Component<FilterSectionProps> {
   public render() {
     return (
