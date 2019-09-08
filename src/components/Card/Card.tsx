@@ -1,8 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import catIcon from './cat.svg';
-import gutIcon from './Vector.svg';
-import plusIcon from './Group.svg';
 import { Heading, Avatar } from '@coterminous/ui';
 import { User } from 'react-feather';
 
@@ -34,13 +31,6 @@ const Center = styled.div`
   padding: 20px;
   padding-right: 90px;
   width: 100%;
-`;
-
-const Right = styled.div`
-  padding: 32px;
-  padding-top: 35px;
-  display: flex;
-  flex-direction: column;
 `;
 
 const Description = styled.p`
