@@ -1,5 +1,6 @@
 {
   "editor.formatOnSave": true,
+  "editor.rulers": [80],
   "search.exclude": {
     "**/.git": true,
     "**/node_modules": true,
