@@ -4,10 +4,6 @@ import PatientCard, {
   PatientCardProps,
 } from '../../../components/PatientCard/PatientCard';
 import { Link } from 'react-router-dom';
-import Avatar1 from './Avatar1.png';
-import Avatar2 from './Avatar2.png';
-import Avatar3 from './Avatar3.png';
-import Avatar4 from './Avatar4.png';
 import {
   GetDashboardListComponent,
   GetDashboardListQuery,
