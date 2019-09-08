@@ -1,8 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import PatientCard, {
-  PatientCardProps,
-} from '../../../components/PatientCard/PatientCard';
+import PatientCard from '../../../components/PatientCard/PatientCard';
 import { Link } from 'react-router-dom';
 import {
   GetDashboardListComponent,
