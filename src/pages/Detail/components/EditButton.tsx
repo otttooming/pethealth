@@ -6,7 +6,7 @@ import {
 } from '../../../generated-models';
 import { MutateProps } from '@apollo/react-hoc';
 import { withRouter, RouteComponentProps } from 'react-router';
-import Button from '../../../components/Button';
+import { Button } from '@coterminous/ui';
 
 interface Params {
   id: string;
@@ -43,7 +43,7 @@ class EditButton extends React.Component<EditButtonProps, any> {
   public render() {
     return (
       <div>
-        <Button onClick={this.handleSubmit}> Save </Button>
+        <Button onClick={this.handleSubmit}>Save</Button>
       </div>
     );
   }
