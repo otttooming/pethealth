@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Icon, { IconName, IconSize } from '../../../components/Icon/Icon';
-import Button from '../../../components/Button/Button';
 import NavigationBack from '../../../components/NavigationBack/NavigationBack';
 import gallery1 from './gallery1.png';
 import gallery2 from './gallery2.png';
@@ -17,6 +16,7 @@ import {
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MutateProps } from '@apollo/react-hoc';
 import EditButton from './EditButton';
+import { Button } from '@coterminous/ui';
 
 interface Params {
   id: string;
