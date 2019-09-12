@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Icon, { IconName } from '../Icon/Icon';
+import { Button } from '@coterminous/ui';
+import { Send } from 'react-feather';
 
 export interface TextFieldProps {
   defaultValue: string;
@@ -54,12 +55,6 @@ const IconWrapper = styled.div`
   padding-right: 8px;
 `;
 
-const Button = styled.button`
-  outline: none;
-  border: none;
-  background: none;
-`;
-
 export default class TextField extends React.Component<
   TextFieldProps,
   TextFieldState
@@ -102,9 +97,7 @@ export default class TextField extends React.Component<
           defaultValue={this.props.defaultValue}
         />
         <IconWrapper>
-          <Button onClick={this.handleSubmit}>
-            <Icon name={IconName.MAIL} />
-          </Button>
+          <Button onClick={this.handleSubmit} icon={<Send />} />
         </IconWrapper>
       </Wrapper>
     );
