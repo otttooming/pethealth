@@ -5,7 +5,7 @@
   "dependencies": {
     "@apollo/react-components": "^3.0.1",
     "@apollo/react-hoc": "^3.0.1",
-    "@coterminous/ui": "github:otttooming/coterminous-ui#87e8720",
+    "@coterminous/ui": "github:otttooming/coterminous-ui#16808c1",
     "apollo-boost": "0.4.4",
     "apollo-link-context": "1.0.18",
     "graphql": "14.5.4",

@@ -926,9 +926,9 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@coterminous/ui@github:otttooming/coterminous-ui#87e8720":
+"@coterminous/ui@github:otttooming/coterminous-ui#16808c1":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/otttooming/coterminous-ui.git#87e872037367bb98c3cf764fae047058f7aa1c6f"
+  resolved "git+ssh://git@github.com/otttooming/coterminous-ui.git#16808c1a38032d62009337827747c61522824c54"
   dependencies:
     downshift "^3.2.12"
     react-photoswipe "1.3.0"
